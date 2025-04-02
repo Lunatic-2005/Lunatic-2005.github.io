@@ -1,3 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
+  <entry>
+    <title>Hello World</title>
+    <url>/2025/04/01/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very
+first post. Check <a href="https://hexo.io/docs/">documentation</a> for
+more info. If you get any problems when using Hexo, you can find the
+answer in <a
+href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or
+you can ask me on <a
+href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="quick-start">Quick Start</h2>
+<h3 id="create-a-new-post">Create a new post</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a
+href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="run-server">Run server</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="generate-static-files">Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a
+href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a
+href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>图论模型：最短路径算法模型</title>
+    <url>/2025/04/02/%E5%9B%BE%E8%AE%BA%E6%A8%A1%E5%9E%8B%EF%BC%9A%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E7%AE%97%E6%B3%95%E6%A8%A1%E5%9E%8B/</url>
+    <content><![CDATA[<h2 id="基础理论">基础理论</h2>
+<p>图，有向图，无向图的定义这里从略。</p>
+<p>定义1 无环，无重边的图称为简单图。</p>
+<p>定义2
+任意两顶点均相邻的简单图称为完全图。含有n个顶点的完全图记为<span
+class="math inline"><em>K</em><sub><em>n</em></sub></span>。</p>
+<p>定义3 顶点的度：</p>
+<p>（1）在无向图中，与顶点v关联的边的数目（环算两次）称为这个点的度，记为<span
+class="math inline"><em>d</em>(<em>v</em>)</span>。</p>
+<p>（2）在有向图中，从顶点v引出的弧的数目称为v的出度，记为<span
+class="math inline"><em>d</em><sup>+</sup>(<em>v</em>)</span>，从该点引入的弧的数目称为入度，记为<span
+class="math inline"><em>d</em><sup>−</sup>(<em>v</em>)</span>，两者相加之和记为顶点的度。</p>
+<p>定理1 对任意图，有</p>
+<p><span
+class="math display">∑<em>d</em>(<em>v</em>) = 2 ⋅ |<em>E</em>|</span></p>
+<p>推论：任何图中的奇顶点总数为偶数。</p>
+<h2 id="图的矩阵表示">图的矩阵表示</h2>
+<p><strong>1.关联矩阵</strong> 对于无向图 <span
+class="math inline"><em>G</em></span>，其关联矩阵 <span
+class="math inline"><em>M</em> = (<em>m</em><sub><em>i</em><em>j</em></sub>)<sub><em>n</em> × <em>m</em></sub></span>，其中</p>
+<p><span class="math display">$$
+m_{ij} = \begin{cases}
+1, &amp; \text{if } v_i \text{ is related to } e_j \\
+0, &amp; \text{if } v_i \text{ is not related to } e_j
+\end{cases}
+$$</span></p>
+<p>对于有向图 <span class="math inline"><em>G</em></span>，其关联矩阵
+<span
+class="math inline"><em>M</em> = (<em>m</em><sub><em>i</em><em>j</em></sub>)<sub><em>n</em> × <em>m</em></sub></span>，其中</p>
+<p><span class="math display">$$
+m_{ij} = \begin{cases}
+1, &amp; \text{当 } v_i \text{ 是起始点} \\
+0, &amp; \text{当 } v_i \text{ 与 } e_j \text{ 无关} \\
+-1, &amp; \text{当 } v_i \text{ 是末端点}
+\end{cases}
+$$</span></p>
+<p><strong>2.邻接矩阵</strong></p>
+<p>对于无向赋权图 <span
+class="math inline"><em>G</em></span>，其邻接矩阵 <span
+class="math inline"><em>W</em> = (<em>w</em><sub><em>i</em><em>j</em></sub>)<sub><em>n</em> × <em>m</em></sub></span>，其中</p>
+<p><span class="math display">$$
+w_{ij} =
+\begin{cases}
+\text{weight between } v_i \text{ and } v_j, &amp; \text{顶点 } v_i
+\text{ 和 } v_j \text{ 相邻} \\
+0, &amp; \text{顶点 } v_i \text{ 和 } v_j \text{ 不相邻}
+\end{cases}
+$$</span></p>
+<p>对于有向赋权图，上式改为：</p>
+<p><span class="math display">$$
+w_{ij} =
+\begin{cases}
+\text{weight between } v_i \text{ and } v_j, &amp; (v_i,v_j) \in A \\
+0, &amp; \text{顶点 } v_i \text{ 指向 } v_j \text{ 的弧不存在或 } i=j
+\end{cases}
+$$</span></p>
+<h2 id="最短路算法">最短路算法</h2>
+<p><strong>1.Dijkstra算法（贪心算法）</strong>
+这是一种贪心算法，其主要用到的是迭代方法。它的依据是一个重要且明显的性质：<strong>最短路是一条路，它的任意子路也是该子路两端点间的最短路</strong>。
+该算法的核心思想是：<strong>从起点由近及远地求得到各点的最短路和距离，直到到达某个顶点</strong>。
+为了避免重复并保留每一步的计算信息，对于任意顶点<span
+class="math inline"><em>v</em><sub><em>i</em></sub></span>定义两个记号：</p>
+<p><span class="math display">$$
+l(v):\text{顶点v的标号，表示起点到v点的当前路径长度} \\
+z(v):\text{顶点v的父顶点标号，用于确定最短路线（类似于链表链域的作用）}
+\\
+S_i: \text{表示具有永久标号的顶点集}
+$$</span></p>
+<p>算法的操作可以这样表示：</p>
+<p>令起点<span class="math inline"><em>u</em><sub>0</sub></span>：</p>
+<ol type="1">
+<li><span
+class="math inline"><em>l</em>(<em>u</em><sub>0</sub>) = 0</span>，对<span
+class="math inline"><em>v</em> ≠ <em>u</em><sub>0</sub></span>，令<span
+class="math inline"><em>l</em>(<em>v</em>) = ∞</span>，<span
+class="math inline"><em>z</em>(<em>v</em>) = <em>u</em><sub>0</sub></span>，<span
+class="math inline"><em>S</em><sub>0</sub> = {<em>u</em><sub>0</sub>}</span>，<span
+class="math inline"><em>i</em> = 0</span>。</li>
+<li>对每个<span class="math inline">$v \in \overline{S_i}$</span>（<span
+class="math inline">$\overline{S_i}=V \setminus S_i$</span>），令<span
+class="math inline"><em>l</em>(<em>v</em>) = min {<em>l</em>(<em>v</em>), <em>l</em>(<em>v</em><sub>previous</sub>) + <em>w</em>(<em>v</em><sub>previous</sub>, <em>v</em>)}</span>。</li>
+</ol>
+<p>其中，<span
+class="math inline"><em>w</em><sub><em>u</em><em>v</em></sub></span>表示顶点<span
+class="math inline"><em>u</em></span>和<span
+class="math inline"><em>v</em></span>之间边的权值。如果利用上一个节点对当前节点的<span
+class="math inline"><em>l</em>(<em>v</em>)</span>进行了修改，则<span
+class="math inline"><em>z</em>(<em>v</em>) = <em>v</em><sub>previous</sub></span>，否则<span
+class="math inline"><em>z</em>(<em>v</em>)</span>不变。计算<span
+class="math inline">min {<em>l</em>(<em>v</em>)}</span>，把达到这个最小值的一个顶点即为<span
+class="math inline"><em>u</em><sub><em>i</em> + 1</sub></span>，令<span
+class="math inline"><em>S</em><sub><em>i</em> + 1</sub> = <em>S</em><sub><em>i</em></sub> ∪ {<em>u</em><sub><em>i</em> + 1</sub>}</span>。</p>
+<p>算法用伪代码表示如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">DIJKSTRA(G, w, s)</span><br><span class="line">// 初始化</span><br><span class="line">for each vertex v in G.V:</span><br><span class="line">    l(v) = ∞</span><br><span class="line">    z(v) = NIL</span><br><span class="line">l(s) = 0</span><br><span class="line">S_i = Ø</span><br><span class="line">Q = G.V  // Q 是一个优先队列，按 l(v) 排序</span><br><span class="line"></span><br><span class="line">while Q is not empty:</span><br><span class="line">    u = EXTRACT-MIN(Q)  // 从 Q 中取出 l(v) 最小的顶点 u</span><br><span class="line">    S_i = S_i ∪ &#123;u&#125;    // 将 u 加入永久标号集合 S_i</span><br><span class="line">    for each vertex v in G.Adj[u]:  // 遍历 u 的所有邻接顶点 v</span><br><span class="line">        if l(v) &gt; l(u) + w(u, v):  // 松弛操作</span><br><span class="line">            l(v) = l(u) + w(u, v)</span><br><span class="line">            z(v) = u</span><br><span class="line">            DECREASE-KEY(Q, v, l(v))  // 更新 Q 中 v 的优先级</span><br><span class="line"></span><br><span class="line">下面是用python实现的算法：</span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line">import heapq</span><br><span class="line"></span><br><span class="line">def dijkstra(graph, start):</span><br><span class="line">    # 初始化距离字典和父顶点字典</span><br><span class="line">    l = &#123;vertex: float(&#x27;inf&#x27;) for vertex in graph&#125;</span><br><span class="line">    z = &#123;vertex: None for vertex in graph&#125;</span><br><span class="line">    l[start] = 0  # 起点的距离为0</span><br><span class="line"></span><br><span class="line">    # 使用优先队列存储 (距离, 顶点) 对</span><br><span class="line">    priority_queue = [(0, start)]</span><br><span class="line"></span><br><span class="line">    while priority_queue:</span><br><span class="line">        current_distance, u = heapq.heappop(priority_queue)</span><br><span class="line"></span><br><span class="line">        # 如果当前距离大于已知最短距离，则跳过</span><br><span class="line">        if current_distance &gt; l[u]:</span><br><span class="line">            continue</span><br><span class="line"></span><br><span class="line">        # 遍历邻接顶点</span><br><span class="line">        for v, weight in graph[u].items():</span><br><span class="line">            distance = current_distance + weight</span><br><span class="line"></span><br><span class="line">            # 如果发现更短路径，则更新</span><br><span class="line">            if distance &lt; l[v]:</span><br><span class="line">                l[v] = distance</span><br><span class="line">                z[v] = u</span><br><span class="line">                heapq.heappush(priority_queue, (distance, v))</span><br><span class="line"></span><br><span class="line">    return l, z</span><br><span class="line"></span><br><span class="line"># 示例图的邻接表表示</span><br><span class="line">graph = &#123;</span><br><span class="line">    &#x27;A&#x27;: &#123;&#x27;B&#x27;: 1, &#x27;C&#x27;: 4&#125;,</span><br><span class="line">    &#x27;B&#x27;: &#123;&#x27;A&#x27;: 1, &#x27;C&#x27;: 2, &#x27;D&#x27;: 5&#125;,</span><br><span class="line">    &#x27;C&#x27;: &#123;&#x27;A&#x27;: 4, &#x27;B&#x27;: 2, &#x27;D&#x27;: 1&#125;,</span><br><span class="line">    &#x27;D&#x27;: &#123;&#x27;B&#x27;: 5, &#x27;C&#x27;: 1&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">l, z = dijkstra(graph, &#x27;A&#x27;)</span><br><span class="line">print(&quot;最短距离:&quot;, l)</span><br><span class="line">print(&quot;父顶点记录:&quot;, z)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>2.Floid算法：（动态规划）</strong></p>
+<p>如果一个节点位于起点到重点的最短距离路径上，以节点0→8为例，</p>
+<ol type="1">
+<li><span class="math inline">$l（0→8）=l(0 \to 4)+l(4\to 8)(\text{if 4}
+\in \text{the shortest way }) \\l（0→8）&lt;l(0 \to 6)+l(6\to
+8)(\text{if 6} \notin \text{the shortest way })$</span></li>
+<li>Python代码（片段）：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="variable language_">self</span>.V):</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="variable language_">self</span>.V):</span><br><span class="line">		<span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="variable language_">self</span>.V):</span><br><span class="line">			<span class="keyword">if</span> <span class="variable language_">self</span>.D[i][k]+<span class="variable language_">self</span>[k][j]&lt;<span class="variable language_">self</span>.D[i][j]:</span><br><span class="line">				<span class="variable language_">self</span>.D[i][j]=<span class="variable language_">self</span>.D[i][k]+<span class="variable language_">self</span>[k][j]</span><br><span class="line">				<span class="variable language_">self</span>.S[i][j]=<span class="variable language_">self</span>.S[i][k]</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>数学建模</tag>
+      </tags>
+  </entry>
 </search>
