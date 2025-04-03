@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>My First Blog</title>
-    <url>/2025/04/02/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<p>欢迎来到我的博客。</p>
-<p>这是我用Hexo+Github搭建的第一个博客。我将在这里分享我的学习笔记，日常感慨和读书笔记等。</p>
-]]></content>
-  </entry>
-  <entry>
     <title>二叉树及其基本操作算法</title>
     <url>/2025/04/04/%E6%A0%91/</url>
     <content><![CDATA[<h3 id="二叉树的特性："><a href="#二叉树的特性：" class="headerlink" title="二叉树的特性："></a>二叉树的特性：</h3><ol>
@@ -158,5 +151,12 @@ l（0→8）<l(0 \to 6)+l(6\to 8)(\text{if 6} \notin \text{the shortest way })</
       <tags>
         <tag>数学建模</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>My First Blog</title>
+    <url>/2025/04/02/hello-world/</url>
+    <content><![CDATA[<p>欢迎来到我的博客。</p>
+<p>这是我用Hexo+Github搭建的第一个博客。我将在这里分享我的学习笔记，日常感慨和读书笔记等。</p>
+]]></content>
   </entry>
 </search>
