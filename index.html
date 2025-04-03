@@ -210,7 +210,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2025-04-04 00:17:02 / 修改时间：03:14:46" itemprop="dateCreated datePublished" datetime="2025-04-04T00:17:02+08:00">2025-04-04</time>
+              <time title="创建时间：2025-04-04 00:17:02 / 修改时间：03:19:50" itemprop="dateCreated datePublished" datetime="2025-04-04T00:17:02+08:00">2025-04-04</time>
             </span>
 
           <br>
@@ -242,28 +242,18 @@
 <li>与一般树的根本区别：二叉树的每一个节点都恰好有两颗子树（其中一个或两个可以为空），而树的每一个元素可以有任意数量的子树。</li>
 <li>二叉树中，每个元素的子树是有序的，也就是说，有左子树和右子树之分。</li>
 <li>二叉树可以为空的。</li>
-<li><p>一颗有</p>
-<script type="math/tex; mode=display">
-n>0</script><p>个元素的二叉树有</p>
-<script type="math/tex; mode=display">
-n-1</script><p>条边，最大高度为$n$,最小高度为</p>
-<script type="math/tex; mode=display">
-\left\lceil\log_2(n-1)\right\rceil</script></li>
-<li><p>一颗二叉树高度为h&gt;=0，它至少有h个元素，最多有</p>
-<script type="math/tex; mode=display">
-2^h-1</script><p>个元素（称为满二叉树）</p>
-</li>
+<li>一颗有<script type="math/tex">n>0</script>个元素的二叉树有<script type="math/tex">n-1</script>条边，最大高度为<script type="math/tex">n</script>,最小高度为<script type="math/tex; mode=display">
+ \left\lceil\log_2(n-1)\right\rceil</script></li>
+<li>一颗二叉树高度为h&gt;=0，它至少有h个元素，最多有<script type="math/tex; mode=display">
+2^h-1</script>个元素（称为满二叉树）</li>
 <li><p>完全二叉树是指对高度为h的满二叉树，从第一层到最后一层，在每层中从左至右顺序编号，删除k个编号为</p>
 <script type="math/tex; mode=display">
 2^h-i(1≤i≤k<2^h)</script><p>的元素得到的二叉树。然而，我们还有更为容易理解的一种定义：完全二叉树：深度为k的具有n个结点的二叉树，当且仅当其每一个结点都与深度为k的满二叉树中编号为1~n的结点一 一对应时，称之为完全二叉树。<br><img src="images/tree/complete_tree.png" alt="二叉树"></p>
 </li>
 <li><p>完全二叉树的特性：设完全二叉树的一元素其编号为i，1≤i≤n.则有</p>
 <ol>
-<li><p>如果i=1，则该元素为二叉树的根；如果i&gt;1,则其父节点的编号为</p>
-<script type="math/tex; mode=display">
-i/2</script></li>
-<li><p>有n个元素的完全二叉树，其高度为</p>
-<script type="math/tex; mode=display">
+<li>如果i=1，则该元素为二叉树的根；如果i&gt;1,则其父节点的编号为<script type="math/tex">i/2</script></li>
+<li>有n个元素的完全二叉树，其高度为<script type="math/tex; mode=display">
 \left\lceil\log_2{(n+1)}\right\rceil</script></li>
 <li>如果2i&gt;n，则该元素无左孩，否则其左孩编号为2i</li>
 <li><p>如果2i+1&gt;n，则该元素无右孩，否则其右孩编号为2i+1.<br>下面证明一下这个性质。<br>当i=1，显然该元素为二叉树的根；当i&gt;1时，考虑对应元素不在最下层，位于树的第</p>
@@ -278,7 +268,7 @@ i>\frac{n}{2}</script><p>设高度为h,只需证：h-1层的最后一个元素�
 </li>
 </ol>
 <script type="math/tex; mode=display">
-_{previous} \geq n/2</script><p>考虑最极端的情况，也就是满二叉树（我们当然可以知道满二叉树是一种特殊的二叉树），那么</p>
+i_{previous} \geq n/2</script><p>考虑最极端的情况，也就是满二叉树（我们当然可以知道满二叉树是一种特殊的二叉树），那么</p>
 <script type="math/tex; mode=display">
 n=2^h-1</script><p>，而h-1层的最后一个元素的编号为</p>
 <script type="math/tex; mode=display">
@@ -286,13 +276,11 @@ i_{previous}=2^h{h-1}-1</script><p>（注意这一点是与假设满二叉树无
 <script type="math/tex; mode=display">
 n_{max}>n</script><p>，则：</p>
 <script type="math/tex; mode=display">
-_{previous} \geq \frac{n_{max}}{2}>\frac{n}{2}</script><p>故得证。同理可以完全对称地证明剩余的一个结论。</p>
+i_{previous} \geq \frac{n_{max}}{2}>\frac{n}{2}</script><p>故得证。同理可以完全对称地证明剩余的一个结论。</p>
 </li>
 </ol>
 <h3 id="二叉树的描述："><a href="#二叉树的描述：" class="headerlink" title="二叉树的描述："></a>二叉树的描述：</h3><ol>
-<li><p>数组描述。<br>二叉树的数组表示利用了性质7，把二叉树看作是缺少了部分元素的完全二叉树。将二叉树相对于完全二叉树（实际上，相对于满二叉树）缺少的部分也参与编号，对编号后的树建立数组，原有二叉树的元素按照其编号存储在数组的相应位置。一个有n个元素的二叉树最多需要</p>
-<script type="math/tex; mode=display">
-2^n</script><p>个空间来存储（包括了数组的零位置）。所以这是一种很浪费空间的描述方式。值得注意的是，在这种描述种我们用到了类似哈希表的思想，用空间换得了时间。比如，这样存储的二叉树，其查找的时间复杂度为O(1).</p>
+<li><p>数组描述。<br>二叉树的数组表示利用了性质7，把二叉树看作是缺少了部分元素的完全二叉树。将二叉树相对于完全二叉树（实际上，相对于满二叉树）缺少的部分也参与编号，对编号后的树建立数组，原有二叉树的元素按照其编号存储在数组的相应位置。一个有n个元素的二叉树最多需要<script type="math/tex">2^n</script><br>个空间来存储（包括了数组的零位置）。所以这是一种很浪费空间的描述方式。值得注意的是，在这种描述种我们用到了类似哈希表的思想，用空间换得了时间。比如，这样存储的二叉树，其查找的时间复杂度为O(1).</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MaxSize 100struct TreeNode&#123;</span></span><br><span class="line">   ElemType value;<span class="comment">//结点中的数据元素</span></span><br><span class="line">   <span class="type">bool</span> isEmpty;<span class="comment">//结点是否为空&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">main</span>()&#123;</span><br><span class="line">   TreeNode t[MaxSize];</span><br><span class="line">   <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;MaxSize; i++)&#123;</span><br><span class="line">      t[i].isEmpty = <span class="literal">true</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 <li><p>链表描述。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="comment">//binary search tree:left&lt;=right</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">bstNode</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="type">int</span> data;</span><br><span class="line">bstNode* left;</span><br><span class="line">bstNode* right;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//Creat a node</span></span><br><span class="line"><span class="function">bstNode* <span class="title">getNewNode</span><span class="params">(<span class="type">int</span> data)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">bstNode* newNode = <span class="keyword">new</span> <span class="built_in">bstNode</span>();</span><br><span class="line">newNode-&gt;data = data;</span><br><span class="line">newNode-&gt;left = newNode-&gt;right = <span class="literal">nullptr</span>;</span><br><span class="line"><span class="keyword">return</span> newNode;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">binaryTreeNode</span></span><br><span class="line">&#123;</span><br><span class="line">T element;</span><br><span class="line">binaryTreeNode&lt;T&gt; *lChild,*rChild;</span><br></pre></td></tr></table></figure>
