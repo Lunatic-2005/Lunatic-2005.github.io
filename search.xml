@@ -6,7 +6,7 @@
     <content><![CDATA[]]></content>
   </entry>
   <entry>
-    <title>树</title>
+    <title>二叉树及其基本操作算法</title>
     <url>/2025/04/04/%E6%A0%91/</url>
     <content><![CDATA[<h3 id="二叉树的特性："><a href="#二叉树的特性：" class="headerlink" title="二叉树的特性："></a>二叉树的特性：</h3><ol>
 <li>与一般树的根本区别：二叉树的每一个节点都恰好有两颗子树（其中一个或两个可以为空），而树的每一个元素可以有任意数量的子树。</li>
