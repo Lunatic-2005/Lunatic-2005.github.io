@@ -1,11 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>STM32 位带操作</title>
+    <url>/2025/04/05/STM32-%E4%BD%8D%E5%B8%A6%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[<h2 id="什么是位带操作和位带区"><a href="#什么是位带操作和位带区" class="headerlink" title="什么是位带操作和位带区"></a>什么是位带操作和位带区</h2><h3 id="位带操作"><a href="#位带操作" class="headerlink" title="位带操作"></a>位带操作</h3><p>STM32内核的最小寻址单位是字节，一个字节里面有8位，所谓位带操作就是在STM32中实现位操作的方法。，我们先来看什么是<strong>位带区</strong>。</p>
+<p>下面一张图片是Cortex-M内核寻址空间映射图。</p>
+<p><img data-src="images/STM32/stm32_find_addr.png" alt="寻址映射图"></p>
+<p>图中的SRAM区里的0X20000000-0X200FFFF地址段和片内外设区里的0X40000000-0X400FFFFF地址段就是位带区，也就是设计支持位带操作的内存区域。在野火相关资料文档中，有这样一段解释：</p>
+<blockquote>
+<p>那么，STM32是如何将内核寻址单位缩小到位的呢？位带区这两个1MB的空间除了可以像正常的RAM一样操作外， 他们还有自己的位带别名区，位带别名区把这1MB的空间的每一个位膨胀成一个32位的字，当访问位带别名区的这些字时，就可以达到访问位带区某个比特位的目的。</p>
+</blockquote>
+<p>由此可以看出，想要对STM32实现位操作，只有随位带别名区的一个字空间（注意，不是字节空间）进行操作，而之所以不用字节则是因为这样会降低访问速度。</p>
+<h2 id="如何进行位带操作"><a href="#如何进行位带操作" class="headerlink" title="如何进行位带操作"></a>如何进行位带操作</h2><p>我们可以通过指针的形式访问位带别名区地址从而达到操作位带区比特位的效果。</p>
+<h3 id="外设位带别名区地址"><a href="#外设位带别名区地址" class="headerlink" title="外设位带别名区地址"></a>外设位带别名区地址</h3><p>对于片上外设位带区的某一位空间，设其所在的<strong>字节</strong>地址为A，位序号为n（0&lt;=n&lt;=31），则该位<strong>对应的位带别名区地址</strong>为</p>
+<script type="math/tex; mode=display">
+AliasAddr= 0x42000000+ (A-0x40000000)\times8\times4 +4n</script><p>0X42000000是外设位带别名区的起始地址，0x40000000是外设位带区的起始地址，（A-0x40000000）表示该比特前面有多少个字节， 一个字节有8位，所以*8，一个位膨胀后是4个字节，所以*4，n表示该比特在A地址的序号，因为一个位经过膨胀后是四个字节，所以也*4。</p>
+<h3 id="SRAM位带别名区地址"><a href="#SRAM位带别名区地址" class="headerlink" title="SRAM位带别名区地址"></a>SRAM位带别名区地址</h3><p>同样可以知道，</p>
+<script type="math/tex; mode=display">
+AliasAddr= 0x22000000+ (A-0x20000000)\times8\times4 +4n</script><h3 id="宏定义位带别名区地址的转换"><a href="#宏定义位带别名区地址的转换" class="headerlink" title="宏定义位带别名区地址的转换"></a>宏定义位带别名区地址的转换</h3><p><code>#define BITBAND(addr,bitnum)((addr &amp; 0xF0000000)+0x02000000+((addr &amp;0x00FFFFF&lt;&lt;5)+(bitnum&lt;&lt;2))</code></p>
+<p>好好理解一下这个公式！特别是其中按位与运算之巧妙！以下是野火开源资料对上述公示的描述。</p>
+<blockquote>
+<p>addr &amp; 0xF0000000是为了区别SRAM还是外设，实际效果就是取出4或者2，如果是外设，则取出的是4，+0X02000000之后就等于0X42000000， 0X42000000是外设别名区的起始地址。如果是SRAM，则取出的是2，+0X02000000之后就等于0X22000000，0X22000000是SRAM别名区的起始地址。</p>
+<p>addr &amp; 0x00FFFFFF 屏蔽了高三位，相当于减去0X20000000或者0X40000000，但是为什么是屏蔽高三位？因为外设的最高地址是：0X20100000， 跟起始地址0X20000000相减的时候，总是低5位才有效，所以干脆就把高三位屏蔽掉来达到减去起始地址的效果，具体屏蔽掉多少位跟最高地址有关。 SRAM同理分析即可。&lt;&lt;5相当于*8*4，&lt;&lt;2相当于*4，这两个我们在上面分析过。</p>
+</blockquote>
+<p>下面介绍常用的宏定义</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#define BITBAND(addr,bitnum)((addr &amp; 0xF0000000)+0x02000000+((addr &amp;0x00FFFFF&lt;&lt;5)+(bitnum&lt;&lt;2))</span><br><span class="line">#define MEM_ADDR(addr)            *((volatile unsigned long *)addr)</span><br><span class="line">#define BIT_ADDR(addr,bitnum)     MEM_ADDR(BITAND)(addr,bitnum)</span><br></pre></td></tr></table></figure>
+<p>上述宏定义中，BITAND用来将位带区某一位空间所在字节的首位地址和位偏移量映射为其在位带别名区的地址；MEM_ADDR用于将位带区某一位空间所在字节的首位地址转化为指针；</p>
+<p>BIT_ADDR用于将位带区某一位空间所在字节的首位地址和位偏移量映射为对应的指针。（值得注意的是volatile关键字，需要提醒编译器每次存储或读取addr地址时重新从变量地址读取数据，避免优化）；由于地址是32位的，所以用无符号长整形表达地址。</p>
+<h3 id="GPIO的位带操作"><a href="#GPIO的位带操作" class="headerlink" title="GPIO的位带操作"></a>GPIO的位带操作</h3><p>我们来举一个例子：</p>
+<p>如果我们要控制一个LED闪烁，利用库函数，我们需要经历一下算法：</p>
+<ol>
+<li>初始化GPIO引脚（低电平有效为例）</li>
+<li>控制GPIO为低电平，延时一段时间</li>
+<li>控制GPIO为高电平，延时一段时间</li>
+<li>回到2</li>
+</ol>
+<p>然而利用位带操作，我们可以对单个管脚进行操作。当我们要操作一个位，直接用GPIO封装的宏直接访问这一位的数据。这样可以直接利用对应寄存器进行输出！上述算法变为：</p>
+<ol>
+<li>通过相应GPIO的寄存器地址的位带别名区地址，访问寄存器变量。可以利用宏定义：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// GPIO ODR 和 IDR 寄存器地址映射 </span><br><span class="line">#define GPIOA_ODR_Addr    (GPIOA_BASE+20) </span><br><span class="line">#define GPIOB_ODR_Addr    (GPIOB_BASE+20)   </span><br><span class="line">#define GPIOC_ODR_Addr    (GPIOC_BASE+20)  </span><br><span class="line">#define GPIOD_ODR_Addr    (GPIOD_BASE+20) </span><br><span class="line">#define GPIOE_ODR_Addr    (GPIOE_BASE+20) </span><br><span class="line">#define GPIOF_ODR_Addr    (GPIOF_BASE+20)  </span><br><span class="line">#define GPIOG_ODR_Addr    (GPIOG_BASE+20)</span><br><span class="line">#define GPIOH_ODR_Addr    (GPIOH_BASE+20)  </span><br><span class="line">#define GPIOI_ODR_Addr    (GPIOI_BASE+20)</span><br><span class="line">#define GPIOJ_ODR_Addr    (GPIOJ_BASE+20)  </span><br><span class="line">#define GPIOK_ODR_Addr    (GPIOK_BASE+20)</span><br><span class="line"></span><br><span class="line">#define GPIOA_IDR_Addr    (GPIOA_BASE+16)  </span><br><span class="line">#define GPIOB_IDR_Addr    (GPIOB_BASE+16)  </span><br><span class="line">#define GPIOC_IDR_Addr    (GPIOC_BASE+16)   </span><br><span class="line">#define GPIOD_IDR_Addr    (GPIOD_BASE+16)  </span><br><span class="line">#define GPIOE_IDR_Addr    (GPIOE_BASE+16)  </span><br><span class="line">#define GPIOF_IDR_Addr    (GPIOF_BASE+16)  </span><br><span class="line">#define GPIOG_IDR_Addr    (GPIOG_BASE+16)  </span><br><span class="line">#define GPIOH_IDR_Addr    (GPIOH_BASE+16)</span><br><span class="line">#define GPIOI_IDR_Addr    (GPIOI_BASE+16)</span><br><span class="line">#define GPIOJ_IDR_Addr    (GPIOJ_BASE+16)</span><br><span class="line">#define GPIOK_IDR_Addr    (GPIOK_BASE+16)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 单独操作 GPIO的某一个IO口，n(0,1,2...16),n表示具体是哪一个IO口</span><br><span class="line">#define PAout(n)   BIT_ADDR(GPIOA_ODR_Addr,n)  //输出   </span><br><span class="line">#define PAin(n)    BIT_ADDR(GPIOA_IDR_Addr,n)  //输入   </span><br><span class="line"></span><br><span class="line">#define PBout(n)   BIT_ADDR(GPIOB_ODR_Addr,n)  //输出   </span><br><span class="line">#define PBin(n)    BIT_ADDR(GPIOB_IDR_Addr,n)  //输入   </span><br><span class="line"></span><br><span class="line">#define PCout(n)   BIT_ADDR(GPIOC_ODR_Addr,n)  //输出   </span><br><span class="line">#define PCin(n)    BIT_ADDR(GPIOC_IDR_Addr,n)  //输入   </span><br><span class="line"></span><br><span class="line">#define PDout(n)   BIT_ADDR(GPIOD_ODR_Addr,n)  //输出   </span><br><span class="line">#define PDin(n)    BIT_ADDR(GPIOD_IDR_Addr,n)  //输入   </span><br><span class="line"></span><br><span class="line">#define PEout(n)   BIT_ADDR(GPIOE_ODR_Addr,n)  //输出   </span><br><span class="line">#define PEin(n)    BIT_ADDR(GPIOE_IDR_Addr,n)  //输入  </span><br><span class="line"></span><br><span class="line">#define PFout(n)   BIT_ADDR(GPIOF_ODR_Addr,n)  //输出   </span><br><span class="line">#define PFin(n)    BIT_ADDR(GPIOF_IDR_Addr,n)  //输入  </span><br><span class="line"></span><br><span class="line">#define PGout(n)   BIT_ADDR(GPIOG_ODR_Addr,n)  //输出   </span><br><span class="line">#define PGin(n)    BIT_ADDR(GPIOG_IDR_Addr,n)  //输入  </span><br><span class="line"></span><br><span class="line">#define PHout(n)   BIT_ADDR(GPIOH_ODR_Addr,n)  //输出   </span><br><span class="line">#define PHin(n)    BIT_ADDR(GPIOH_IDR_Addr,n)  //输入  </span><br><span class="line"></span><br><span class="line">#define PIout(n)   BIT_ADDR(GPIOI_ODR_Addr,n)  //输出   </span><br><span class="line">#define PIin(n)    BIT_ADDR(GPIOI_IDR_Addr,n)  //输入 </span><br><span class="line"></span><br><span class="line">#define PJout(n)   BIT_ADDR(GPIOJ_ODR_Addr,n)  //输出   </span><br><span class="line">#define PJin(n)    BIT_ADDR(GPIOJ_IDR_Addr,n)  //输入  </span><br><span class="line"></span><br><span class="line">#define PKout(n)   BIT_ADDR(GPIOK_ODR_Addr,n)  //输出   </span><br><span class="line">#define PKin(n)    BIT_ADDR(GPIOK_IDR_Addr,n)  //输入  </span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>进行操作。（库函数中已经写好啦，现场查即可）</p>
+<ol>
+<li>LED=0，延时；LED=1，延时；</li>
+<li>回到2；</li>
+</ol>
+<p>注意：</p>
+<ol>
+<li>STM32F7以上的MCU不支持位带操作。</li>
+<li>out管脚作为左值使用，in管脚作为右值使用。</li>
+</ol>
+<p>下面来写一下上述GPIO位带操作的实现举例。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">//.c文件核心代码</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    //LED_Init</span><br><span class="line">    LED_GPIO_Init();</span><br><span class="line">    while(1)&#123;</span><br><span class="line">      PFout(6)=0;</span><br><span class="line">      SOFT_Delay(0x0FFFFF);</span><br><span class="line">      PFout(6)=1;</span><br><span class="line">      SOFT_Delay(0x0FFFFF);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">/*基于一般库函数的版本：</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    RCC_HSE_Config(RCC_PLLSource_HSE_Div2,RCC_PLLMul_9);</span><br><span class="line">    LED_Init();</span><br><span class="line">    while(1)</span><br><span class="line">    &#123;</span><br><span class="line">        GPIO_ResetBits(LED0_PORT,LED0_PIN);</span><br><span class="line">        SOFT_Delay(0x0FFFFF);</span><br><span class="line">        GPIO_ResetBits(LED0_PORT,LED0_PIN);</span><br><span class="line">        SOFT_Delay(0x0FFFFF);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>stm32</tag>
+        <tag>单片机</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>My First Blog</title>
     <url>/2025/04/02/hello-world/</url>
     <content><![CDATA[<p>欢迎来到我的博客。</p>
 <p>这是我用Hexo+Github搭建的第一个博客。我将在这里分享我的学习笔记，日常感慨和读书笔记等。</p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>二叉搜索树</title>
+    <url>/2025/04/04/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>图论模型：最小路径算法</title>
@@ -61,9 +124,37 @@ l（0→8）<l(0 \to 6)+l(6\to 8)(\text{if 6} \notin \text{the shortest way })</
       </tags>
   </entry>
   <entry>
-    <title>二叉搜索树</title>
-    <url>/2025/04/04/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</url>
-    <content><![CDATA[]]></content>
+    <title>排序算法</title>
+    <url>/2025/03/31/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="算法（2）排序算法"><a href="#算法（2）排序算法" class="headerlink" title="算法（2）排序算法"></a>算法（2）排序算法</h1><p>1、插入排序</p>
+<p>1.1 直接插入排序：</p>
+<p>直接插入排序的基本思想：</p>
+<p>1）将整个数组分为“已排序”和“未排序”的两部分，设已排序m，总长度n</p>
+<p>2）从未排序部分选取第一个元素</p>
+<p>3）遍历已排序的数组，查找需要插入的位置下标i</p>
+<p>4）保护待排序数据，将下标大于i，小于m的所有元素右移一位</p>
+<p>5）插入，进入下一轮循环</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">InsertSort</span><span class="params">(type* arr, <span class="type">int</span> num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> m = <span class="number">1</span>; m &lt; num; m++)<span class="comment">//外层for循环，用于记录已经排序好的长度m</span></span><br><span class="line">	&#123;</span><br><span class="line">		type tmp = arr[m];</span><br><span class="line">		<span class="type">int</span> i = m - <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span> ( i = m - <span class="number">1</span>; i &gt;= <span class="number">0</span>&amp;&amp;arr[i]&gt;tmp; i--)<span class="comment">//内层for循环，用于遍历已排序的数组</span></span><br><span class="line">		&#123;</span><br><span class="line">			arr[i + <span class="number">1</span>] = arr[i];</span><br><span class="line">		&#125;</span><br><span class="line">		arr[i<span class="number">+1</span>] = tmp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>算法的性能分析：</p>
+<p>时间复杂度：O（n^2）</p>
+<p>（平均情况下向长度为m的序列中插入一个数据的平均移动速度是m/2，m从1累加到n-1）</p>
+<p>空间复杂度：O（1）</p>
+<p>稳定性：稳定</p>
+<p>2、交换排序</p>
+<p>2.1 快速排序</p>
+<p>1）递归调用自身</p>
+<p>2）每次将数组以“主元”为界分为较大组和较小组，再对两组分别进行快速排序</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span> <span class="comment">// 用于 std::swap</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">Partition</span><span class="params">(<span class="type">int</span>* arr, <span class="type">int</span> num, <span class="type">int</span> nLower, <span class="type">int</span> nUpper)</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> pivot = arr[nLower]; <span class="comment">// 选取第一个元素作为主元进行切割</span></span><br><span class="line">	<span class="type">int</span> nLeft = nLower + <span class="number">1</span>;</span><br><span class="line">	<span class="type">int</span> nRight = nUpper; <span class="comment">// 确定本次分割的范围</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">		<span class="keyword">while</span> (nLeft &lt;= nRight &amp;&amp; arr[nLeft] &lt;= pivot) nLeft++; <span class="comment">// 查找左侧第一个大于 pivot 的元素对应的下标</span></span><br><span class="line">		<span class="keyword">while</span> (nRight &gt;= nLeft &amp;&amp; arr[nRight] &gt;= pivot) nRight--; <span class="comment">// 查找右侧第一个小于 pivot 的元素对应的下标</span></span><br><span class="line">		<span class="keyword">if</span> (nLeft &gt; nRight) <span class="keyword">break</span>; <span class="comment">// 循环退出条件</span></span><br><span class="line">		<span class="keyword">if</span> (nLeft &lt; nRight) &#123; <span class="comment">// 如果左标小于右标，交换找到的两个下标对应的数的位置</span></span><br><span class="line">			std::<span class="built_in">swap</span>(arr[nLeft], arr[nRight]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	std::<span class="built_in">swap</span>(arr[nLower], arr[nRight]); <span class="comment">// 将主元放到正确的位置</span></span><br><span class="line">	<span class="keyword">return</span> nRight; <span class="comment">// 返回主元的最终位置</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">QuickSort</span><span class="params">(<span class="type">int</span>* arr, <span class="type">int</span> num, <span class="type">int</span> nLower = <span class="number">0</span>, <span class="type">int</span> nUpper = <span class="number">-1</span>)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (nUpper == <span class="number">-1</span>) nUpper = num - <span class="number">1</span>; <span class="comment">// 缺省参数的情况，nUpper 应该是 num - 1</span></span><br><span class="line">	<span class="keyword">if</span> (nLower &lt; nUpper) &#123;</span><br><span class="line">		<span class="type">int</span> nSplit = <span class="built_in">Partition</span>(arr, num, nLower, nUpper); <span class="comment">// 划分数组</span></span><br><span class="line">		<span class="built_in">QuickSort</span>(arr, num, nLower, nSplit - <span class="number">1</span>); <span class="comment">// 递归排序左侧子数组</span></span><br><span class="line">		<span class="built_in">QuickSort</span>(arr, num, nSplit + <span class="number">1</span>, nUpper); <span class="comment">// 递归排序右侧子数组</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>算法性能分析：</p>
+<p>快速排序在n较大时时间复杂度O（nlogn）</p>
+<p>在n较小时或主元选择不合理时，时间复杂度为O（n^2）</p>
+<p>空间复杂度O（logn）</p>
+<p>快速排序是不稳定的</p>
+<p>3、选择排序</p>
+<p>3.1直接选择排序</p>
+<p>1）数组被分为已排序与未排序两组</p>
+<p>2）每次遍历未排序组找到最小的元素插入已排序组的最后</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> type&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">selectSort</span><span class="params">(type* items, <span class="type">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> imin = i - <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = i; j &lt; len; j++)<span class="comment">//j从i开始，在i后寻找最小的排到已经排序的前序列后一个</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (items[j] &lt; items[imin]) &#123;</span><br><span class="line">				imin = j;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (imin != i - <span class="number">1</span>)<span class="comment">//如果找到了，将最小值放置到i-1处</span></span><br><span class="line">		&#123;</span><br><span class="line">			type t = items[i - <span class="number">1</span>];</span><br><span class="line">			items[i - <span class="number">1</span>] = items[imin];</span><br><span class="line">			items[imin] = t;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>简谐振动（更新中）</title>
@@ -73,7 +164,7 @@ l（0→8）<l(0 \to 6)+l(6\to 8)(\text{if 6} \notin \text{the shortest way })</
 \vec x=\vec x_1+\vec x_2······(1)\\
 x=A_1cos(\omega t+\phi_1)+A_2cos(\omega t+\phi_2)=\sqrt{A_1^2+A_2^2+2A_1A_2cos(\phi_1-\phi_2)}cos(\omega t+\phi)······(2)
 \\ where \text{ } \phi=arctan(\frac{A_1sin\phi_1+A_2sin\phi_2}{A_1cos\phi_1+A_2cos\phi_2})······(3)</script><p>这个推导是纯数学的，让我们用几何的方法来理解一下，即使用旋转矢量方法来现场计算一下这个值（毕竟背这个公式有点……）</p>
-<p><img data-src="images/physics/swirling_vec(1" alt="旋转矢量下同方向同频率简谐振动的合成">.png)</p>
+<p><img data-src="images/physics/swirlingvec1.png" alt="旋转矢量的合成"></p>
 <p>这样可以直接由几何关系，利用余弦定理求得A，再利用比值法求得</p>
 <script type="math/tex; mode=display">
 \phi</script><p>下面讨论两种特殊的情况：</p>
@@ -87,7 +178,7 @@ x=A_1cos(\omega t+\phi_1)+A_2cos(\omega t+\phi_2)=\sqrt{A_1^2+A_2^2+2A_1A_2cos(\
 <script type="math/tex; mode=display">
 \text{if}\text{ }\phi_2-\phi_1=(2k+1)\pi,k\in N^+\\
 \text{then }A=\lvert{A_1-A_2}\rvert.</script><h3 id="多个同方向、同频率简谐振动的合成：旋转矢量"><a href="#多个同方向、同频率简谐振动的合成：旋转矢量" class="headerlink" title="多个同方向、同频率简谐振动的合成：旋转矢量"></a>多个<strong>同方向、同频率</strong>简谐振动的合成：旋转矢量</h3><p>用《普通物理学》的一道经典例题来讲解一下。</p>
-<p><img data-src="images/physics/swirling_vec(2" alt=" ">.png)</p>
+<p><img data-src="images/physics/swirlingvec2.png" alt=" "></p>
 <p>由几何关系容易得到，若选取第一个质点（这里假设为质点）运动方向为旋转参考系的x轴正向，则有：</p>
 <script type="math/tex; mode=display">
 A=2\cdot (Rsin\frac{N\alpha}{2})\\
@@ -158,39 +249,6 @@ x'=\sqrt{A_1^2+A_2^2}\cos({\omega t+\phi})</script></li>
 m\frac{d^2x}{dt^2}=-kx-\gamma\frac{dx}{dt}\\\text{这是一个二阶常系数线齐次微分方程，我们讨论其解的结构：}\\\text{令}\omega^2_0=k/m,2\beta=\gamma/m,\\x''+2\beta x'+\omega_0^2x=0,\\
 \lambda^2+2\beta\lambda+\omega_0^2=0,
 \lambda_{1,2}=-\beta\pm\sqrt{\beta^2-\omega_0^2}\\1)\beta<\omega,x=A_0e^{-\beta t}cos(\sqrt{\omega_0^2-\beta^2 }\cdot t+\phi)\\2)\beta>\omega_0,x=Ae^{-(\beta+\sqrt{\beta^2-\omega_0^2})t}+Be^{-(\beta-\sqrt{\beta^2-\omega^2_0})t}\\3)\beta=\omega_0,x=e^{-\beta t}(A+Bt)</script>]]></content>
-  </entry>
-  <entry>
-    <title>排序算法</title>
-    <url>/2025/03/31/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<h1 id="算法（2）排序算法"><a href="#算法（2）排序算法" class="headerlink" title="算法（2）排序算法"></a>算法（2）排序算法</h1><p>1、插入排序</p>
-<p>1.1 直接插入排序：</p>
-<p>直接插入排序的基本思想：</p>
-<p>1）将整个数组分为“已排序”和“未排序”的两部分，设已排序m，总长度n</p>
-<p>2）从未排序部分选取第一个元素</p>
-<p>3）遍历已排序的数组，查找需要插入的位置下标i</p>
-<p>4）保护待排序数据，将下标大于i，小于m的所有元素右移一位</p>
-<p>5）插入，进入下一轮循环</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">InsertSort</span><span class="params">(type* arr, <span class="type">int</span> num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> m = <span class="number">1</span>; m &lt; num; m++)<span class="comment">//外层for循环，用于记录已经排序好的长度m</span></span><br><span class="line">	&#123;</span><br><span class="line">		type tmp = arr[m];</span><br><span class="line">		<span class="type">int</span> i = m - <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span> ( i = m - <span class="number">1</span>; i &gt;= <span class="number">0</span>&amp;&amp;arr[i]&gt;tmp; i--)<span class="comment">//内层for循环，用于遍历已排序的数组</span></span><br><span class="line">		&#123;</span><br><span class="line">			arr[i + <span class="number">1</span>] = arr[i];</span><br><span class="line">		&#125;</span><br><span class="line">		arr[i<span class="number">+1</span>] = tmp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>算法的性能分析：</p>
-<p>时间复杂度：O（n^2）</p>
-<p>（平均情况下向长度为m的序列中插入一个数据的平均移动速度是m/2，m从1累加到n-1）</p>
-<p>空间复杂度：O（1）</p>
-<p>稳定性：稳定</p>
-<p>2、交换排序</p>
-<p>2.1 快速排序</p>
-<p>1）递归调用自身</p>
-<p>2）每次将数组以“主元”为界分为较大组和较小组，再对两组分别进行快速排序</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span> <span class="comment">// 用于 std::swap</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">Partition</span><span class="params">(<span class="type">int</span>* arr, <span class="type">int</span> num, <span class="type">int</span> nLower, <span class="type">int</span> nUpper)</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> pivot = arr[nLower]; <span class="comment">// 选取第一个元素作为主元进行切割</span></span><br><span class="line">	<span class="type">int</span> nLeft = nLower + <span class="number">1</span>;</span><br><span class="line">	<span class="type">int</span> nRight = nUpper; <span class="comment">// 确定本次分割的范围</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">		<span class="keyword">while</span> (nLeft &lt;= nRight &amp;&amp; arr[nLeft] &lt;= pivot) nLeft++; <span class="comment">// 查找左侧第一个大于 pivot 的元素对应的下标</span></span><br><span class="line">		<span class="keyword">while</span> (nRight &gt;= nLeft &amp;&amp; arr[nRight] &gt;= pivot) nRight--; <span class="comment">// 查找右侧第一个小于 pivot 的元素对应的下标</span></span><br><span class="line">		<span class="keyword">if</span> (nLeft &gt; nRight) <span class="keyword">break</span>; <span class="comment">// 循环退出条件</span></span><br><span class="line">		<span class="keyword">if</span> (nLeft &lt; nRight) &#123; <span class="comment">// 如果左标小于右标，交换找到的两个下标对应的数的位置</span></span><br><span class="line">			std::<span class="built_in">swap</span>(arr[nLeft], arr[nRight]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	std::<span class="built_in">swap</span>(arr[nLower], arr[nRight]); <span class="comment">// 将主元放到正确的位置</span></span><br><span class="line">	<span class="keyword">return</span> nRight; <span class="comment">// 返回主元的最终位置</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">QuickSort</span><span class="params">(<span class="type">int</span>* arr, <span class="type">int</span> num, <span class="type">int</span> nLower = <span class="number">0</span>, <span class="type">int</span> nUpper = <span class="number">-1</span>)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (nUpper == <span class="number">-1</span>) nUpper = num - <span class="number">1</span>; <span class="comment">// 缺省参数的情况，nUpper 应该是 num - 1</span></span><br><span class="line">	<span class="keyword">if</span> (nLower &lt; nUpper) &#123;</span><br><span class="line">		<span class="type">int</span> nSplit = <span class="built_in">Partition</span>(arr, num, nLower, nUpper); <span class="comment">// 划分数组</span></span><br><span class="line">		<span class="built_in">QuickSort</span>(arr, num, nLower, nSplit - <span class="number">1</span>); <span class="comment">// 递归排序左侧子数组</span></span><br><span class="line">		<span class="built_in">QuickSort</span>(arr, num, nSplit + <span class="number">1</span>, nUpper); <span class="comment">// 递归排序右侧子数组</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>算法性能分析：</p>
-<p>快速排序在n较大时时间复杂度O（nlogn）</p>
-<p>在n较小时或主元选择不合理时，时间复杂度为O（n^2）</p>
-<p>空间复杂度O（logn）</p>
-<p>快速排序是不稳定的</p>
-<p>3、选择排序</p>
-<p>3.1直接选择排序</p>
-<p>1）数组被分为已排序与未排序两组</p>
-<p>2）每次遍历未排序组找到最小的元素插入已排序组的最后</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> type&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">selectSort</span><span class="params">(type* items, <span class="type">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> imin = i - <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = i; j &lt; len; j++)<span class="comment">//j从i开始，在i后寻找最小的排到已经排序的前序列后一个</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (items[j] &lt; items[imin]) &#123;</span><br><span class="line">				imin = j;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (imin != i - <span class="number">1</span>)<span class="comment">//如果找到了，将最小值放置到i-1处</span></span><br><span class="line">		&#123;</span><br><span class="line">			type t = items[i - <span class="number">1</span>];</span><br><span class="line">			items[i - <span class="number">1</span>] = items[imin];</span><br><span class="line">			items[imin] = t;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>二叉树及其基本操作算法</title>
@@ -301,64 +359,6 @@ i_{previous} \geq \frac{n_{max}}{2}>\frac{n}{2}</script><p>故得证。同理可
 <h3 id="应用举例：信号放大器问题"><a href="#应用举例：信号放大器问题" class="headerlink" title="应用举例：信号放大器问题"></a>应用举例：信号放大器问题</h3>]]></content>
       <tags>
         <tag>数据结构与算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>STM32 位带操作</title>
-    <url>/2025/04/05/STM32-%E4%BD%8D%E5%B8%A6%E6%93%8D%E4%BD%9C/</url>
-    <content><![CDATA[<h2 id="什么是位带操作和位带区"><a href="#什么是位带操作和位带区" class="headerlink" title="什么是位带操作和位带区"></a>什么是位带操作和位带区</h2><h3 id="位带操作"><a href="#位带操作" class="headerlink" title="位带操作"></a>位带操作</h3><p>STM32内核的最小寻址单位是字节，一个字节里面有8位，所谓位带操作就是在STM32中实现位操作的方法。，我们先来看什么是<strong>位带区</strong>。</p>
-<p>下面一张图片是Cortex-M内核寻址空间映射图。</p>
-<p><img data-src="images/STM32/stm32_find_addr.png" alt="寻址映射图"></p>
-<p>图中的SRAM区里的0X20000000-0X200FFFF地址段和片内外设区里的0X40000000-0X400FFFFF地址段就是位带区，也就是设计支持位带操作的内存区域。在野火相关资料文档中，有这样一段解释：</p>
-<blockquote>
-<p>那么，STM32是如何将内核寻址单位缩小到位的呢？位带区这两个1MB的空间除了可以像正常的RAM一样操作外， 他们还有自己的位带别名区，位带别名区把这1MB的空间的每一个位膨胀成一个32位的字，当访问位带别名区的这些字时，就可以达到访问位带区某个比特位的目的。</p>
-</blockquote>
-<p>由此可以看出，想要对STM32实现位操作，只有随位带别名区的一个字空间（注意，不是字节空间）进行操作，而之所以不用字节则是因为这样会降低访问速度。</p>
-<h2 id="如何进行位带操作"><a href="#如何进行位带操作" class="headerlink" title="如何进行位带操作"></a>如何进行位带操作</h2><p>我们可以通过指针的形式访问位带别名区地址从而达到操作位带区比特位的效果。</p>
-<h3 id="外设位带别名区地址"><a href="#外设位带别名区地址" class="headerlink" title="外设位带别名区地址"></a>外设位带别名区地址</h3><p>对于片上外设位带区的某一位空间，设其所在的<strong>字节</strong>地址为A，位序号为n（0&lt;=n&lt;=31），则该位<strong>对应的位带别名区地址</strong>为</p>
-<script type="math/tex; mode=display">
-AliasAddr= 0x42000000+ (A-0x40000000)\times8\times4 +4n</script><p>0X42000000是外设位带别名区的起始地址，0x40000000是外设位带区的起始地址，（A-0x40000000）表示该比特前面有多少个字节， 一个字节有8位，所以*8，一个位膨胀后是4个字节，所以*4，n表示该比特在A地址的序号，因为一个位经过膨胀后是四个字节，所以也*4。</p>
-<h3 id="SRAM位带别名区地址"><a href="#SRAM位带别名区地址" class="headerlink" title="SRAM位带别名区地址"></a>SRAM位带别名区地址</h3><p>同样可以知道，</p>
-<script type="math/tex; mode=display">
-AliasAddr= 0x22000000+ (A-0x20000000)\times8\times4 +4n</script><h3 id="宏定义位带别名区地址的转换"><a href="#宏定义位带别名区地址的转换" class="headerlink" title="宏定义位带别名区地址的转换"></a>宏定义位带别名区地址的转换</h3><p><code>#define BITBAND(addr,bitnum)((addr &amp; 0xF0000000)+0x02000000+((addr &amp;0x00FFFFF&lt;&lt;5)+(bitnum&lt;&lt;2))</code></p>
-<p>好好理解一下这个公式！特别是其中按位与运算之巧妙！以下是野火开源资料对上述公示的描述。</p>
-<blockquote>
-<p>addr &amp; 0xF0000000是为了区别SRAM还是外设，实际效果就是取出4或者2，如果是外设，则取出的是4，+0X02000000之后就等于0X42000000， 0X42000000是外设别名区的起始地址。如果是SRAM，则取出的是2，+0X02000000之后就等于0X22000000，0X22000000是SRAM别名区的起始地址。</p>
-<p>addr &amp; 0x00FFFFFF 屏蔽了高三位，相当于减去0X20000000或者0X40000000，但是为什么是屏蔽高三位？因为外设的最高地址是：0X20100000， 跟起始地址0X20000000相减的时候，总是低5位才有效，所以干脆就把高三位屏蔽掉来达到减去起始地址的效果，具体屏蔽掉多少位跟最高地址有关。 SRAM同理分析即可。&lt;&lt;5相当于*8*4，&lt;&lt;2相当于*4，这两个我们在上面分析过。</p>
-</blockquote>
-<p>下面介绍常用的宏定义</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#define BITBAND(addr,bitnum)((addr &amp; 0xF0000000)+0x02000000+((addr &amp;0x00FFFFF&lt;&lt;5)+(bitnum&lt;&lt;2))</span><br><span class="line">#define MEM_ADDR(addr)            *((volatile unsigned long *)addr)</span><br><span class="line">#define BIT_ADDR(addr,bitnum)     MEM_ADDR(BITAND)(addr,bitnum)</span><br></pre></td></tr></table></figure>
-<p>上述宏定义中，BITAND用来将位带区某一位空间所在字节的首位地址和位偏移量映射为其在位带别名区的地址；MEM_ADDR用于将位带区某一位空间所在字节的首位地址转化为指针；</p>
-<p>BIT_ADDR用于将位带区某一位空间所在字节的首位地址和位偏移量映射为对应的指针。（值得注意的是volatile关键字，需要提醒编译器每次存储或读取addr地址时重新从变量地址读取数据，避免优化）；由于地址是32位的，所以用无符号长整形表达地址。</p>
-<h3 id="GPIO的位带操作"><a href="#GPIO的位带操作" class="headerlink" title="GPIO的位带操作"></a>GPIO的位带操作</h3><p>我们来举一个例子：</p>
-<p>如果我们要控制一个LED闪烁，利用库函数，我们需要经历一下算法：</p>
-<ol>
-<li>初始化GPIO引脚（低电平有效为例）</li>
-<li>控制GPIO为低电平，延时一段时间</li>
-<li>控制GPIO为高电平，延时一段时间</li>
-<li>回到2</li>
-</ol>
-<p>然而利用位带操作，我们可以对单个管脚进行操作。当我们要操作一个位，直接用GPIO封装的宏直接访问这一位的数据。这样可以直接利用对应寄存器进行输出！上述算法变为：</p>
-<ol>
-<li>通过相应GPIO的寄存器地址的位带别名区地址，访问寄存器变量。可以利用宏定义：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// GPIO ODR 和 IDR 寄存器地址映射 </span><br><span class="line">#define GPIOA_ODR_Addr    (GPIOA_BASE+20) </span><br><span class="line">#define GPIOB_ODR_Addr    (GPIOB_BASE+20)   </span><br><span class="line">#define GPIOC_ODR_Addr    (GPIOC_BASE+20)  </span><br><span class="line">#define GPIOD_ODR_Addr    (GPIOD_BASE+20) </span><br><span class="line">#define GPIOE_ODR_Addr    (GPIOE_BASE+20) </span><br><span class="line">#define GPIOF_ODR_Addr    (GPIOF_BASE+20)  </span><br><span class="line">#define GPIOG_ODR_Addr    (GPIOG_BASE+20)</span><br><span class="line">#define GPIOH_ODR_Addr    (GPIOH_BASE+20)  </span><br><span class="line">#define GPIOI_ODR_Addr    (GPIOI_BASE+20)</span><br><span class="line">#define GPIOJ_ODR_Addr    (GPIOJ_BASE+20)  </span><br><span class="line">#define GPIOK_ODR_Addr    (GPIOK_BASE+20)</span><br><span class="line"></span><br><span class="line">#define GPIOA_IDR_Addr    (GPIOA_BASE+16)  </span><br><span class="line">#define GPIOB_IDR_Addr    (GPIOB_BASE+16)  </span><br><span class="line">#define GPIOC_IDR_Addr    (GPIOC_BASE+16)   </span><br><span class="line">#define GPIOD_IDR_Addr    (GPIOD_BASE+16)  </span><br><span class="line">#define GPIOE_IDR_Addr    (GPIOE_BASE+16)  </span><br><span class="line">#define GPIOF_IDR_Addr    (GPIOF_BASE+16)  </span><br><span class="line">#define GPIOG_IDR_Addr    (GPIOG_BASE+16)  </span><br><span class="line">#define GPIOH_IDR_Addr    (GPIOH_BASE+16)</span><br><span class="line">#define GPIOI_IDR_Addr    (GPIOI_BASE+16)</span><br><span class="line">#define GPIOJ_IDR_Addr    (GPIOJ_BASE+16)</span><br><span class="line">#define GPIOK_IDR_Addr    (GPIOK_BASE+16)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 单独操作 GPIO的某一个IO口，n(0,1,2...16),n表示具体是哪一个IO口</span><br><span class="line">#define PAout(n)   BIT_ADDR(GPIOA_ODR_Addr,n)  //输出   </span><br><span class="line">#define PAin(n)    BIT_ADDR(GPIOA_IDR_Addr,n)  //输入   </span><br><span class="line"></span><br><span class="line">#define PBout(n)   BIT_ADDR(GPIOB_ODR_Addr,n)  //输出   </span><br><span class="line">#define PBin(n)    BIT_ADDR(GPIOB_IDR_Addr,n)  //输入   </span><br><span class="line"></span><br><span class="line">#define PCout(n)   BIT_ADDR(GPIOC_ODR_Addr,n)  //输出   </span><br><span class="line">#define PCin(n)    BIT_ADDR(GPIOC_IDR_Addr,n)  //输入   </span><br><span class="line"></span><br><span class="line">#define PDout(n)   BIT_ADDR(GPIOD_ODR_Addr,n)  //输出   </span><br><span class="line">#define PDin(n)    BIT_ADDR(GPIOD_IDR_Addr,n)  //输入   </span><br><span class="line"></span><br><span class="line">#define PEout(n)   BIT_ADDR(GPIOE_ODR_Addr,n)  //输出   </span><br><span class="line">#define PEin(n)    BIT_ADDR(GPIOE_IDR_Addr,n)  //输入  </span><br><span class="line"></span><br><span class="line">#define PFout(n)   BIT_ADDR(GPIOF_ODR_Addr,n)  //输出   </span><br><span class="line">#define PFin(n)    BIT_ADDR(GPIOF_IDR_Addr,n)  //输入  </span><br><span class="line"></span><br><span class="line">#define PGout(n)   BIT_ADDR(GPIOG_ODR_Addr,n)  //输出   </span><br><span class="line">#define PGin(n)    BIT_ADDR(GPIOG_IDR_Addr,n)  //输入  </span><br><span class="line"></span><br><span class="line">#define PHout(n)   BIT_ADDR(GPIOH_ODR_Addr,n)  //输出   </span><br><span class="line">#define PHin(n)    BIT_ADDR(GPIOH_IDR_Addr,n)  //输入  </span><br><span class="line"></span><br><span class="line">#define PIout(n)   BIT_ADDR(GPIOI_ODR_Addr,n)  //输出   </span><br><span class="line">#define PIin(n)    BIT_ADDR(GPIOI_IDR_Addr,n)  //输入 </span><br><span class="line"></span><br><span class="line">#define PJout(n)   BIT_ADDR(GPIOJ_ODR_Addr,n)  //输出   </span><br><span class="line">#define PJin(n)    BIT_ADDR(GPIOJ_IDR_Addr,n)  //输入  </span><br><span class="line"></span><br><span class="line">#define PKout(n)   BIT_ADDR(GPIOK_ODR_Addr,n)  //输出   </span><br><span class="line">#define PKin(n)    BIT_ADDR(GPIOK_IDR_Addr,n)  //输入  </span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>进行操作。（库函数中已经写好啦，现场查即可）</p>
-<ol>
-<li>LED=0，延时；LED=1，延时；</li>
-<li>回到2；</li>
-</ol>
-<p>注意：</p>
-<ol>
-<li>STM32F7以上的MCU不支持位带操作。</li>
-<li>out管脚作为左值使用，in管脚作为右值使用。</li>
-</ol>
-<p>下面来写一下上述GPIO位带操作的实现举例。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">//.c文件核心代码</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    //LED_Init</span><br><span class="line">    LED_GPIO_Init();</span><br><span class="line">    while(1)&#123;</span><br><span class="line">      PFout(6)=0;</span><br><span class="line">      SOFT_Delay(0x0FFFFF);</span><br><span class="line">      PFout(6)=1;</span><br><span class="line">      SOFT_Delay(0x0FFFFF);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">/*基于一般库函数的版本：</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    RCC_HSE_Config(RCC_PLLSource_HSE_Div2,RCC_PLLMul_9);</span><br><span class="line">    LED_Init();</span><br><span class="line">    while(1)</span><br><span class="line">    &#123;</span><br><span class="line">        GPIO_ResetBits(LED0_PORT,LED0_PIN);</span><br><span class="line">        SOFT_Delay(0x0FFFFF);</span><br><span class="line">        GPIO_ResetBits(LED0_PORT,LED0_PIN);</span><br><span class="line">        SOFT_Delay(0x0FFFFF);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>stm32</tag>
-        <tag>单片机</tag>
       </tags>
   </entry>
 </search>
