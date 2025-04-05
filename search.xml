@@ -67,6 +67,11 @@ AliasAddr= 0x22000000+ (A-0x20000000)\times8\times4 +4n</script><h3 id="宏定�
 ]]></content>
   </entry>
   <entry>
+    <title>二叉搜索树</title>
+    <url>/2025/04/04/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>图论模型：最小路径算法</title>
     <url>/2025/04/02/%E5%9B%BE%E8%AE%BA%E6%A8%A1%E5%9E%8B%EF%BC%9A%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E7%AE%97%E6%B3%95/</url>
     <content><![CDATA[<h2 id="基础理论"><a href="#基础理论" class="headerlink" title="基础理论"></a>基础理论</h2><p>图，有向图，无向图的定义这里从略。</p>
@@ -118,11 +123,6 @@ l（0→8）<l(0 \to 6)+l(6\to 8)(\text{if 6} \notin \text{the shortest way })</
       <tags>
         <tag>数学建模</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>二叉搜索树</title>
-    <url>/2025/04/04/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</url>
-    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>排序算法</title>
@@ -313,6 +313,100 @@ i_{previous} \geq \frac{n_{max}}{2}>\frac{n}{2}</script><p>故得证。同理可
       </tags>
   </entry>
   <entry>
+    <title>简谐振动（更新中）</title>
+    <url>/2025/04/05/%E7%AE%80%E8%B0%90%E6%8C%AF%E5%8A%A8%E7%9A%84%E5%90%88%E6%88%90/</url>
+    <content><![CDATA[<h2 id="简谐振动的合成"><a href="#简谐振动的合成" class="headerlink" title="简谐振动的合成"></a>简谐振动的合成</h2><h3 id="两个同方向，同频率的简谐振动的合成"><a href="#两个同方向，同频率的简谐振动的合成" class="headerlink" title="两个同方向，同频率的简谐振动的合成"></a>两个<strong>同方向，同频率</strong>的简谐振动的合成</h3><p>由于运动是同方向的，可以将位移的合成表达为代数加法，即</p>
+<script type="math/tex; mode=display">
+\vec x=\vec x_1+\vec x_2······(1)\\
+x=A_1cos(\omega t+\phi_1)+A_2cos(\omega t+\phi_2)=\sqrt{A_1^2+A_2^2+2A_1A_2cos(\phi_1-\phi_2)}cos(\omega t+\phi)······(2)
+\\ where \text{ } \phi=arctan(\frac{A_1sin\phi_1+A_2sin\phi_2}{A_1cos\phi_1+A_2cos\phi_2})······(3)</script><p>这个推导是纯数学的，让我们用几何的方法来理解一下，即使用旋转矢量方法来现场计算一下这个值（毕竟背这个公式有点……）</p>
+<p><img data-src="images/physics/swirlingvec1.png" alt="旋转矢量的合成"></p>
+<p>这样可以直接由几何关系，利用余弦定理求得A，再利用比值法求得</p>
+<script type="math/tex; mode=display">
+\phi</script><p>下面讨论两种特殊的情况：</p>
+<ol>
+<li><p>当两振动同相位（或可用诱导公式化为同相位）则：</p>
+<script type="math/tex; mode=display">
+\text{if}\text{ }\phi_2-\phi_1=2k\pi,k\in N^+\\
+\text{then }A=A_1+A_2</script></li>
+<li>当两振动反相位（或可用诱导公式化为反相位）则：</li>
+</ol>
+<script type="math/tex; mode=display">
+\text{if}\text{ }\phi_2-\phi_1=(2k+1)\pi,k\in N^+\\
+\text{then }A=\lvert{A_1-A_2}\rvert.</script><h3 id="多个同方向、同频率简谐振动的合成：旋转矢量"><a href="#多个同方向、同频率简谐振动的合成：旋转矢量" class="headerlink" title="多个同方向、同频率简谐振动的合成：旋转矢量"></a>多个<strong>同方向、同频率</strong>简谐振动的合成：旋转矢量</h3><p>用《普通物理学》的一道经典例题来讲解一下。</p>
+<p><img data-src="images/physics/swirlingvec2.png" alt=" "></p>
+<p>由几何关系容易得到，若选取第一个质点（这里假设为质点）运动方向为旋转参考系的x轴正向，则有：</p>
+<script type="math/tex; mode=display">
+A=2\cdot (Rsin\frac{N\alpha}{2})\\
+\phi=\frac{(N-1)\beta}{2}\\
+x=Acos(\omega t+\phi)\\=2\cdot (Rsin\frac{N\alpha}{2})\cdot cos[\omega t+\frac{(N-1)\beta}{2}]</script><h3 id="两个同方向不同频率的简谐振动的合成-拍"><a href="#两个同方向不同频率的简谐振动的合成-拍" class="headerlink" title="两个同方向不同频率的简谐振动的合成 拍"></a>两个同方向不同频率的简谐振动的合成 拍</h3><p>两个同方向不同频率的简谐振动的和振动不再是简谐振动，下面先看一下它的一般表示</p>
+<script type="math/tex; mode=display">
+x_1=A_1cos(\omega_1 t+\phi)\\x_1=A_2cos(\omega_2 t+\phi)\\x=x_1+x_2=A_1cos(\omega_1 t+\phi_1)+A_2cos(\omega_2 t+\phi_2)\\\text{if }A_1=A_2=A,\\x=2Acos(\frac{\omega_2-\omega_1}{2}t)cos(\frac{\omega_2+\omega_1}{2}t+\phi)</script><p>上式是一个相当复杂的运动，这里我们讨论一下：当</p>
+<script type="math/tex; mode=display">
+\lvert\omega_2-\omega_1\rvert<<\omega_i,i=1,2</script><p>条件下，令</p>
+<script type="math/tex; mode=display">
+\omega_1\approx\omega_2\approx\omega\\
+\text{so that }cos(\frac{\omega_2-\omega_1}{2}t)\approx1\\\frac{\omega_2+\omega_1}{2}\approx \omega\\x\approx 2Acos(\frac{\omega_2-\omega_1}{2}t)cos(\omega t+\phi)</script><p>可以认为和运动近似为一个振幅为</p>
+<script type="math/tex; mode=display">
+\lvert Acos(\frac{\omega_2-\omega_1}{2}t)\rvert</script><p>的变振幅运动，这个振幅变化的频率称为<strong>拍频</strong>，即</p>
+<script type="math/tex; mode=display">
+\nu=\lvert \nu_2-\nu_1\rvert</script><p><img data-src="images/physics/clap.png" alt="拍"></p>
+<h3 id="谐振分析和频谱"><a href="#谐振分析和频谱" class="headerlink" title="谐振分析和频谱"></a>谐振分析和频谱</h3><p><strong>傅里叶变换</strong>：</p>
+<h4 id="傅里叶变换的定义"><a href="#傅里叶变换的定义" class="headerlink" title="傅里叶变换的定义"></a>傅里叶变换的定义</h4><p>对于一个连续时间函数 ，其傅里叶变换  定义为：</p>
+<script type="math/tex; mode=display">
+F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i\omega t} \, dt</script><h4 id="傅里叶逆变换"><a href="#傅里叶逆变换" class="headerlink" title="傅里叶逆变换"></a>傅里叶逆变换</h4><p>傅里叶逆变换（Inverse Fourier Transform）将频域信号 转换回时域信号 ：</p>
+<script type="math/tex; mode=display">
+f(t) = \frac{1}{2\pi} \int_{-\infty}^{\infty} F(\omega) e^{i\omega t} \, d\omega</script><h4 id="离散傅里叶变换"><a href="#离散傅里叶变换" class="headerlink" title="离散傅里叶变换"></a>离散傅里叶变换</h4><p>对于离散时间信号 ( x[n] )，其离散傅里叶变换（Discrete Fourier Transform, DFT） ( X[k] ) 定义为：</p>
+<script type="math/tex; mode=display">
+X[k] = \sum_{n=0}^{N-1} x[n] e^{-i 2\pi k n / N}</script><p>其中，( N ) 是信号的长度，( k ) 是频率索引。</p>
+<h4 id="快速傅里叶变换"><a href="#快速傅里叶变换" class="headerlink" title="快速傅里叶变换"></a>快速傅里叶变换</h4><p>快速傅里叶变换（Fast Fourier Transform, FFT）是一种高效的算法，用于计算离散傅里叶变换。它利用了 DFT 的对称性和周期性，将计算复杂度从 ( O(N^2) ) 降低到 ( O(N · log N) )。</p>
+<h4 id="傅里叶变换的示例"><a href="#傅里叶变换的示例" class="headerlink" title="** 傅里叶变换的示例"></a>** 傅里叶变换的示例</h4><p>假设我们有一个简单的时域信号</p>
+<script type="math/tex; mode=display">
+f(t) = \cos(2\pi t)</script><p>我们来计算它的傅里叶变换：</p>
+<script type="math/tex; mode=display">
+F(\omega) = \int_{-\infty}^{\infty} \cos(2\pi t) e^{-i\omega t} \, dt\\
+
+\text{利用欧拉公式}
+\\
+cos(2\pi t) = \frac{e^{i2\pi t} + e^{-i2\pi t}}{2} \\我们有：
+\\
+F(\omega) = \frac{1}{2} \int_{-\infty}^{\infty} \left( e^{i2\pi t} + e^{-i2\pi t} \right) e^{-i\omega t} \, dt
+\\
+
+\\
+= \frac{1}{2} \left( \int_{-\infty}^{\infty} e^{i(2\pi - \omega) t} \, dt + \int_{-\infty}^{\infty} e^{-i(2\pi + \omega) t} \, dt \right)
+\\
+
+\text{这两个积分都是狄拉克δ函数的定义，因此：}
+
+\\
+F(\omega) = \frac{1}{2} \left( 2\pi \delta(\omega - 2\pi) + 2\pi \delta(\omega + 2\pi) \right)
+\\
+
+\\
+= \pi \left( \delta(\omega - 2\pi) + \delta(\omega + 2\pi) \right)
+\\</script><p>可以重点考虑一种特殊的情况：各个分运动都为某个基频整数倍的谐振合成。</p>
+<h3 id="两个相互垂直的，同频率简谐振动的合成"><a href="#两个相互垂直的，同频率简谐振动的合成" class="headerlink" title="两个相互垂直的，同频率简谐振动的合成"></a>两个相互垂直的，同频率简谐振动的合成</h3><p>先说结论：轨迹是一个椭圆。下面来尝试证明一下。</p>
+<script type="math/tex; mode=display">
+x=A_1cos(\omega t+\phi_1)\\y=A_2cos(\omega t+\phi_2)\\消去t,则\\\frac{x^2}{A_1^2}+\frac{y^2}{A_2^2}-\frac{2xy}{A_1A_2}\\=\cos^2{(\omega t+\phi_1)}+\cos^2{(\omega t+\phi_2)}-2\cos(\omega t+\phi_1)\cos(\omega t+\phi_2)\\=[\cos(\omega t+\phi_1)-\cos(\omega t+\phi_2)]^2=\sin^2(\phi_2-\phi_1)</script><p>这是一个椭圆的方程，由此方程可以得到，</p>
+<ol>
+<li><script type="math/tex; mode=display">
+\text{if }\Delta \phi=\phi_2-\phi_1=0\\y=\frac{A_2}{A_1}\cdot x</script><p>这表示此时，振动退化成一条直线上的简谐运动，直线的斜率为y轴振幅与x轴振幅之比，如果以上述直线为x’轴建立运动方程，则：</p>
+<script type="math/tex; mode=display">
+x'=\sqrt{A_1^2+A_2^2}\cos({\omega t+\phi})</script></li>
+<li><script type="math/tex; mode=display">
+\text{if }\Delta\phi=\pm \pi\\...</script></li>
+<li><script type="math/tex; mode=display">
+\text{if }\Delta\phi= \pi/2,\\\frac{x^2}{A_1^2}+\frac{y^2}{A_2^2}=1</script></li>
+</ol>
+<h3 id="两个相互垂直不同频率的简谐振动合成"><a href="#两个相互垂直不同频率的简谐振动合成" class="headerlink" title="两个相互垂直不同频率的简谐振动合成"></a>两个相互垂直不同频率的简谐振动合成</h3><p><img data-src="images/physics/bisaru.png" alt="李萨如图形"></p>
+<h2 id="阻尼振动-受迫振动-共振"><a href="#阻尼振动-受迫振动-共振" class="headerlink" title="阻尼振动 受迫振动 共振"></a>阻尼振动 受迫振动 共振</h2><h3 id="阻尼振动"><a href="#阻尼振动" class="headerlink" title="阻尼振动"></a>阻尼振动</h3><p>这里主要考虑一下阻力与速度成正比的情况，并且忽略所谓的辐射损失，推导阻尼振动的运动方程。设弹簧振子在线性阻力下运动，则：</p>
+<script type="math/tex; mode=display">
+m\frac{d^2x}{dt^2}=-kx-\gamma\frac{dx}{dt}\\\text{这是一个二阶常系数线齐次微分方程，我们讨论其解的结构：}\\\text{令}\omega^2_0=k/m,2\beta=\gamma/m,\\x''+2\beta x'+\omega_0^2x=0,\\
+\lambda^2+2\beta\lambda+\omega_0^2=0,
+\lambda_{1,2}=-\beta\pm\sqrt{\beta^2-\omega_0^2}\\1)\beta<\omega,x=A_0e^{-\beta t}cos(\sqrt{\omega_0^2-\beta^2 }\cdot t+\phi)\\2)\beta>\omega_0,x=Ae^{-(\beta+\sqrt{\beta^2-\omega_0^2})t}+Be^{-(\beta-\sqrt{\beta^2-\omega^2_0})t}\\3)\beta=\omega_0,x=e^{-\beta t}(A+Bt)</script>]]></content>
+  </entry>
+  <entry>
     <title>编码器与译码器</title>
     <url>/2025/04/04/%EF%BC%88%E4%B8%89%EF%BC%89%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF%EF%BC%9A%E7%BC%96%E7%A0%81%E5%99%A8%E4%B8%8E%E8%AF%91%E7%A0%81%E5%99%A8/</url>
     <content><![CDATA[<h1 id="3-1-编码器：普通编码器与优先编码器"><a href="#3-1-编码器：普通编码器与优先编码器" class="headerlink" title="3.1 编码器：普通编码器与优先编码器"></a>3.1 编码器：普通编码器与优先编码器</h1><p>3.1.1 编码器的分类</p>
@@ -433,99 +527,5 @@ i_{previous} \geq \frac{n_{max}}{2}>\frac{n}{2}</script><p>故得证。同理可
       <tags>
         <tag>组合逻辑</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>简谐振动（更新中）</title>
-    <url>/2025/04/05/%E7%AE%80%E8%B0%90%E6%8C%AF%E5%8A%A8%E7%9A%84%E5%90%88%E6%88%90/</url>
-    <content><![CDATA[<h2 id="简谐振动的合成"><a href="#简谐振动的合成" class="headerlink" title="简谐振动的合成"></a>简谐振动的合成</h2><h3 id="两个同方向，同频率的简谐振动的合成"><a href="#两个同方向，同频率的简谐振动的合成" class="headerlink" title="两个同方向，同频率的简谐振动的合成"></a>两个<strong>同方向，同频率</strong>的简谐振动的合成</h3><p>由于运动是同方向的，可以将位移的合成表达为代数加法，即</p>
-<script type="math/tex; mode=display">
-\vec x=\vec x_1+\vec x_2······(1)\\
-x=A_1cos(\omega t+\phi_1)+A_2cos(\omega t+\phi_2)=\sqrt{A_1^2+A_2^2+2A_1A_2cos(\phi_1-\phi_2)}cos(\omega t+\phi)······(2)
-\\ where \text{ } \phi=arctan(\frac{A_1sin\phi_1+A_2sin\phi_2}{A_1cos\phi_1+A_2cos\phi_2})······(3)</script><p>这个推导是纯数学的，让我们用几何的方法来理解一下，即使用旋转矢量方法来现场计算一下这个值（毕竟背这个公式有点……）</p>
-<p><img data-src="images/physics/swirlingvec1.png" alt="旋转矢量的合成"></p>
-<p>这样可以直接由几何关系，利用余弦定理求得A，再利用比值法求得</p>
-<script type="math/tex; mode=display">
-\phi</script><p>下面讨论两种特殊的情况：</p>
-<ol>
-<li><p>当两振动同相位（或可用诱导公式化为同相位）则：</p>
-<script type="math/tex; mode=display">
-\text{if}\text{ }\phi_2-\phi_1=2k\pi,k\in N^+\\
-\text{then }A=A_1+A_2</script></li>
-<li>当两振动反相位（或可用诱导公式化为反相位）则：</li>
-</ol>
-<script type="math/tex; mode=display">
-\text{if}\text{ }\phi_2-\phi_1=(2k+1)\pi,k\in N^+\\
-\text{then }A=\lvert{A_1-A_2}\rvert.</script><h3 id="多个同方向、同频率简谐振动的合成：旋转矢量"><a href="#多个同方向、同频率简谐振动的合成：旋转矢量" class="headerlink" title="多个同方向、同频率简谐振动的合成：旋转矢量"></a>多个<strong>同方向、同频率</strong>简谐振动的合成：旋转矢量</h3><p>用《普通物理学》的一道经典例题来讲解一下。</p>
-<p><img data-src="images/physics/swirlingvec2.png" alt=" "></p>
-<p>由几何关系容易得到，若选取第一个质点（这里假设为质点）运动方向为旋转参考系的x轴正向，则有：</p>
-<script type="math/tex; mode=display">
-A=2\cdot (Rsin\frac{N\alpha}{2})\\
-\phi=\frac{(N-1)\beta}{2}\\
-x=Acos(\omega t+\phi)\\=2\cdot (Rsin\frac{N\alpha}{2})\cdot cos[\omega t+\frac{(N-1)\beta}{2}]</script><h3 id="两个同方向不同频率的简谐振动的合成-拍"><a href="#两个同方向不同频率的简谐振动的合成-拍" class="headerlink" title="两个同方向不同频率的简谐振动的合成 拍"></a>两个同方向不同频率的简谐振动的合成 拍</h3><p>两个同方向不同频率的简谐振动的和振动不再是简谐振动，下面先看一下它的一般表示</p>
-<script type="math/tex; mode=display">
-x_1=A_1cos(\omega_1 t+\phi)\\x_1=A_2cos(\omega_2 t+\phi)\\x=x_1+x_2=A_1cos(\omega_1 t+\phi_1)+A_2cos(\omega_2 t+\phi_2)\\\text{if }A_1=A_2=A,\\x=2Acos(\frac{\omega_2-\omega_1}{2}t)cos(\frac{\omega_2+\omega_1}{2}t+\phi)</script><p>上式是一个相当复杂的运动，这里我们讨论一下：当</p>
-<script type="math/tex; mode=display">
-\lvert\omega_2-\omega_1\rvert<<\omega_i,i=1,2</script><p>条件下，令</p>
-<script type="math/tex; mode=display">
-\omega_1\approx\omega_2\approx\omega\\
-\text{so that }cos(\frac{\omega_2-\omega_1}{2}t)\approx1\\\frac{\omega_2+\omega_1}{2}\approx \omega\\x\approx 2Acos(\frac{\omega_2-\omega_1}{2}t)cos(\omega t+\phi)</script><p>可以认为和运动近似为一个振幅为</p>
-<script type="math/tex; mode=display">
-\lvert Acos(\frac{\omega_2-\omega_1}{2}t)\rvert</script><p>的变振幅运动，这个振幅变化的频率称为<strong>拍频</strong>，即</p>
-<script type="math/tex; mode=display">
-\nu=\lvert \nu_2-\nu_1\rvert</script><p><img data-src="images/physics/clap.png" alt="拍"></p>
-<h3 id="谐振分析和频谱"><a href="#谐振分析和频谱" class="headerlink" title="谐振分析和频谱"></a>谐振分析和频谱</h3><p><strong>傅里叶变换</strong>：</p>
-<h4 id="傅里叶变换的定义"><a href="#傅里叶变换的定义" class="headerlink" title="傅里叶变换的定义"></a>傅里叶变换的定义</h4><p>对于一个连续时间函数 ，其傅里叶变换  定义为：</p>
-<script type="math/tex; mode=display">
-F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i\omega t} \, dt</script><h4 id="傅里叶逆变换"><a href="#傅里叶逆变换" class="headerlink" title="傅里叶逆变换"></a>傅里叶逆变换</h4><p>傅里叶逆变换（Inverse Fourier Transform）将频域信号 转换回时域信号 ：</p>
-<script type="math/tex; mode=display">
-f(t) = \frac{1}{2\pi} \int_{-\infty}^{\infty} F(\omega) e^{i\omega t} \, d\omega</script><h4 id="离散傅里叶变换"><a href="#离散傅里叶变换" class="headerlink" title="离散傅里叶变换"></a>离散傅里叶变换</h4><p>对于离散时间信号 ( x[n] )，其离散傅里叶变换（Discrete Fourier Transform, DFT） ( X[k] ) 定义为：</p>
-<script type="math/tex; mode=display">
-X[k] = \sum_{n=0}^{N-1} x[n] e^{-i 2\pi k n / N}</script><p>其中，( N ) 是信号的长度，( k ) 是频率索引。</p>
-<h4 id="快速傅里叶变换"><a href="#快速傅里叶变换" class="headerlink" title="快速傅里叶变换"></a>快速傅里叶变换</h4><p>快速傅里叶变换（Fast Fourier Transform, FFT）是一种高效的算法，用于计算离散傅里叶变换。它利用了 DFT 的对称性和周期性，将计算复杂度从 ( O(N^2) ) 降低到 ( O(N · log N) )。</p>
-<h4 id="傅里叶变换的示例"><a href="#傅里叶变换的示例" class="headerlink" title="** 傅里叶变换的示例"></a>** 傅里叶变换的示例</h4><p>假设我们有一个简单的时域信号</p>
-<script type="math/tex; mode=display">
-f(t) = \cos(2\pi t)</script><p>我们来计算它的傅里叶变换：</p>
-<script type="math/tex; mode=display">
-F(\omega) = \int_{-\infty}^{\infty} \cos(2\pi t) e^{-i\omega t} \, dt\\
-
-\text{利用欧拉公式}
-\\
-cos(2\pi t) = \frac{e^{i2\pi t} + e^{-i2\pi t}}{2} \\我们有：
-\\
-F(\omega) = \frac{1}{2} \int_{-\infty}^{\infty} \left( e^{i2\pi t} + e^{-i2\pi t} \right) e^{-i\omega t} \, dt
-\\
-
-\\
-= \frac{1}{2} \left( \int_{-\infty}^{\infty} e^{i(2\pi - \omega) t} \, dt + \int_{-\infty}^{\infty} e^{-i(2\pi + \omega) t} \, dt \right)
-\\
-
-\text{这两个积分都是狄拉克δ函数的定义，因此：}
-
-\\
-F(\omega) = \frac{1}{2} \left( 2\pi \delta(\omega - 2\pi) + 2\pi \delta(\omega + 2\pi) \right)
-\\
-
-\\
-= \pi \left( \delta(\omega - 2\pi) + \delta(\omega + 2\pi) \right)
-\\</script><p>可以重点考虑一种特殊的情况：各个分运动都为某个基频整数倍的谐振合成。</p>
-<h3 id="两个相互垂直的，同频率简谐振动的合成"><a href="#两个相互垂直的，同频率简谐振动的合成" class="headerlink" title="两个相互垂直的，同频率简谐振动的合成"></a>两个相互垂直的，同频率简谐振动的合成</h3><p>先说结论：轨迹是一个椭圆。下面来尝试证明一下。</p>
-<script type="math/tex; mode=display">
-x=A_1cos(\omega t+\phi_1)\\y=A_2cos(\omega t+\phi_2)\\消去t,则\\\frac{x^2}{A_1^2}+\frac{y^2}{A_2^2}-\frac{2xy}{A_1A_2}\\=\cos^2{(\omega t+\phi_1)}+\cos^2{(\omega t+\phi_2)}-2\cos(\omega t+\phi_1)\cos(\omega t+\phi_2)\\=[\cos(\omega t+\phi_1)-\cos(\omega t+\phi_2)]^2=\sin^2(\phi_2-\phi_1)</script><p>这是一个椭圆的方程，由此方程可以得到，</p>
-<ol>
-<li><script type="math/tex; mode=display">
-\text{if }\Delta \phi=\phi_2-\phi_1=0\\y=\frac{A_2}{A_1}\cdot x</script><p>这表示此时，振动退化成一条直线上的简谐运动，直线的斜率为y轴振幅与x轴振幅之比，如果以上述直线为x’轴建立运动方程，则：</p>
-<script type="math/tex; mode=display">
-x'=\sqrt{A_1^2+A_2^2}\cos({\omega t+\phi})</script></li>
-<li><script type="math/tex; mode=display">
-\text{if }\Delta\phi=\pm \pi\\...</script></li>
-<li><script type="math/tex; mode=display">
-\text{if }\Delta\phi= \pi/2,\\\frac{x^2}{A_1^2}+\frac{y^2}{A_2^2}=1</script></li>
-</ol>
-<h3 id="两个相互垂直不同频率的简谐振动合成"><a href="#两个相互垂直不同频率的简谐振动合成" class="headerlink" title="两个相互垂直不同频率的简谐振动合成"></a>两个相互垂直不同频率的简谐振动合成</h3><p><img data-src="images/physics/bisaru.png" alt="李萨如图形"></p>
-<h2 id="阻尼振动-受迫振动-共振"><a href="#阻尼振动-受迫振动-共振" class="headerlink" title="阻尼振动 受迫振动 共振"></a>阻尼振动 受迫振动 共振</h2><h3 id="阻尼振动"><a href="#阻尼振动" class="headerlink" title="阻尼振动"></a>阻尼振动</h3><p>这里主要考虑一下阻力与速度成正比的情况，并且忽略所谓的辐射损失，推导阻尼振动的运动方程。设弹簧振子在线性阻力下运动，则：</p>
-<script type="math/tex; mode=display">
-m\frac{d^2x}{dt^2}=-kx-\gamma\frac{dx}{dt}\\\text{这是一个二阶常系数线齐次微分方程，我们讨论其解的结构：}\\\text{令}\omega^2_0=k/m,2\beta=\gamma/m,\\x''+2\beta x'+\omega_0^2x=0,\\
-\lambda^2+2\beta\lambda+\omega_0^2=0,
-\lambda_{1,2}=-\beta\pm\sqrt{\beta^2-\omega_0^2}\\1)\beta<\omega,x=A_0e^{-\beta t}cos(\sqrt{\omega_0^2-\beta^2 }\cdot t+\phi)\\2)\beta>\omega_0,x=Ae^{-(\beta+\sqrt{\beta^2-\omega_0^2})t}+Be^{-(\beta-\sqrt{\beta^2-\omega^2_0})t}\\3)\beta=\omega_0,x=e^{-\beta t}(A+Bt)</script>]]></content>
   </entry>
 </search>
