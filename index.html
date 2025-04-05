@@ -685,7 +685,7 @@ AliasAddr= 0x22000000+ (A-0x20000000)\times8\times4 +4n</script><h3 id="宏定�
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-04-06 03:22:46" itemprop="dateModified" datetime="2025-04-06T03:22:46+08:00">2025-04-06</time>
+                <time title="修改时间：2025-04-06 03:37:02" itemprop="dateModified" datetime="2025-04-06T03:37:02+08:00">2025-04-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -725,9 +725,9 @@ AliasAddr= 0x22000000+ (A-0x20000000)\times8\times4 +4n</script><h3 id="宏定�
           <h1 id="3-1-编码器：普通编码器与优先编码器"><a href="#3-1-编码器：普通编码器与优先编码器" class="headerlink" title="3.1 编码器：普通编码器与优先编码器"></a>3.1 编码器：普通编码器与优先编码器</h1><p>3.1.1 编码器的分类</p>
 <p>普通编码器：任何时刻只允许输入一个有效信号，不允许同时出现两个或两个以上的有效信号，因而其输入是一组有约束的变量</p>
 <p>优先编码器：用于优先中断系统和键盘编码</p>
-<p>3.1.2优先编码器举例： 8线-3线优先编码器（74LS48）</p>
-<p><img data-src="images/digitalcircuit/image.png" alt="image.png"></p>
-<p><img data-src="images/digitalcircuit/image1.png" alt="image.png"></p>
+<p>3.1.2优先编码器举例： 8线-3线优先编码器（74LS148）</p>
+<p><img data-src="images/digitalcircuit/image.png" alt="74LS148"></p>
+<p><img data-src="images/digitalcircuit/image1.png" alt="74148真值表"></p>
 <p>输入输出均为低电平有效，优先级7~0。从功能表可以看出：</p>
 <ol>
 <li>E1是使能端，E1处于低电平时系统才工作。</li>
@@ -773,10 +773,10 @@ AliasAddr= 0x22000000+ (A-0x20000000)\times8\times4 +4n</script><h3 id="宏定�
 <li>测试文件包含了多种测试场景，包括使能控制、单输入和多输入情况</li>
 </ul>
 <p>级联问题：（注意到后三位的循环）</p>
-<p><img data-src="images/digitalcircuit/image2.png" alt="image.png"></p>
+<p><img data-src="images/digitalcircuit/image2.png" alt="2*8_3=16_4"></p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//级联:</span></span><br><span class="line"><span class="keyword">module</span> _16_4encoder(</span><br><span class="line">    <span class="keyword">input</span> S,</span><br><span class="line">    <span class="keyword">input</span> [<span class="number">15</span>:<span class="number">0</span>] IN,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> [<span class="number">3</span>:<span class="number">0</span>] Y,</span><br><span class="line">    <span class="keyword">output</span> Ys,</span><br><span class="line">    <span class="keyword">output</span> Yex</span><br><span class="line">);</span><br><span class="line">    <span class="comment">// 中间信号</span></span><br><span class="line">    <span class="keyword">wire</span> Ys1, Yex1, Ys2, Yex2;</span><br><span class="line">    <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] Y1, Y2;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 实例化两个74HC148</span></span><br><span class="line">    _74hc148 U1(</span><br><span class="line">        <span class="variable">.A</span>(IN[<span class="number">15</span>:<span class="number">8</span>]),  <span class="comment">// 高8位输入</span></span><br><span class="line">        <span class="variable">.S</span>(S),</span><br><span class="line">        <span class="variable">.Y</span>(Y1),</span><br><span class="line">        <span class="variable">.Ys</span>(Ys1),</span><br><span class="line">        <span class="variable">.Yex</span>(Yex1)</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    _74hc148 U2(</span><br><span class="line">        <span class="variable">.A</span>(IN[<span class="number">7</span>:<span class="number">0</span>]),   <span class="comment">// 低8位输入</span></span><br><span class="line">        <span class="variable">.S</span>(Ys1),       <span class="comment">// 如果高8位无效，则处理低8位</span></span><br><span class="line">        <span class="variable">.Y</span>(Y2),</span><br><span class="line">        <span class="variable">.Ys</span>(Ys2),</span><br><span class="line">        <span class="variable">.Yex</span>(Yex2)</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 合并输出</span></span><br><span class="line">    <span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span> (!Ys1) <span class="keyword">begin</span>  <span class="comment">// 高8位有效</span></span><br><span class="line">            Y[<span class="number">2</span>:<span class="number">0</span>] = Y1;</span><br><span class="line">            Y[<span class="number">3</span>] = <span class="number">1&#x27;b1</span>;  <span class="comment">// 高8位优先</span></span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">            Y[<span class="number">2</span>:<span class="number">0</span>] = Y2;</span><br><span class="line">            Y[<span class="number">3</span>] = <span class="number">1&#x27;b0</span>;  <span class="comment">// 低8位</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 有效输出和扩展输出</span></span><br><span class="line">    <span class="keyword">assign</span> Ys = ~(Ys1 | Ys2);  <span class="comment">// 如果高8位或低8位有效，则Ys为低电平</span></span><br><span class="line">    <span class="keyword">assign</span> Yex = Ys1 &amp; Ys2;    <span class="comment">// 如果高8位和低8位都无效，则Yex为低电平</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 <h1 id="3-2译码器"><a href="#3-2译码器" class="headerlink" title="3.2译码器"></a>3.2译码器</h1><p>3.2.1 中规模集成电路译码器的基本结构：</p>
-<p><img data-src="images/digitalcircuit/image3.png" alt="image.png"></p>
+<p><img data-src="images/digitalcircuit/image3.png" alt="decoder"></p>
 <p> 例如，3-8译码器74LS38：</p>
 <ol>
 <li>基本介绍</li>
@@ -821,10 +821,10 @@ AliasAddr= 0x22000000+ (A-0x20000000)\times8\times4 +4n</script><h3 id="宏定�
 <p><img data-src="images/digitalcircuit/image5.png" alt="image.png"></p>
 <p><img data-src="images/digitalcircuit/image6.png" alt="image.png"></p>
 <p>74ls47：七段字形译码器<br>下图所示的是一个七段字形数码管:</p>
-<p><img data-src="images/digitalcircuit/image7.png" alt="image.png"></p>
+<p><img data-src="images/digitalcircuit/image7.png" alt="digit"></p>
 <p>7个条形的发光二极管排列成这种样式，每一段通过一个引脚控制。7段数码管有两种，共阳极数码管和共阴极数码管，其中，共阳极数码管的7个发光二极管的阳极连在一起，7个阴极是独立的；而共阴极数码管的7个发光二极管的阴极连在一起，7个阳极是独立的。<br>当共阳极数码管的某一阴极接低电平时，相应的二极管发光，故共阳极数码管需要输出低电平有效的译码器驱动，而共阴极数码管需要输出高电平有效的译码器驱动。</p>
 <p>如下图所示是一个输出低电平有效的七段字形译码器74LS47的集成芯片引脚图和它的真值表：</p>
-<p><img data-src="images/digitalcircuit/image8.png" alt="image.png"></p>
+<p><img data-src="images/digitalcircuit/image8.png" alt="74LS47"></p>
 <p>在译码的同时，还有一些引脚有如下的功能：</p>
 <p>（1）试灯输入 L T </p>
 <p>试灯输入顾名思义是为了检测每一段数码管是否正常工作而设置的，当输入为0时，无论其余的输入是什么值，译码器都是输出低电平，可以保证每一个发光二极管变亮。</p>
