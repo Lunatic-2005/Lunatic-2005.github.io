@@ -206,7 +206,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2025-04-06 02:15:05 / 修改时间：02:56:40" itemprop="dateCreated datePublished" datetime="2025-04-06T02:15:05+08:00">2025-04-06</time>
+              <time title="创建时间：2025-04-06 02:15:05 / 修改时间：03:12:00" itemprop="dateCreated datePublished" datetime="2025-04-06T02:15:05+08:00">2025-04-06</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -224,14 +224,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>682</span>
+              <span>2.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>5 分钟</span>
             </span>
 
         </div>
@@ -272,6 +272,10 @@
 <li>有时候，我们只能想到一个大致的思路，但是可以由此触发比较高级的算法，例如想到要插值，可以选用不太老套的插值方法。</li>
 <li>不要小看中学数学中学过的初等几何知识。</li>
 </ol>
+<p>定位为编程辅助建模，意味着二者我都要会！</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 原始数据</span></span><br><span class="line">test_1 = np.array([<span class="number">1529.808</span>, <span class="number">1529.807</span>, <span class="number">1529.813</span>, <span class="number">1529.812</span>, <span class="number">1529.814</span>, <span class="number">1529.809</span>])</span><br><span class="line">test_2 = np.array([<span class="number">1541.095</span>, <span class="number">1541.092</span>, <span class="number">1541.090</span>, <span class="number">1541.093</span>, <span class="number">1541.094</span>, <span class="number">1541.091</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 归一化 (标准化可选)</span></span><br><span class="line">test1 = test_1 / np.mean(test_1)</span><br><span class="line">test2 = test_2 / np.mean(test_2)</span><br><span class="line">dist = <span class="number">0.6</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成测试点位置</span></span><br><span class="line">test_points = np.array([<span class="number">1</span>*dist, <span class="number">2</span>*dist, <span class="number">3</span>*dist, <span class="number">4</span>*dist, <span class="number">5</span>*dist, <span class="number">6</span>*dist])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建 DataFrame</span></span><br><span class="line">df = pd.DataFrame(&#123;</span><br><span class="line">    <span class="string">&quot;testpoint&quot;</span>: test_points,</span><br><span class="line">    <span class="string">&quot;test1&quot;</span>: test1,</span><br><span class="line">    <span class="string">&quot;test2&quot;</span>: test2</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提取数据</span></span><br><span class="line">x = df[<span class="string">&quot;testpoint&quot;</span>].values</span><br><span class="line">y1 = df[<span class="string">&quot;test1&quot;</span>].values</span><br><span class="line">y2 = df[<span class="string">&quot;test2&quot;</span>].values</span><br><span class="line"></span><br><span class="line"><span class="comment"># 三次多项式拟合</span></span><br><span class="line">coef1_cubic = np.polyfit(x, y1, <span class="number">3</span>)</span><br><span class="line">coef2_cubic = np.polyfit(x, y2, <span class="number">3</span>)</span><br><span class="line">poly1_cubic = np.poly1d(coef1_cubic)</span><br><span class="line">poly2_cubic = np.poly1d(coef2_cubic)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成更平滑的拟合曲线</span></span><br><span class="line">x_dense = np.linspace(<span class="built_in">min</span>(x), <span class="built_in">max</span>(x), <span class="number">100</span>)</span><br><span class="line">y1_dense = poly1_cubic(x_dense)</span><br><span class="line">y2_dense = poly2_cubic(x_dense)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘图</span></span><br><span class="line">plt.figure(figsize=(<span class="number">8</span>, <span class="number">5</span>))</span><br><span class="line">plt.scatter(x, y1, color=<span class="string">&quot;blue&quot;</span>, label=<span class="string">&quot;Test1 Data&quot;</span>)</span><br><span class="line">plt.scatter(x, y2, color=<span class="string">&quot;red&quot;</span>, label=<span class="string">&quot;Test2 Data&quot;</span>)</span><br><span class="line">plt.plot(x_dense, y1_dense, linestyle=<span class="string">&quot;--&quot;</span>, color=<span class="string">&quot;blue&quot;</span>, alpha=<span class="number">0.7</span>, label=<span class="string">&quot;Cubic Fit 1 (smooth)&quot;</span>)</span><br><span class="line">plt.plot(x_dense, y2_dense, linestyle=<span class="string">&quot;--&quot;</span>, color=<span class="string">&quot;red&quot;</span>, alpha=<span class="number">0.7</span>, label=<span class="string">&quot;Cubic Fit 2 (smooth)&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.xlabel(<span class="string">&quot;Test Point Distance&quot;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&quot;Normalized Wavelength&quot;</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.title(<span class="string">&quot;Cubic Polynomial Fit (Smoothed)&quot;</span>)</span><br><span class="line">plt.grid()</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出拟合系数</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Test1 三次拟合系数:&quot;</span>, coef1_cubic)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Test2 三次拟合系数:&quot;</span>, coef2_cubic)</span><br><span class="line"></span><br><span class="line">test=[test1,test2]</span><br><span class="line"><span class="comment">#波长数据</span></span><br><span class="line">x_need=[<span class="number">0.3</span>,<span class="number">0.4</span>,<span class="number">0.5</span>,<span class="number">0.6</span>,<span class="number">0.7</span>]</span><br><span class="line">y1_predict=poly1_cubic(x_need)</span><br><span class="line">y2_predict=poly2_cubic(x_need)</span><br><span class="line">y1_predict=y1_predict*np.mean(test_1)</span><br><span class="line">y2_predict=y2_predict*np.mean(test_2)</span><br><span class="line"><span class="comment">#曲率数据</span></span><br><span class="line">lamda0=[<span class="number">1529</span>,<span class="number">1540</span>]</span><br><span class="line">c=<span class="number">4200</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">lamda2K</span>(<span class="params">y,i</span>):</span><br><span class="line">    <span class="keyword">return</span>(c*(y-lamda0[i]))/lamda0[i-<span class="number">1</span>]</span><br><span class="line">y1_predict=lamda2K(y1_predict,<span class="number">0</span>)</span><br><span class="line">y2_predict=lamda2K(y2_predict,<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_K</span>(<span class="params">x,i</span>):</span><br><span class="line">    y_predict=poly1_cubic(x)/np.mean(test[i-<span class="number">1</span>])</span><br><span class="line">    y_predict=lamda2K(y_predict,i-<span class="number">1</span>)</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(y1_predict)</span><br><span class="line"><span class="built_in">print</span>(y2_predict)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>以上为第一问代码。其输出结果也一并贴在下方。</p>
+<p><img data-src="images/mathmodel/Huazhong16C1.png" alt="第一问结果"></p>
 
       
     </div>
@@ -632,6 +636,204 @@ AliasAddr= 0x22000000+ (A-0x20000000)\times8\times4 +4n</script><h3 id="宏定�
 
       
           
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://lunatic-2005.github.io/2025/04/04/%EF%BC%88%E4%B8%89%EF%BC%89%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF%EF%BC%9A%E7%BC%96%E7%A0%81%E5%99%A8%E4%B8%8E%E8%AF%91%E7%A0%81%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.png">
+      <meta itemprop="name" content="Liu Yiwei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lunatic's Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/04/04/%EF%BC%88%E4%B8%89%EF%BC%89%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF%EF%BC%9A%E7%BC%96%E7%A0%81%E5%99%A8%E4%B8%8E%E8%AF%91%E7%A0%81%E5%99%A8/" class="post-title-link" itemprop="url">编码器与译码器</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-04-04 13:51:42" itemprop="dateCreated datePublished" datetime="2025-04-04T13:51:42+08:00">2025-04-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-04-06 03:22:46" itemprop="dateModified" datetime="2025-04-06T03:22:46+08:00">2025-04-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%97%E9%80%BB%E8%BE%91%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">数字逻辑设计</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>9 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="3-1-编码器：普通编码器与优先编码器"><a href="#3-1-编码器：普通编码器与优先编码器" class="headerlink" title="3.1 编码器：普通编码器与优先编码器"></a>3.1 编码器：普通编码器与优先编码器</h1><p>3.1.1 编码器的分类</p>
+<p>普通编码器：任何时刻只允许输入一个有效信号，不允许同时出现两个或两个以上的有效信号，因而其输入是一组有约束的变量</p>
+<p>优先编码器：用于优先中断系统和键盘编码</p>
+<p>3.1.2优先编码器举例： 8线-3线优先编码器（74LS48）</p>
+<p><img data-src="images/digitalcircuit/image.png" alt="image.png"></p>
+<p><img data-src="images/digitalcircuit/image1.png" alt="image.png"></p>
+<p>输入输出均为低电平有效，优先级7~0。从功能表可以看出：</p>
+<ol>
+<li>E1是使能端，E1处于低电平时系统才工作。</li>
+<li>CS （chip select）和E0输出情况：</li>
+</ol>
+<p>CS：片选信号，当片选信号为0时，说明有输入信号，该芯片片选有效；</p>
+<p>E1：Enable信号</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>CS</th>
+<th>E0</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>使能端高电平，系统不工作</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>系统工作但无输入信号</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>系统工作且有输入信号</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>下面是74LS148优先编码器的Verilog实现：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> _74hc148(</span><br><span class="line">    <span class="keyword">input</span>           S,</span><br><span class="line">    <span class="keyword">input</span>   [<span class="number">7</span>:<span class="number">0</span>]   A,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>]   Y,</span><br><span class="line">    <span class="keyword">output</span>          Yex,</span><br><span class="line">    <span class="keyword">output</span>          Ys</span><br><span class="line">);</span><br><span class="line"><span class="keyword">always</span>@(*)<span class="keyword">begin</span><span class="comment">//always块内部只能访问reg变量</span></span><br><span class="line">   <span class="keyword">if</span>(!S)<span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">casex</span>(A)</span><br><span class="line">            <span class="number">8&#x27;b0xxxxxxx</span> : Y = <span class="number">0</span>;</span><br><span class="line">            <span class="number">8&#x27;b10xxxxxx</span> : Y = <span class="number">1</span>;</span><br><span class="line">            <span class="number">8&#x27;b110xxxxx</span> : Y = <span class="number">2</span>;</span><br><span class="line">            <span class="number">8&#x27;b1110xxxx</span> : Y = <span class="number">3</span>;</span><br><span class="line">            <span class="number">8&#x27;b11110xxx</span> : Y = <span class="number">4</span>;</span><br><span class="line">            <span class="number">8&#x27;b111110xx</span> : Y = <span class="number">5</span>;</span><br><span class="line">            <span class="number">8&#x27;b1111110x</span> : Y = <span class="number">6</span>;</span><br><span class="line">            <span class="number">8&#x27;b11111110</span> : Y = <span class="number">7</span>;</span><br><span class="line">            <span class="keyword">default</span>:      Y = <span class="number">7</span>;</span><br><span class="line">        <span class="keyword">endcase</span></span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">      Y=<span class="number">7</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">assign</span> &#123;Ys,Yex&#125;=S ? <span class="number">2&#x27;b11</span> : (&amp;A ? <span class="number">2&#x27;b01</span> : <span class="number">2&#x27;b10</span>);<span class="comment">//&amp;A 对A进行按位与，即诘问A是否各位都为1</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p>这个实现具有以下特点：</p>
+<ul>
+<li>完全支持优先级编码，I7具有最高优先级，I0具有最低优先级</li>
+<li>使用active-low逻辑，符合74LS148的规格</li>
+<li>包含使能控制（E1）和状态输出（E0, CS）</li>
+<li>测试文件包含了多种测试场景，包括使能控制、单输入和多输入情况</li>
+</ul>
+<p>级联问题：（注意到后三位的循环）</p>
+<p><img data-src="images/digitalcircuit/image2.png" alt="image.png"></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//级联:</span></span><br><span class="line"><span class="keyword">module</span> _16_4encoder(</span><br><span class="line">    <span class="keyword">input</span> S,</span><br><span class="line">    <span class="keyword">input</span> [<span class="number">15</span>:<span class="number">0</span>] IN,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> [<span class="number">3</span>:<span class="number">0</span>] Y,</span><br><span class="line">    <span class="keyword">output</span> Ys,</span><br><span class="line">    <span class="keyword">output</span> Yex</span><br><span class="line">);</span><br><span class="line">    <span class="comment">// 中间信号</span></span><br><span class="line">    <span class="keyword">wire</span> Ys1, Yex1, Ys2, Yex2;</span><br><span class="line">    <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] Y1, Y2;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 实例化两个74HC148</span></span><br><span class="line">    _74hc148 U1(</span><br><span class="line">        <span class="variable">.A</span>(IN[<span class="number">15</span>:<span class="number">8</span>]),  <span class="comment">// 高8位输入</span></span><br><span class="line">        <span class="variable">.S</span>(S),</span><br><span class="line">        <span class="variable">.Y</span>(Y1),</span><br><span class="line">        <span class="variable">.Ys</span>(Ys1),</span><br><span class="line">        <span class="variable">.Yex</span>(Yex1)</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    _74hc148 U2(</span><br><span class="line">        <span class="variable">.A</span>(IN[<span class="number">7</span>:<span class="number">0</span>]),   <span class="comment">// 低8位输入</span></span><br><span class="line">        <span class="variable">.S</span>(Ys1),       <span class="comment">// 如果高8位无效，则处理低8位</span></span><br><span class="line">        <span class="variable">.Y</span>(Y2),</span><br><span class="line">        <span class="variable">.Ys</span>(Ys2),</span><br><span class="line">        <span class="variable">.Yex</span>(Yex2)</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 合并输出</span></span><br><span class="line">    <span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span> (!Ys1) <span class="keyword">begin</span>  <span class="comment">// 高8位有效</span></span><br><span class="line">            Y[<span class="number">2</span>:<span class="number">0</span>] = Y1;</span><br><span class="line">            Y[<span class="number">3</span>] = <span class="number">1&#x27;b1</span>;  <span class="comment">// 高8位优先</span></span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">            Y[<span class="number">2</span>:<span class="number">0</span>] = Y2;</span><br><span class="line">            Y[<span class="number">3</span>] = <span class="number">1&#x27;b0</span>;  <span class="comment">// 低8位</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 有效输出和扩展输出</span></span><br><span class="line">    <span class="keyword">assign</span> Ys = ~(Ys1 | Ys2);  <span class="comment">// 如果高8位或低8位有效，则Ys为低电平</span></span><br><span class="line">    <span class="keyword">assign</span> Yex = Ys1 &amp; Ys2;    <span class="comment">// 如果高8位和低8位都无效，则Yex为低电平</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h1 id="3-2译码器"><a href="#3-2译码器" class="headerlink" title="3.2译码器"></a>3.2译码器</h1><p>3.2.1 中规模集成电路译码器的基本结构：</p>
+<p><img data-src="images/digitalcircuit/image3.png" alt="image.png"></p>
+<p> 例如，3-8译码器74LS38：</p>
+<ol>
+<li>基本介绍</li>
+</ol>
+<p>74LS138是一种常用的3-8线译码器，其主要功能是将3位二进制输入编码转换为8个互斥的输出。具体功能如下：</p>
+<ol>
+<li>输入编码：接收3位二进制输入信号（A0、A1、A2），可以表示8种不同的状态（000~111）</li>
+<li>译码输出：根据输入的二进制组合，在8个输出端（Y0~Y7）中选择一个输出有效信号</li>
+<li>使能控制：通过3个使能端（S1、S2、S3）控制芯片的工作状态，S1&amp;（S2’+S3’)时工作</li>
+</ol>
+<p>工作原理：</p>
+<ul>
+<li>当使能端满足工作条件时，芯片根据输入端A0、A1、A2的二进制组合，在相应的输出端产生低电平有效信号</li>
+<li>在任意时刻，8个输出端中只有一个输出端为低电平（有效），其余输出端均为高电平（无效）</li>
+</ul>
+<p>主要应用：</p>
+<ul>
+<li>地址译码：在计算机系统中用于<strong>存储器地址译码</strong></li>
+<li>数据选择：用于<strong>多路数据选择电路</strong></li>
+<li>信号分配：将一路信号分配到多个设备</li>
+</ul>
+<ol>
+<li>引脚排布：74LS138有6个输入端，7个输出端。</li>
+</ol>
+<p><img data-src="https://i-blog.csdnimg.cn/blog_migrate/8736ec3fad8152625e694533580a733f.png" alt=""></p>
+<p><strong>特点：</strong></p>
+<ol>
+<li>输入端高电平有效，输出端低电平有效；</li>
+<li>S1，S2，S3为三个使能控制端，且当S1=S2=S3=0时，该译码器才有效状态信号输出。</li>
+</ol>
+<p><strong>真值表如图所示：</strong></p>
+<p><img data-src="https://i-blog.csdnimg.cn/blog_migrate/897c624084caa17c468c1ac72769cda8.png" alt=""></p>
+<p>各输出状态由Ai输入决定。</p>
+<p><img data-src="https://i-blog.csdnimg.cn/blog_migrate/3f5c7b8a30829fe046a43d4543533a89.png" alt=""></p>
+<p>Yi=mi（正好对应最小项）</p>
+<p>Verilog实现</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> _74hc138(</span><br><span class="line">    <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] A,       <span class="comment">// 3位输入地址</span></span><br><span class="line">    <span class="keyword">input</span> S1, S2, S3,    <span class="comment">// 使能信号</span></span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> [<span class="number">7</span>:<span class="number">0</span>] Y   <span class="comment">// 8位输出</span></span><br><span class="line">);</span><br><span class="line">    <span class="comment">// 使能条件判断</span></span><br><span class="line">    <span class="keyword">wire</span> enable;</span><br><span class="line">    <span class="keyword">assign</span> enable = S3 &amp; ~S2 &amp; ~S1;  <span class="comment">// 使能条件：S3=1, S2=0, S1=0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span> (enable) <span class="keyword">begin</span></span><br><span class="line">            <span class="keyword">case</span> (A)</span><br><span class="line">                <span class="number">3&#x27;b000</span>: Y = <span class="number">8&#x27;b00000001</span>;</span><br><span class="line">                <span class="number">3&#x27;b001</span>: Y = <span class="number">8&#x27;b00000010</span>;</span><br><span class="line">                <span class="number">3&#x27;b010</span>: Y = <span class="number">8&#x27;b00000100</span>;</span><br><span class="line">                <span class="number">3&#x27;b011</span>: Y = <span class="number">8&#x27;b00001000</span>;</span><br><span class="line">                <span class="number">3&#x27;b100</span>: Y = <span class="number">8&#x27;b00010000</span>;</span><br><span class="line">                <span class="number">3&#x27;b101</span>: Y = <span class="number">8&#x27;b00100000</span>;</span><br><span class="line">                <span class="number">3&#x27;b110</span>: Y = <span class="number">8&#x27;b01000000</span>;</span><br><span class="line">                <span class="number">3&#x27;b111</span>: Y = <span class="number">8&#x27;b10000000</span>;</span><br><span class="line">                <span class="keyword">default</span>: Y = <span class="number">8&#x27;b11111111</span>;  <span class="comment">// 默认输出全高电平</span></span><br><span class="line">            <span class="keyword">endcase</span></span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">            Y = <span class="number">8&#x27;b11111111</span>;  <span class="comment">// 未使能时，所有输出为高电平</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p>级联问题：</p>
+<p><img data-src="images/digitalcircuit/image4.png" alt="image.png"></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> _16to4_decoder(</span><br><span class="line">    <span class="keyword">input</span> [<span class="number">3</span>:<span class="number">0</span>] A,       <span class="comment">// 4位输入地址</span></span><br><span class="line">    <span class="keyword">input</span> S1, S2, S3,    <span class="comment">// 使能信号</span></span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> [<span class="number">15</span>:<span class="number">0</span>] Y  <span class="comment">// 16位输出</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 中间信号</span></span><br><span class="line">    <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] A1;       <span class="comment">// 第一个74HC138的地址输入</span></span><br><span class="line">    <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] A2;       <span class="comment">// 第二个74HC138的地址输入</span></span><br><span class="line">    <span class="keyword">wire</span> [<span class="number">1</span>:<span class="number">0</span>] enable;   <span class="comment">// 两个74HC138的使能信号</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 分配地址和使能信号</span></span><br><span class="line">    <span class="keyword">assign</span> A1 = A[<span class="number">3</span>:<span class="number">1</span>];   <span class="comment">// 高3位地址给第一个74HC138</span></span><br><span class="line">    <span class="keyword">assign</span> A2 = A[<span class="number">2</span>:<span class="number">0</span>];   <span class="comment">// 低3位地址给第二个74HC138</span></span><br><span class="line">    <span class="keyword">assign</span> enable = &#123;S3, S2, S1&#125;; <span class="comment">// 使能信号</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第一个74HC138，用于选择第二个74HC138的使能信号</span></span><br><span class="line">    <span class="keyword">wire</span> [<span class="number">7</span>:<span class="number">0</span>] Y1;       <span class="comment">// 第一个74HC138的输出</span></span><br><span class="line">    _74hc138 decoder1(</span><br><span class="line">        <span class="variable">.A</span>(A1),</span><br><span class="line">        <span class="variable">.S1</span>(enable[<span class="number">0</span>]),</span><br><span class="line">        <span class="variable">.S2</span>(enable[<span class="number">1</span>]),</span><br><span class="line">        <span class="variable">.S3</span>(enable[<span class="number">2</span>]),</span><br><span class="line">        <span class="variable">.Y</span>(Y1)</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第二个74HC138，用于生成最终的4位输出</span></span><br><span class="line">    <span class="keyword">wire</span> [<span class="number">7</span>:<span class="number">0</span>] Y2;       <span class="comment">// 第二个74HC138的输出</span></span><br><span class="line">    _74hc138 decoder2(</span><br><span class="line">        <span class="variable">.A</span>(A2),</span><br><span class="line">        <span class="variable">.S1</span>(Y1[<span class="number">0</span>]),</span><br><span class="line">        <span class="variable">.S2</span>(Y1[<span class="number">1</span>]),</span><br><span class="line">        <span class="variable">.S3</span>(Y1[<span class="number">2</span>]),</span><br><span class="line">        <span class="variable">.Y</span>(Y2)</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将两个74HC138的输出组合成16位输出</span></span><br><span class="line">    <span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">        Y = &#123;Y2, Y2&#125;;    <span class="comment">// 将第二个74HC138的输出复制到16位输出中</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p>74hc42：BCD码转10进制编码器</p>
+<p><img data-src="images/digitalcircuit/image5.png" alt="image.png"></p>
+<p><img data-src="images/digitalcircuit/image6.png" alt="image.png"></p>
+<p>74ls47：七段字形译码器<br>下图所示的是一个七段字形数码管:</p>
+<p><img data-src="images/digitalcircuit/image7.png" alt="image.png"></p>
+<p>7个条形的发光二极管排列成这种样式，每一段通过一个引脚控制。7段数码管有两种，共阳极数码管和共阴极数码管，其中，共阳极数码管的7个发光二极管的阳极连在一起，7个阴极是独立的；而共阴极数码管的7个发光二极管的阴极连在一起，7个阳极是独立的。<br>当共阳极数码管的某一阴极接低电平时，相应的二极管发光，故共阳极数码管需要输出低电平有效的译码器驱动，而共阴极数码管需要输出高电平有效的译码器驱动。</p>
+<p>如下图所示是一个输出低电平有效的七段字形译码器74LS47的集成芯片引脚图和它的真值表：</p>
+<p><img data-src="images/digitalcircuit/image8.png" alt="image.png"></p>
+<p>在译码的同时，还有一些引脚有如下的功能：</p>
+<p>（1）试灯输入 L T </p>
+<p>试灯输入顾名思义是为了检测每一段数码管是否正常工作而设置的，当输入为0时，无论其余的输入是什么值，译码器都是输出低电平，可以保证每一个发光二极管变亮。</p>
+<p>（2）灭灯输入 B I </p>
+<p>灭灯输入也是顾名思义，是为了让每一段数码管灭灯而设置的。当输入为0时，不论其他的输入是什么状态，译码器均输入高电平，使得所有的数码管熄灭</p>
+<p>（3）灭零输入 B R I </p>
+<p>灭零输入功能是为了让不需要显示的0熄灭而设置的，例如：当我们在显示0088.8800时，实际上只需显示88.88即可，把其他位置上的0熄灭即可。</p>
+<p>（4）灭零输出 R B O<br>RBO输出是否熄灭0的信号</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> _74ls47(</span><br><span class="line">		<span class="keyword">input</span> [<span class="number">3</span>:<span class="number">0</span>] A,       <span class="comment">// 4位输入地址</span></span><br><span class="line">    <span class="keyword">input</span> LT,            <span class="comment">// 试灯输入</span></span><br><span class="line">    <span class="keyword">input</span> BI,            <span class="comment">// 灭灯输入</span></span><br><span class="line">    <span class="keyword">input</span> BRI,           <span class="comment">// 灭零输入</span></span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> [<span class="number">6</span>:<span class="number">0</span>] Y,  <span class="comment">// 7段数码管输出</span></span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> RBO       <span class="comment">// 灭零输出</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 定义7段数码管的段码</span></span><br><span class="line">    <span class="keyword">function</span> [<span class="number">6</span>:<span class="number">0</span>] get_segment(<span class="keyword">input</span> [<span class="number">3</span>:<span class="number">0</span>] value);</span><br><span class="line">        <span class="keyword">case</span> (value)</span><br><span class="line">            <span class="number">4&#x27;d0</span>: get_segment = <span class="number">7&#x27;b1000000</span>;  <span class="comment">// 0</span></span><br><span class="line">            <span class="number">4&#x27;d1</span>: get_segment = <span class="number">7&#x27;b1111001</span>;  <span class="comment">// 1</span></span><br><span class="line">            <span class="number">4&#x27;d2</span>: get_segment = <span class="number">7&#x27;b0100100</span>;  <span class="comment">// 2</span></span><br><span class="line">            <span class="number">4&#x27;d3</span>: get_segment = <span class="number">7&#x27;b0110000</span>;  <span class="comment">// 3</span></span><br><span class="line">            <span class="number">4&#x27;d4</span>: get_segment = <span class="number">7&#x27;b0011001</span>;  <span class="comment">// 4</span></span><br><span class="line">            <span class="number">4&#x27;d5</span>: get_segment = <span class="number">7&#x27;b0010010</span>;  <span class="comment">// 5</span></span><br><span class="line">            <span class="number">4&#x27;d6</span>: get_segment = <span class="number">7&#x27;b0000010</span>;  <span class="comment">// 6</span></span><br><span class="line">            <span class="number">4&#x27;d7</span>: get_segment = <span class="number">7&#x27;b1111000</span>;  <span class="comment">// 7</span></span><br><span class="line">            <span class="number">4&#x27;d8</span>: get_segment = <span class="number">7&#x27;b0000000</span>;  <span class="comment">// 8</span></span><br><span class="line">            <span class="number">4&#x27;d9</span>: get_segment = <span class="number">7&#x27;b0010000</span>;  <span class="comment">// 9</span></span><br><span class="line">            <span class="keyword">default</span>: get_segment = <span class="number">7&#x27;b1111111</span>;  <span class="comment">// 默认全灭</span></span><br><span class="line">        <span class="keyword">endcase</span></span><br><span class="line">    <span class="keyword">endfunction</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span> (!BI) <span class="keyword">begin</span></span><br><span class="line">            <span class="comment">// 灭灯输入为0，所有输出为高电平</span></span><br><span class="line">            Y = <span class="number">7&#x27;b1111111</span>;</span><br><span class="line">            RBO = <span class="number">1&#x27;b1</span>;  <span class="comment">// 灭零输出为高电平</span></span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">if</span> (!LT) <span class="keyword">begin</span></span><br><span class="line">            <span class="comment">// 试灯输入为0，所有输出为低电平</span></span><br><span class="line">            Y = <span class="number">7&#x27;b0000000</span>;</span><br><span class="line">            RBO = <span class="number">1&#x27;b0</span>;  <span class="comment">// 灭零输出为低电平</span></span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">            <span class="comment">// 正常译码</span></span><br><span class="line">            Y = get_segment(A);</span><br><span class="line">            <span class="keyword">if</span> (!BRI &amp;&amp; A == <span class="number">4&#x27;d0</span>) <span class="keyword">begin</span></span><br><span class="line">                <span class="comment">// 灭零输入为0且输入值为0，熄灭0</span></span><br><span class="line">                Y = <span class="number">7&#x27;b1111111</span>;</span><br><span class="line">                RBO = <span class="number">1&#x27;b1</span>;  <span class="comment">// 灭零输出为高电平</span></span><br><span class="line">            <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">                RBO = <span class="number">1&#x27;b0</span>;  <span class="comment">// 灭零输出为低电平</span></span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -1199,20 +1401,20 @@ l（0→8）<l(0 \to 6)+l(6\to 8)(\text{if 6} \notin \text{the shortest way })</
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1269,12 +1471,12 @@ l（0→8）<l(0 \to 6)+l(6\to 8)(\text{if 6} \notin \text{the shortest way })</
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">19k</span>
+    <span title="站点总字数">27k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">35 分钟</span>
+    <span title="站点阅读时长">48 分钟</span>
 </div>
 <footer>
   <p>&copy; Invalid date Liu Yiwei. All rights reserved.</p>
