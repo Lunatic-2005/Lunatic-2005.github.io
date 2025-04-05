@@ -181,6 +181,365 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://lunatic-2005.github.io/2025/04/05/%E7%AE%80%E8%B0%90%E6%8C%AF%E5%8A%A8%E7%9A%84%E5%90%88%E6%88%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.png">
+      <meta itemprop="name" content="Liu Yiwei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lunatic's Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/04/05/%E7%AE%80%E8%B0%90%E6%8C%AF%E5%8A%A8%E7%9A%84%E5%90%88%E6%88%90/" class="post-title-link" itemprop="url">简谐振动（更新中）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-04-05 23:38:05" itemprop="dateCreated datePublished" datetime="2025-04-05T23:38:05+08:00">2025-04-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-04-06 01:57:36" itemprop="dateModified" datetime="2025-04-06T01:57:36+08:00">2025-04-06</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="简谐振动的合成"><a href="#简谐振动的合成" class="headerlink" title="简谐振动的合成"></a>简谐振动的合成</h2><h3 id="两个同方向，同频率的简谐振动的合成"><a href="#两个同方向，同频率的简谐振动的合成" class="headerlink" title="两个同方向，同频率的简谐振动的合成"></a>两个<strong>同方向，同频率</strong>的简谐振动的合成</h3><p>由于运动是同方向的，可以将位移的合成表达为代数加法，即</p>
+<script type="math/tex; mode=display">
+\vec x=\vec x_1+\vec x_2······(1)\\
+x=A_1cos(\omega t+\phi_1)+A_2cos(\omega t+\phi_2)=\sqrt{A_1^2+A_2^2+2A_1A_2cos(\phi_1-\phi_2)}cos(\omega t+\phi)······(2)
+\\ where \text{ } \phi=arctan(\frac{A_1sin\phi_1+A_2sin\phi_2}{A_1cos\phi_1+A_2cos\phi_2})······(3)</script><p>这个推导是纯数学的，让我们用几何的方法来理解一下，即使用旋转矢量方法来现场计算一下这个值（毕竟背这个公式有点……）</p>
+<p><img data-src="images/physics/swirling_vec(1" alt="旋转矢量下同方向同频率简谐振动的合成">.png)</p>
+<p>这样可以直接由几何关系，利用余弦定理求得A，再利用比值法求得</p>
+<script type="math/tex; mode=display">
+\phi</script><p>下面讨论两种特殊的情况：</p>
+<ol>
+<li><p>当两振动同相位（或可用诱导公式化为同相位）则：</p>
+<script type="math/tex; mode=display">
+\text{if}\text{ }\phi_2-\phi_1=2k\pi,k\in N^+\\
+\text{then }A=A_1+A_2</script></li>
+<li>当两振动反相位（或可用诱导公式化为反相位）则：</li>
+</ol>
+<script type="math/tex; mode=display">
+\text{if}\text{ }\phi_2-\phi_1=(2k+1)\pi,k\in N^+\\
+\text{then }A=\lvert{A_1-A_2}\rvert.</script><h3 id="多个同方向、同频率简谐振动的合成：旋转矢量"><a href="#多个同方向、同频率简谐振动的合成：旋转矢量" class="headerlink" title="多个同方向、同频率简谐振动的合成：旋转矢量"></a>多个<strong>同方向、同频率</strong>简谐振动的合成：旋转矢量</h3><p>用《普通物理学》的一道经典例题来讲解一下。</p>
+<p><img data-src="images/physics/swirling_vec(2" alt=" ">.png)</p>
+<p>由几何关系容易得到，若选取第一个质点（这里假设为质点）运动方向为旋转参考系的x轴正向，则有：</p>
+<script type="math/tex; mode=display">
+A=2\cdot (Rsin\frac{N\alpha}{2})\\
+\phi=\frac{(N-1)\beta}{2}\\
+x=Acos(\omega t+\phi)\\=2\cdot (Rsin\frac{N\alpha}{2})\cdot cos[\omega t+\frac{(N-1)\beta}{2}]</script><h3 id="两个同方向不同频率的简谐振动的合成-拍"><a href="#两个同方向不同频率的简谐振动的合成-拍" class="headerlink" title="两个同方向不同频率的简谐振动的合成 拍"></a>两个同方向不同频率的简谐振动的合成 拍</h3><p>两个同方向不同频率的简谐振动的和振动不再是简谐振动，下面先看一下它的一般表示</p>
+<script type="math/tex; mode=display">
+x_1=A_1cos(\omega_1 t+\phi)\\x_1=A_2cos(\omega_2 t+\phi)\\x=x_1+x_2=A_1cos(\omega_1 t+\phi_1)+A_2cos(\omega_2 t+\phi_2)\\\text{if }A_1=A_2=A,\\x=2Acos(\frac{\omega_2-\omega_1}{2}t)cos(\frac{\omega_2+\omega_1}{2}t+\phi)</script><p>上式是一个相当复杂的运动，这里我们讨论一下：当</p>
+<script type="math/tex; mode=display">
+\lvert\omega_2-\omega_1\rvert<<\omega_i,i=1,2</script><p>条件下，令</p>
+<script type="math/tex; mode=display">
+\omega_1\approx\omega_2\approx\omega\\
+\text{so that }cos(\frac{\omega_2-\omega_1}{2}t)\approx1\\\frac{\omega_2+\omega_1}{2}\approx \omega\\x\approx 2Acos(\frac{\omega_2-\omega_1}{2}t)cos(\omega t+\phi)</script><p>可以认为和运动近似为一个振幅为</p>
+<script type="math/tex; mode=display">
+\lvert Acos(\frac{\omega_2-\omega_1}{2}t)\rvert</script><p>的变振幅运动，这个振幅变化的频率称为<strong>拍频</strong>，即</p>
+<script type="math/tex; mode=display">
+\nu=\lvert \nu_2-\nu_1\rvert</script><p><img data-src="images/physics/clap.png" alt="拍"></p>
+<h3 id="谐振分析和频谱"><a href="#谐振分析和频谱" class="headerlink" title="谐振分析和频谱"></a>谐振分析和频谱</h3><p><strong>傅里叶变换</strong>：</p>
+<h4 id="傅里叶变换的定义"><a href="#傅里叶变换的定义" class="headerlink" title="傅里叶变换的定义"></a>傅里叶变换的定义</h4><p>对于一个连续时间函数 ，其傅里叶变换  定义为：</p>
+<script type="math/tex; mode=display">
+F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i\omega t} \, dt</script><h4 id="傅里叶逆变换"><a href="#傅里叶逆变换" class="headerlink" title="傅里叶逆变换"></a>傅里叶逆变换</h4><p>傅里叶逆变换（Inverse Fourier Transform）将频域信号 转换回时域信号 ：</p>
+<script type="math/tex; mode=display">
+f(t) = \frac{1}{2\pi} \int_{-\infty}^{\infty} F(\omega) e^{i\omega t} \, d\omega</script><h4 id="离散傅里叶变换"><a href="#离散傅里叶变换" class="headerlink" title="离散傅里叶变换"></a>离散傅里叶变换</h4><p>对于离散时间信号 ( x[n] )，其离散傅里叶变换（Discrete Fourier Transform, DFT） ( X[k] ) 定义为：</p>
+<script type="math/tex; mode=display">
+X[k] = \sum_{n=0}^{N-1} x[n] e^{-i 2\pi k n / N}</script><p>其中，( N ) 是信号的长度，( k ) 是频率索引。</p>
+<h4 id="快速傅里叶变换"><a href="#快速傅里叶变换" class="headerlink" title="快速傅里叶变换"></a>快速傅里叶变换</h4><p>快速傅里叶变换（Fast Fourier Transform, FFT）是一种高效的算法，用于计算离散傅里叶变换。它利用了 DFT 的对称性和周期性，将计算复杂度从 ( O(N^2) ) 降低到 ( O(N · log N) )。</p>
+<h4 id="傅里叶变换的示例"><a href="#傅里叶变换的示例" class="headerlink" title="** 傅里叶变换的示例"></a>** 傅里叶变换的示例</h4><p>假设我们有一个简单的时域信号</p>
+<script type="math/tex; mode=display">
+f(t) = \cos(2\pi t)</script><p>我们来计算它的傅里叶变换：</p>
+<script type="math/tex; mode=display">
+F(\omega) = \int_{-\infty}^{\infty} \cos(2\pi t) e^{-i\omega t} \, dt\\
+
+\text{利用欧拉公式}
+\\
+cos(2\pi t) = \frac{e^{i2\pi t} + e^{-i2\pi t}}{2} \\我们有：
+\\
+F(\omega) = \frac{1}{2} \int_{-\infty}^{\infty} \left( e^{i2\pi t} + e^{-i2\pi t} \right) e^{-i\omega t} \, dt
+\\
+
+\\
+= \frac{1}{2} \left( \int_{-\infty}^{\infty} e^{i(2\pi - \omega) t} \, dt + \int_{-\infty}^{\infty} e^{-i(2\pi + \omega) t} \, dt \right)
+\\
+
+\text{这两个积分都是狄拉克δ函数的定义，因此：}
+
+\\
+F(\omega) = \frac{1}{2} \left( 2\pi \delta(\omega - 2\pi) + 2\pi \delta(\omega + 2\pi) \right)
+\\
+
+\\
+= \pi \left( \delta(\omega - 2\pi) + \delta(\omega + 2\pi) \right)
+\\</script><p>可以重点考虑一种特殊的情况：各个分运动都为某个基频整数倍的谐振合成。</p>
+<h3 id="两个相互垂直的，同频率简谐振动的合成"><a href="#两个相互垂直的，同频率简谐振动的合成" class="headerlink" title="两个相互垂直的，同频率简谐振动的合成"></a>两个相互垂直的，同频率简谐振动的合成</h3><p>先说结论：轨迹是一个椭圆。下面来尝试证明一下。</p>
+<script type="math/tex; mode=display">
+x=A_1cos(\omega t+\phi_1)\\y=A_2cos(\omega t+\phi_2)\\消去t,则\\\frac{x^2}{A_1^2}+\frac{y^2}{A_2^2}-\frac{2xy}{A_1A_2}\\=\cos^2{(\omega t+\phi_1)}+\cos^2{(\omega t+\phi_2)}-2\cos(\omega t+\phi_1)\cos(\omega t+\phi_2)\\=[\cos(\omega t+\phi_1)-\cos(\omega t+\phi_2)]^2=\sin^2(\phi_2-\phi_1)</script><p>这是一个椭圆的方程，由此方程可以得到，</p>
+<ol>
+<li><script type="math/tex; mode=display">
+\text{if }\Delta \phi=\phi_2-\phi_1=0\\y=\frac{A_2}{A_1}\cdot x</script><p>这表示此时，振动退化成一条直线上的简谐运动，直线的斜率为y轴振幅与x轴振幅之比，如果以上述直线为x’轴建立运动方程，则：</p>
+<script type="math/tex; mode=display">
+x'=\sqrt{A_1^2+A_2^2}\cos({\omega t+\phi})</script></li>
+<li><script type="math/tex; mode=display">
+\text{if }\Delta\phi=\pm \pi\\...</script></li>
+<li><script type="math/tex; mode=display">
+\text{if }\Delta\phi= \pi/2,\\\frac{x^2}{A_1^2}+\frac{y^2}{A_2^2}=1</script></li>
+</ol>
+<h3 id="两个相互垂直不同频率的简谐振动合成"><a href="#两个相互垂直不同频率的简谐振动合成" class="headerlink" title="两个相互垂直不同频率的简谐振动合成"></a>两个相互垂直不同频率的简谐振动合成</h3><p><img data-src="images/physics/bisaru.png" alt="李萨如图形"></p>
+<h2 id="阻尼振动-受迫振动-共振"><a href="#阻尼振动-受迫振动-共振" class="headerlink" title="阻尼振动 受迫振动 共振"></a>阻尼振动 受迫振动 共振</h2><h3 id="阻尼振动"><a href="#阻尼振动" class="headerlink" title="阻尼振动"></a>阻尼振动</h3><p>这里主要考虑一下阻力与速度成正比的情况，并且忽略所谓的辐射损失，推导阻尼振动的运动方程。设弹簧振子在线性阻力下运动，则：</p>
+<script type="math/tex; mode=display">
+m\frac{d^2x}{dt^2}=-kx-\gamma\frac{dx}{dt}\\\text{这是一个二阶常系数线齐次微分方程，我们讨论其解的结构：}\\\text{令}\omega^2_0=k/m,2\beta=\gamma/m,\\x''+2\beta x'+\omega_0^2x=0,\\
+\lambda^2+2\beta\lambda+\omega_0^2=0,
+\lambda_{1,2}=-\beta\pm\sqrt{\beta^2-\omega_0^2}\\1)\beta<\omega,x=A_0e^{-\beta t}cos(\sqrt{\omega_0^2-\beta^2 }\cdot t+\phi)\\2)\beta>\omega_0,x=Ae^{-(\beta+\sqrt{\beta^2-\omega_0^2})t}+Be^{-(\beta-\sqrt{\beta^2-\omega^2_0})t}\\3)\beta=\omega_0,x=e^{-\beta t}(A+Bt)</script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://lunatic-2005.github.io/2025/04/05/STM32-%E4%BD%8D%E5%B8%A6%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.png">
+      <meta itemprop="name" content="Liu Yiwei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lunatic's Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/04/05/STM32-%E4%BD%8D%E5%B8%A6%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">STM32 位带操作</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-04-05 22:12:20 / 修改时间：23:36:13" itemprop="dateCreated datePublished" datetime="2025-04-05T22:12:20+08:00">2025-04-05</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="什么是位带操作和位带区"><a href="#什么是位带操作和位带区" class="headerlink" title="什么是位带操作和位带区"></a>什么是位带操作和位带区</h2><h3 id="位带操作"><a href="#位带操作" class="headerlink" title="位带操作"></a>位带操作</h3><p>STM32内核的最小寻址单位是字节，一个字节里面有8位，所谓位带操作就是在STM32中实现位操作的方法。，我们先来看什么是<strong>位带区</strong>。</p>
+<p>下面一张图片是Cortex-M内核寻址空间映射图。</p>
+<p><img data-src="images/STM32/stm32_find_addr.png" alt="寻址映射图"></p>
+<p>图中的SRAM区里的0X20000000-0X200FFFF地址段和片内外设区里的0X40000000-0X400FFFFF地址段就是位带区，也就是设计支持位带操作的内存区域。在野火相关资料文档中，有这样一段解释：</p>
+<blockquote>
+<p>那么，STM32是如何将内核寻址单位缩小到位的呢？位带区这两个1MB的空间除了可以像正常的RAM一样操作外， 他们还有自己的位带别名区，位带别名区把这1MB的空间的每一个位膨胀成一个32位的字，当访问位带别名区的这些字时，就可以达到访问位带区某个比特位的目的。</p>
+</blockquote>
+<p>由此可以看出，想要对STM32实现位操作，只有随位带别名区的一个字空间（注意，不是字节空间）进行操作，而之所以不用字节则是因为这样会降低访问速度。</p>
+<h2 id="如何进行位带操作"><a href="#如何进行位带操作" class="headerlink" title="如何进行位带操作"></a>如何进行位带操作</h2><p>我们可以通过指针的形式访问位带别名区地址从而达到操作位带区比特位的效果。</p>
+<h3 id="外设位带别名区地址"><a href="#外设位带别名区地址" class="headerlink" title="外设位带别名区地址"></a>外设位带别名区地址</h3><p>对于片上外设位带区的某一位空间，设其所在的<strong>字节</strong>地址为A，位序号为n（0&lt;=n&lt;=31），则该位<strong>对应的位带别名区地址</strong>为</p>
+<script type="math/tex; mode=display">
+AliasAddr= 0x42000000+ (A-0x40000000)\times8\times4 +4n</script><p>0X42000000是外设位带别名区的起始地址，0x40000000是外设位带区的起始地址，（A-0x40000000）表示该比特前面有多少个字节， 一个字节有8位，所以*8，一个位膨胀后是4个字节，所以*4，n表示该比特在A地址的序号，因为一个位经过膨胀后是四个字节，所以也*4。</p>
+<h3 id="SRAM位带别名区地址"><a href="#SRAM位带别名区地址" class="headerlink" title="SRAM位带别名区地址"></a>SRAM位带别名区地址</h3><p>同样可以知道，</p>
+<script type="math/tex; mode=display">
+AliasAddr= 0x22000000+ (A-0x20000000)\times8\times4 +4n</script><h3 id="宏定义位带别名区地址的转换"><a href="#宏定义位带别名区地址的转换" class="headerlink" title="宏定义位带别名区地址的转换"></a>宏定义位带别名区地址的转换</h3><p><code>#define BITBAND(addr,bitnum)((addr &amp; 0xF0000000)+0x02000000+((addr &amp;0x00FFFFF&lt;&lt;5)+(bitnum&lt;&lt;2))</code></p>
+<p>好好理解一下这个公式！特别是其中按位与运算之巧妙！以下是野火开源资料对上述公示的描述。</p>
+<blockquote>
+<p>addr &amp; 0xF0000000是为了区别SRAM还是外设，实际效果就是取出4或者2，如果是外设，则取出的是4，+0X02000000之后就等于0X42000000， 0X42000000是外设别名区的起始地址。如果是SRAM，则取出的是2，+0X02000000之后就等于0X22000000，0X22000000是SRAM别名区的起始地址。</p>
+<p>addr &amp; 0x00FFFFFF 屏蔽了高三位，相当于减去0X20000000或者0X40000000，但是为什么是屏蔽高三位？因为外设的最高地址是：0X20100000， 跟起始地址0X20000000相减的时候，总是低5位才有效，所以干脆就把高三位屏蔽掉来达到减去起始地址的效果，具体屏蔽掉多少位跟最高地址有关。 SRAM同理分析即可。&lt;&lt;5相当于*8*4，&lt;&lt;2相当于*4，这两个我们在上面分析过。</p>
+</blockquote>
+<p>下面介绍常用的宏定义</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#define BITBAND(addr,bitnum)((addr &amp; 0xF0000000)+0x02000000+((addr &amp;0x00FFFFF&lt;&lt;5)+(bitnum&lt;&lt;2))</span><br><span class="line">#define MEM_ADDR(addr)            *((volatile unsigned long *)addr)</span><br><span class="line">#define BIT_ADDR(addr,bitnum)     MEM_ADDR(BITAND)(addr,bitnum)</span><br></pre></td></tr></table></figure>
+<p>上述宏定义中，BITAND用来将位带区某一位空间所在字节的首位地址和位偏移量映射为其在位带别名区的地址；MEM_ADDR用于将位带区某一位空间所在字节的首位地址转化为指针；</p>
+<p>BIT_ADDR用于将位带区某一位空间所在字节的首位地址和位偏移量映射为对应的指针。（值得注意的是volatile关键字，需要提醒编译器每次存储或读取addr地址时重新从变量地址读取数据，避免优化）；由于地址是32位的，所以用无符号长整形表达地址。</p>
+<h3 id="GPIO的位带操作"><a href="#GPIO的位带操作" class="headerlink" title="GPIO的位带操作"></a>GPIO的位带操作</h3><p>我们来举一个例子：</p>
+<p>如果我们要控制一个LED闪烁，利用库函数，我们需要经历一下算法：</p>
+<ol>
+<li>初始化GPIO引脚（低电平有效为例）</li>
+<li>控制GPIO为低电平，延时一段时间</li>
+<li>控制GPIO为高电平，延时一段时间</li>
+<li>回到2</li>
+</ol>
+<p>然而利用位带操作，我们可以对单个管脚进行操作。当我们要操作一个位，直接用GPIO封装的宏直接访问这一位的数据。这样可以直接利用对应寄存器进行输出！上述算法变为：</p>
+<ol>
+<li>通过相应GPIO的寄存器地址的位带别名区地址，访问寄存器变量。可以利用宏定义：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">// GPIO ODR 和 IDR 寄存器地址映射 </span><br><span class="line">#define GPIOA_ODR_Addr    (GPIOA_BASE+20) </span><br><span class="line">#define GPIOB_ODR_Addr    (GPIOB_BASE+20)   </span><br><span class="line">#define GPIOC_ODR_Addr    (GPIOC_BASE+20)  </span><br><span class="line">#define GPIOD_ODR_Addr    (GPIOD_BASE+20) </span><br><span class="line">#define GPIOE_ODR_Addr    (GPIOE_BASE+20) </span><br><span class="line">#define GPIOF_ODR_Addr    (GPIOF_BASE+20)  </span><br><span class="line">#define GPIOG_ODR_Addr    (GPIOG_BASE+20)</span><br><span class="line">#define GPIOH_ODR_Addr    (GPIOH_BASE+20)  </span><br><span class="line">#define GPIOI_ODR_Addr    (GPIOI_BASE+20)</span><br><span class="line">#define GPIOJ_ODR_Addr    (GPIOJ_BASE+20)  </span><br><span class="line">#define GPIOK_ODR_Addr    (GPIOK_BASE+20)</span><br><span class="line"></span><br><span class="line">#define GPIOA_IDR_Addr    (GPIOA_BASE+16)  </span><br><span class="line">#define GPIOB_IDR_Addr    (GPIOB_BASE+16)  </span><br><span class="line">#define GPIOC_IDR_Addr    (GPIOC_BASE+16)   </span><br><span class="line">#define GPIOD_IDR_Addr    (GPIOD_BASE+16)  </span><br><span class="line">#define GPIOE_IDR_Addr    (GPIOE_BASE+16)  </span><br><span class="line">#define GPIOF_IDR_Addr    (GPIOF_BASE+16)  </span><br><span class="line">#define GPIOG_IDR_Addr    (GPIOG_BASE+16)  </span><br><span class="line">#define GPIOH_IDR_Addr    (GPIOH_BASE+16)</span><br><span class="line">#define GPIOI_IDR_Addr    (GPIOI_BASE+16)</span><br><span class="line">#define GPIOJ_IDR_Addr    (GPIOJ_BASE+16)</span><br><span class="line">#define GPIOK_IDR_Addr    (GPIOK_BASE+16)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 单独操作 GPIO的某一个IO口，n(0,1,2...16),n表示具体是哪一个IO口</span><br><span class="line">#define PAout(n)   BIT_ADDR(GPIOA_ODR_Addr,n)  //输出   </span><br><span class="line">#define PAin(n)    BIT_ADDR(GPIOA_IDR_Addr,n)  //输入   </span><br><span class="line"></span><br><span class="line">#define PBout(n)   BIT_ADDR(GPIOB_ODR_Addr,n)  //输出   </span><br><span class="line">#define PBin(n)    BIT_ADDR(GPIOB_IDR_Addr,n)  //输入   </span><br><span class="line"></span><br><span class="line">#define PCout(n)   BIT_ADDR(GPIOC_ODR_Addr,n)  //输出   </span><br><span class="line">#define PCin(n)    BIT_ADDR(GPIOC_IDR_Addr,n)  //输入   </span><br><span class="line"></span><br><span class="line">#define PDout(n)   BIT_ADDR(GPIOD_ODR_Addr,n)  //输出   </span><br><span class="line">#define PDin(n)    BIT_ADDR(GPIOD_IDR_Addr,n)  //输入   </span><br><span class="line"></span><br><span class="line">#define PEout(n)   BIT_ADDR(GPIOE_ODR_Addr,n)  //输出   </span><br><span class="line">#define PEin(n)    BIT_ADDR(GPIOE_IDR_Addr,n)  //输入  </span><br><span class="line"></span><br><span class="line">#define PFout(n)   BIT_ADDR(GPIOF_ODR_Addr,n)  //输出   </span><br><span class="line">#define PFin(n)    BIT_ADDR(GPIOF_IDR_Addr,n)  //输入  </span><br><span class="line"></span><br><span class="line">#define PGout(n)   BIT_ADDR(GPIOG_ODR_Addr,n)  //输出   </span><br><span class="line">#define PGin(n)    BIT_ADDR(GPIOG_IDR_Addr,n)  //输入  </span><br><span class="line"></span><br><span class="line">#define PHout(n)   BIT_ADDR(GPIOH_ODR_Addr,n)  //输出   </span><br><span class="line">#define PHin(n)    BIT_ADDR(GPIOH_IDR_Addr,n)  //输入  </span><br><span class="line"></span><br><span class="line">#define PIout(n)   BIT_ADDR(GPIOI_ODR_Addr,n)  //输出   </span><br><span class="line">#define PIin(n)    BIT_ADDR(GPIOI_IDR_Addr,n)  //输入 </span><br><span class="line"></span><br><span class="line">#define PJout(n)   BIT_ADDR(GPIOJ_ODR_Addr,n)  //输出   </span><br><span class="line">#define PJin(n)    BIT_ADDR(GPIOJ_IDR_Addr,n)  //输入  </span><br><span class="line"></span><br><span class="line">#define PKout(n)   BIT_ADDR(GPIOK_ODR_Addr,n)  //输出   </span><br><span class="line">#define PKin(n)    BIT_ADDR(GPIOK_IDR_Addr,n)  //输入  </span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>进行操作。（库函数中已经写好啦，现场查即可）</p>
+<ol>
+<li>LED=0，延时；LED=1，延时；</li>
+<li>回到2；</li>
+</ol>
+<p>注意：</p>
+<ol>
+<li>STM32F7以上的MCU不支持位带操作。</li>
+<li>out管脚作为左值使用，in管脚作为右值使用。</li>
+</ol>
+<p>下面来写一下上述GPIO位带操作的实现举例。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//.c文件核心代码</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    //LED_Init</span><br><span class="line">    LED_GPIO_Init();</span><br><span class="line">    while(1)&#123;</span><br><span class="line">      PFout(6)=0;</span><br><span class="line">      SOFT_Delay(0x0FFFFF);</span><br><span class="line">      PFout(6)=1;</span><br><span class="line">      SOFT_Delay(0x0FFFFF);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">/*基于一般库函数的版本：</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    RCC_HSE_Config(RCC_PLLSource_HSE_Div2,RCC_PLLMul_9);</span><br><span class="line">    LED_Init();</span><br><span class="line">    while(1)</span><br><span class="line">    &#123;</span><br><span class="line">        GPIO_ResetBits(LED0_PORT,LED0_PIN);</span><br><span class="line">        SOFT_Delay(0x0FFFFF);</span><br><span class="line">        GPIO_ResetBits(LED0_PORT,LED0_PIN);</span><br><span class="line">        SOFT_Delay(0x0FFFFF);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://lunatic-2005.github.io/2025/04/04/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.png">
+      <meta itemprop="name" content="Liu Yiwei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lunatic's Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/04/04/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/" class="post-title-link" itemprop="url">二叉搜索树</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-04-04 13:51:42" itemprop="dateCreated datePublished" datetime="2025-04-04T13:51:42+08:00">2025-04-04</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>0</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://lunatic-2005.github.io/2025/04/04/%E6%A0%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -204,10 +563,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2025-04-04 00:17:02 / 修改时间：03:21:13" itemprop="dateCreated datePublished" datetime="2025-04-04T00:17:02+08:00">2025-04-04</time>
+              <time title="创建时间：2025-04-04 00:17:02" itemprop="dateCreated datePublished" datetime="2025-04-04T00:17:02+08:00">2025-04-04</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-04-05 23:34:43" itemprop="dateModified" datetime="2025-04-05T23:34:43+08:00">2025-04-05</time>
+              </span>
 
           <br>
             <span class="post-meta-item" title="本文字数">
@@ -238,18 +603,28 @@
 <li>与一般树的根本区别：二叉树的每一个节点都恰好有两颗子树（其中一个或两个可以为空），而树的每一个元素可以有任意数量的子树。</li>
 <li>二叉树中，每个元素的子树是有序的，也就是说，有左子树和右子树之分。</li>
 <li>二叉树可以为空的。</li>
-<li>一颗有<script type="math/tex">n>0</script>个元素的二叉树有<script type="math/tex">n-1</script>条边，最大高度为<script type="math/tex">n</script>,最小高度为<script type="math/tex; mode=display">
- \left\lceil\log_2(n-1)\right\rceil</script></li>
-<li>一颗二叉树高度为h&gt;=0，它至少有h个元素，最多有<script type="math/tex; mode=display">
-2^h-1</script>个元素（称为满二叉树）</li>
+<li><p>一颗有</p>
+<script type="math/tex; mode=display">
+n>0</script><p>个元素的二叉树有</p>
+<script type="math/tex; mode=display">
+n-1</script><p>条边，最大高度为<script type="math/tex">n</script>,最小高度为</p>
+<script type="math/tex; mode=display">
+\left\lceil\log_2(n-1)\right\rceil</script></li>
+<li><p>一颗二叉树高度为h&gt;=0，它至少有h个元素，最多有</p>
+<script type="math/tex; mode=display">
+2^h-1</script><p>个元素（称为满二叉树）</p>
+</li>
 <li><p>完全二叉树是指对高度为h的满二叉树，从第一层到最后一层，在每层中从左至右顺序编号，删除k个编号为</p>
 <script type="math/tex; mode=display">
-2^h-i(1≤i≤k<2^h)</script><p>的元素得到的二叉树。然而，我们还有更为容易理解的一种定义：完全二叉树：深度为k的具有n个结点的二叉树，当且仅当其每一个结点都与深度为k的满二叉树中编号为1~n的结点一 一对应时，称之为完全二叉树。<br><img src="images/tree/complete_tree.png" alt="二叉树"></p>
+2^h-i(1≤i≤k<2^h)</script><p>的元素得到的二叉树。然而，我们还有更为容易理解的一种定义：完全二叉树：深度为k的具有n个结点的二叉树，当且仅当其每一个结点都与深度为k的满二叉树中编号为1~n的结点一 一对应时，称之为完全二叉树。<br><img data-src="images/tree/complete_tree.png" alt="二叉树"></p>
 </li>
 <li><p>完全二叉树的特性：设完全二叉树的一元素其编号为i，1≤i≤n.则有</p>
 <ol>
-<li>如果i=1，则该元素为二叉树的根；如果i&gt;1,则其父节点的编号为<script type="math/tex">i/2</script></li>
-<li>有n个元素的完全二叉树，其高度为<script type="math/tex; mode=display">
+<li><p>如果i=1，则该元素为二叉树的根；如果i&gt;1,则其父节点的编号为</p>
+<script type="math/tex; mode=display">
+i/2</script></li>
+<li><p>有n个元素的完全二叉树，其高度为</p>
+<script type="math/tex; mode=display">
 \left\lceil\log_2{(n+1)}\right\rceil</script></li>
 <li>如果2i&gt;n，则该元素无左孩，否则其左孩编号为2i</li>
 <li><p>如果2i+1&gt;n，则该元素无右孩，否则其右孩编号为2i+1.<br>下面证明一下这个性质。<br>当i=1，显然该元素为二叉树的根；当i&gt;1时，考虑对应元素不在最下层，位于树的第</p>
@@ -276,7 +651,9 @@ i_{previous} \geq \frac{n_{max}}{2}>\frac{n}{2}</script><p>故得证。同理可
 </li>
 </ol>
 <h3 id="二叉树的描述："><a href="#二叉树的描述：" class="headerlink" title="二叉树的描述："></a>二叉树的描述：</h3><ol>
-<li><p>数组描述。<br>二叉树的数组表示利用了性质7，把二叉树看作是缺少了部分元素的完全二叉树。将二叉树相对于完全二叉树（实际上，相对于满二叉树）缺少的部分也参与编号，对编号后的树建立数组，原有二叉树的元素按照其编号存储在数组的相应位置。一个有n个元素的二叉树最多需要<script type="math/tex">2^n</script><br>个空间来存储（包括了数组的零位置）。所以这是一种很浪费空间的描述方式。值得注意的是，在这种描述种我们用到了类似哈希表的思想，用空间换得了时间。比如，这样存储的二叉树，其查找的时间复杂度为O(1).</p>
+<li><p>数组描述。<br>二叉树的数组表示利用了性质7，把二叉树看作是缺少了部分元素的完全二叉树。将二叉树相对于完全二叉树（实际上，相对于满二叉树）缺少的部分也参与编号，对编号后的树建立数组，原有二叉树的元素按照其编号存储在数组的相应位置。一个有n个元素的二叉树最多需要</p>
+<script type="math/tex; mode=display">
+2^n</script><p>个空间来存储（包括了数组的零位置）。所以这是一种很浪费空间的描述方式。值得注意的是，在这种描述种我们用到了类似哈希表的思想，用空间换得了时间。比如，这样存储的二叉树，其查找的时间复杂度为O(1).</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MaxSize 100struct TreeNode&#123;</span></span><br><span class="line">   ElemType value;<span class="comment">//结点中的数据元素</span></span><br><span class="line">   <span class="type">bool</span> isEmpty;<span class="comment">//结点是否为空&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">main</span>()&#123;</span><br><span class="line">   TreeNode t[MaxSize];</span><br><span class="line">   <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;MaxSize; i++)&#123;</span><br><span class="line">      t[i].isEmpty = <span class="literal">true</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 <li><p>链表描述。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="comment">//binary search tree:left&lt;=right</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">bstNode</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="type">int</span> data;</span><br><span class="line">bstNode* left;</span><br><span class="line">bstNode* right;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//Creat a node</span></span><br><span class="line"><span class="function">bstNode* <span class="title">getNewNode</span><span class="params">(<span class="type">int</span> data)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">bstNode* newNode = <span class="keyword">new</span> <span class="built_in">bstNode</span>();</span><br><span class="line">newNode-&gt;data = data;</span><br><span class="line">newNode-&gt;left = newNode-&gt;right = <span class="literal">nullptr</span>;</span><br><span class="line"><span class="keyword">return</span> newNode;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">binaryTreeNode</span></span><br><span class="line">&#123;</span><br><span class="line">T element;</span><br><span class="line">binaryTreeNode&lt;T&gt; *lChild,*rChild;</span><br></pre></td></tr></table></figure>
@@ -324,8 +701,8 @@ i_{previous} \geq \frac{n_{max}}{2}>\frac{n}{2}</script><p>故得证。同理可
 <li>如果Q列不为空，则从队头弹出一个节点，读取其数据并将其孩子节点（如果存在）入列。</li>
 <li>重复3，直到Q列空，返回。</li>
 </ol>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">LevelOrder</span><span class="params">(bstNode* root)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span>;</span><br><span class="line">queue&lt;bstNode*&gt;Q;</span><br><span class="line">Q.<span class="built_in">push</span>(root);</span><br><span class="line"><span class="comment">//while the queue is not empty</span></span><br><span class="line"><span class="keyword">while</span> (!Q.<span class="built_in">empty</span>())</span><br><span class="line">&#123;</span><br><span class="line">bstNode* current = Q.<span class="built_in">front</span>();</span><br><span class="line">cout &lt;&lt; current-&gt;data &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line"><span class="keyword">if</span> (current-&gt;left)Q.<span class="built_in">push</span>(current-&gt;left);</span><br><span class="line"><span class="keyword">if</span> (current-&gt;right)Q.<span class="built_in">push</span>(current-&gt;right);</span><br><span class="line">Q.<span class="built_in">pop</span>();</span><br><span class="line">&#125;</span><br><span class="line">cout &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">LevelOrder</span><span class="params">(bstNode* root)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span>;</span><br><span class="line">queue&lt;bstNode*&gt;Q;</span><br><span class="line">Q.<span class="built_in">push</span>(root);</span><br><span class="line"><span class="comment">//while the queue is not empty</span></span><br><span class="line"><span class="keyword">while</span> (!Q.<span class="built_in">empty</span>())</span><br><span class="line">&#123;</span><br><span class="line">bstNode* current = Q.<span class="built_in">front</span>();</span><br><span class="line">cout &lt;&lt; current-&gt;data &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line"><span class="keyword">if</span> (current-&gt;left)Q.<span class="built_in">push</span>(current-&gt;left);</span><br><span class="line"><span class="keyword">if</span> (current-&gt;right)Q.<span class="built_in">push</span>(current-&gt;right);</span><br><span class="line">Q.<span class="built_in">pop</span>();</span><br><span class="line">&#125;</span><br><span class="line">cout &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="应用举例：信号放大器问题"><a href="#应用举例：信号放大器问题" class="headerlink" title="应用举例：信号放大器问题"></a>应用举例：信号放大器问题</h3>
       
     </div>
 
@@ -543,6 +920,106 @@ l（0→8）<l(0 \to 6)+l(6\to 8)(\text{if 6} \notin \text{the shortest way })</
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://lunatic-2005.github.io/2025/03/31/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.png">
+      <meta itemprop="name" content="Liu Yiwei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lunatic's Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/03/31/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">排序算法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-03-31 20:49:40 / 修改时间：22:23:24" itemprop="dateCreated datePublished" datetime="2025-03-31T20:49:40+08:00">2025-03-31</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="算法（2）排序算法"><a href="#算法（2）排序算法" class="headerlink" title="算法（2）排序算法"></a>算法（2）排序算法</h1><p>1、插入排序</p>
+<p>1.1 直接插入排序：</p>
+<p>直接插入排序的基本思想：</p>
+<p>1）将整个数组分为“已排序”和“未排序”的两部分，设已排序m，总长度n</p>
+<p>2）从未排序部分选取第一个元素</p>
+<p>3）遍历已排序的数组，查找需要插入的位置下标i</p>
+<p>4）保护待排序数据，将下标大于i，小于m的所有元素右移一位</p>
+<p>5）插入，进入下一轮循环</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">InsertSort</span><span class="params">(type* arr, <span class="type">int</span> num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> m = <span class="number">1</span>; m &lt; num; m++)<span class="comment">//外层for循环，用于记录已经排序好的长度m</span></span><br><span class="line">	&#123;</span><br><span class="line">		type tmp = arr[m];</span><br><span class="line">		<span class="type">int</span> i = m - <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span> ( i = m - <span class="number">1</span>; i &gt;= <span class="number">0</span>&amp;&amp;arr[i]&gt;tmp; i--)<span class="comment">//内层for循环，用于遍历已排序的数组</span></span><br><span class="line">		&#123;</span><br><span class="line">			arr[i + <span class="number">1</span>] = arr[i];</span><br><span class="line">		&#125;</span><br><span class="line">		arr[i<span class="number">+1</span>] = tmp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>算法的性能分析：</p>
+<p>时间复杂度：O（n^2）</p>
+<p>（平均情况下向长度为m的序列中插入一个数据的平均移动速度是m/2，m从1累加到n-1）</p>
+<p>空间复杂度：O（1）</p>
+<p>稳定性：稳定</p>
+<p>2、交换排序</p>
+<p>2.1 快速排序</p>
+<p>1）递归调用自身</p>
+<p>2）每次将数组以“主元”为界分为较大组和较小组，再对两组分别进行快速排序</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span> <span class="comment">// 用于 std::swap</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">Partition</span><span class="params">(<span class="type">int</span>* arr, <span class="type">int</span> num, <span class="type">int</span> nLower, <span class="type">int</span> nUpper)</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> pivot = arr[nLower]; <span class="comment">// 选取第一个元素作为主元进行切割</span></span><br><span class="line">	<span class="type">int</span> nLeft = nLower + <span class="number">1</span>;</span><br><span class="line">	<span class="type">int</span> nRight = nUpper; <span class="comment">// 确定本次分割的范围</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">		<span class="keyword">while</span> (nLeft &lt;= nRight &amp;&amp; arr[nLeft] &lt;= pivot) nLeft++; <span class="comment">// 查找左侧第一个大于 pivot 的元素对应的下标</span></span><br><span class="line">		<span class="keyword">while</span> (nRight &gt;= nLeft &amp;&amp; arr[nRight] &gt;= pivot) nRight--; <span class="comment">// 查找右侧第一个小于 pivot 的元素对应的下标</span></span><br><span class="line">		<span class="keyword">if</span> (nLeft &gt; nRight) <span class="keyword">break</span>; <span class="comment">// 循环退出条件</span></span><br><span class="line">		<span class="keyword">if</span> (nLeft &lt; nRight) &#123; <span class="comment">// 如果左标小于右标，交换找到的两个下标对应的数的位置</span></span><br><span class="line">			std::<span class="built_in">swap</span>(arr[nLeft], arr[nRight]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	std::<span class="built_in">swap</span>(arr[nLower], arr[nRight]); <span class="comment">// 将主元放到正确的位置</span></span><br><span class="line">	<span class="keyword">return</span> nRight; <span class="comment">// 返回主元的最终位置</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">QuickSort</span><span class="params">(<span class="type">int</span>* arr, <span class="type">int</span> num, <span class="type">int</span> nLower = <span class="number">0</span>, <span class="type">int</span> nUpper = <span class="number">-1</span>)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (nUpper == <span class="number">-1</span>) nUpper = num - <span class="number">1</span>; <span class="comment">// 缺省参数的情况，nUpper 应该是 num - 1</span></span><br><span class="line">	<span class="keyword">if</span> (nLower &lt; nUpper) &#123;</span><br><span class="line">		<span class="type">int</span> nSplit = <span class="built_in">Partition</span>(arr, num, nLower, nUpper); <span class="comment">// 划分数组</span></span><br><span class="line">		<span class="built_in">QuickSort</span>(arr, num, nLower, nSplit - <span class="number">1</span>); <span class="comment">// 递归排序左侧子数组</span></span><br><span class="line">		<span class="built_in">QuickSort</span>(arr, num, nSplit + <span class="number">1</span>, nUpper); <span class="comment">// 递归排序右侧子数组</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>算法性能分析：</p>
+<p>快速排序在n较大时时间复杂度O（nlogn）</p>
+<p>在n较小时或主元选择不合理时，时间复杂度为O（n^2）</p>
+<p>空间复杂度O（logn）</p>
+<p>快速排序是不稳定的</p>
+<p>3、选择排序</p>
+<p>3.1直接选择排序</p>
+<p>1）数组被分为已排序与未排序两组</p>
+<p>2）每次遍历未排序组找到最小的元素插入已排序组的最后</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> type&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">selectSort</span><span class="params">(type* items, <span class="type">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> imin = i - <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = i; j &lt; len; j++)<span class="comment">//j从i开始，在i后寻找最小的排到已经排序的前序列后一个</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (items[j] &lt; items[imin]) &#123;</span><br><span class="line">				imin = j;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (imin != i - <span class="number">1</span>)<span class="comment">//如果找到了，将最小值放置到i-1处</span></span><br><span class="line">		&#123;</span><br><span class="line">			type t = items[i - <span class="number">1</span>];</span><br><span class="line">			items[i - <span class="number">1</span>] = items[imin];</span><br><span class="line">			items[imin] = t;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
 
@@ -611,12 +1088,12 @@ l（0→8）<l(0 \to 6)+l(6\to 8)(\text{if 6} \notin \text{the shortest way })</
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -673,12 +1150,12 @@ l（0→8）<l(0 \to 6)+l(6\to 8)(\text{if 6} \notin \text{the shortest way })</
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">11k</span>
+    <span title="站点总字数">19k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">20 分钟</span>
+    <span title="站点阅读时长">34 分钟</span>
 </div>
 <footer>
   <p>&copy; Invalid date Liu Yiwei. All rights reserved.</p>
