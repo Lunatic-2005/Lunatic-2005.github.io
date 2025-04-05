@@ -22,15 +22,20 @@
     var CONFIG = {"hostname":"lunatic-2005.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Lunatic&#39;s Space">
-<meta property="og:url" content="http://lunatic-2005.github.io/archives/2025/03/index.html">
+  <meta name="description" content="我们做的问题是：第十六届华中杯问题C。这个问题在数学建模竞赛中属于十分简单的问题。我大体的思路就是： 问题一思路： 归一化波长数据 画出归一化波长-横坐标散点图 得到散点图后，判断适合用何种曲线拟合 采用数据点拟合并画图 选择合适的插值方法，插入数据点后再次拟合 比较两次拟合的结果  问题二思路： 采用迭代方法求函数的离散表达式（可取x区间长0.01等） 增加迭代次数，更改迭代模型（几何近似or微">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数模模拟题的复盘">
+<meta property="og:url" content="http://lunatic-2005.github.io/2025/04/06/%E6%95%B0%E6%A8%A1%E6%A8%A1%E6%8B%9F%E9%A2%98%E7%9A%84%E5%A4%8D%E7%9B%98/index.html">
 <meta property="og:site_name" content="Lunatic&#39;s Space">
+<meta property="og:description" content="我们做的问题是：第十六届华中杯问题C。这个问题在数学建模竞赛中属于十分简单的问题。我大体的思路就是： 问题一思路： 归一化波长数据 画出归一化波长-横坐标散点图 得到散点图后，判断适合用何种曲线拟合 采用数据点拟合并画图 选择合适的插值方法，插入数据点后再次拟合 比较两次拟合的结果  问题二思路： 采用迭代方法求函数的离散表达式（可取x区间长0.01等） 增加迭代次数，更改迭代模型（几何近似or微">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-04-05T18:15:05.000Z">
+<meta property="article:modified_time" content="2025-04-05T18:56:40.948Z">
 <meta property="article:author" content="Liu Yiwei">
+<meta property="article:tag" content="数学建模">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://lunatic-2005.github.io/archives/2025/03/">
+<link rel="canonical" href="http://lunatic-2005.github.io/2025/04/06/%E6%95%B0%E6%A8%A1%E6%A8%A1%E6%8B%9F%E9%A2%98%E7%9A%84%E5%A4%8D%E7%9B%98/">
 
 
 <script id="page-configurations">
@@ -38,12 +43,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>归档 | Lunatic's Space</title>
+  <title>数模模拟题的复盘 | Lunatic's Space</title>
   
 
 
@@ -175,70 +180,138 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 8 篇日志。 继续努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://lunatic-2005.github.io/2025/04/06/%E6%95%B0%E6%A8%A1%E6%A8%A1%E6%8B%9F%E9%A2%98%E7%9A%84%E5%A4%8D%E7%9B%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.png">
+      <meta itemprop="name" content="Liu Yiwei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lunatic's Space">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数模模拟题的复盘
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-04-06 02:15:05 / 修改时间：02:56:40" itemprop="dateCreated datePublished" datetime="2025-04-06T02:15:05+08:00">2025-04-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" itemprop="url" rel="index"><span itemprop="name">数学建模</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>682</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2025</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2025-03-31T20:49:40+08:00"
-              content="2025-03-31">
-          03-31
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2025/03/31/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" itemprop="url">
-            <span itemprop="name">排序算法</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2025-03-30T22:41:49+08:00"
-              content="2025-03-30">
-          03-30
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2025/03/30/hello-world/" itemprop="url">
-            <span itemprop="name">欢迎来到Lunatic's Space</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+        <p>我们做的问题是：第十六届华中杯<a href="assets/ProblemC.pdf">问题C</a>。这个问题在数学建模竞赛中属于十分简单的问题。我大体的思路就是：</p>
+<h3 id="问题一思路："><a href="#问题一思路：" class="headerlink" title="问题一思路："></a>问题一思路：</h3><ol>
+<li>归一化波长数据</li>
+<li>画出归一化波长-横坐标散点图</li>
+<li>得到散点图后，判断适合用何种曲线拟合</li>
+<li>采用数据点拟合并画图</li>
+<li>选择合适的插值方法，插入数据点后再次拟合</li>
+<li>比较两次拟合的结果</li>
+</ol>
+<h3 id="问题二思路："><a href="#问题二思路：" class="headerlink" title="问题二思路："></a>问题二思路：</h3><ol>
+<li>采用迭代方法求函数的离散表达式（可取x区间长0.01等）</li>
+<li>增加迭代次数，更改迭代模型（几何近似or微分）</li>
+<li>建立曲线函数表达式，分析不同情况下求得函数表达式的精确性</li>
+</ol>
+<h3 id="问题三思路："><a href="#问题三思路：" class="headerlink" title="问题三思路："></a>问题三思路：</h3><ol>
+<li>采用问题二的最佳方案，划分训练集和测试集</li>
+<li>利用训练集求出预测函数表达式，再对测试集进行预测</li>
+<li>对结果进行误差分析（残差，均方误差），分析误差产生的原因</li>
+</ol>
+<p>此后，我阅读了某优秀论文，发现其基本思想与我几乎一致。</p>
+<p>对于我们初学者想到的这种老套的既有模型，我的总结如下：</p>
+<ol>
+<li>本次第一题的结果几乎都维持在2.2附近，这说明曲线的曲率近似为定值，应想到原曲线为一个圆。这说明我们对结果的解释不够完善。在做完一件事之后，一定要回头给一个好的解释。</li>
+<li>不应该拘泥于题目文件本身，积极寻找相关领域论文，从机理方面做误差分析等实际情况的考虑。</li>
+<li>公式过程十分完善，推导很“数学”。虽然使用的都是可以用既有Matlab或Python函数求解的模型，但数模究竟是数模，必须要有完善的数学推理，这部分要把b装足了。</li>
+<li>学会变着法儿画图，但是要对每个图片的意义做好阐述。不要认为联系实际，给出合理解释的部分比较low！</li>
+<li>有时候，我们只能想到一个大致的思路，但是可以由此触发比较高级的算法，例如想到要插值，可以选用不太老套的插值方法。</li>
+<li>不要小看中学数学中学过的初等几何知识。</li>
+</ol>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" rel="tag"># 数学建模</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/04/05/%E7%AE%80%E8%B0%90%E6%8C%AF%E5%8A%A8%E7%9A%84%E5%90%88%E6%88%90/" rel="prev" title="简谐振动（更新中）">
+      <i class="fa fa-chevron-left"></i> 简谐振动（更新中）
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
 
@@ -292,6 +365,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%B8%80%E6%80%9D%E8%B7%AF%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">问题一思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%BA%8C%E6%80%9D%E8%B7%AF%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">问题二思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%B8%89%E6%80%9D%E8%B7%AF%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">问题三思路：</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
