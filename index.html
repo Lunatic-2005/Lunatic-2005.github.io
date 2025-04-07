@@ -201,7 +201,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2025-04-07 18:04:43 / 修改时间：19:28:41" itemprop="dateCreated datePublished" datetime="2025-04-07T18:04:43+08:00">2025-04-07</time>
+              <time title="创建时间：2025-04-07 18:04:43 / 修改时间：19:58:26" itemprop="dateCreated datePublished" datetime="2025-04-07T18:04:43+08:00">2025-04-07</time>
             </span>
 
           <br>
@@ -210,14 +210,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.6k</span>
+              <span>2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -302,7 +302,69 @@
 </tbody>
 </table>
 </div>
-<p>下面是反逻辑SR锁存器的真值表<br>| S’ | R; | Q | <script type="math/tex">Q^*</script> |<br>| - | - | -   | - |<br>| 1 | 1 | 1   | 1 |<br>| 1 | 1 | 0   | 0 |<br>| 0 | 1 | 0   | 1 |<br>| 0 | 1 | 1   | 1 |<br>| 1 | 0 | 0   | 0 |<br>| 1 | 0 | 1   | 0 |<br>| 0 | 0 | 1   | 1 |<br>| 0 | 0 | 0   | 1 |</p>
+<p>下面是反逻辑SR锁存器的真值表</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>(S’)</th>
+<th>(R)</th>
+<th>(Q)</th>
+<th>(Q^*)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>注意这两种触发器真值表的最后两行不是一样的！另外这个电路要自己画一遍。</p>
 <h2 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h2><h3 id="电平触发"><a href="#电平触发" class="headerlink" title="电平触发"></a>电平触发</h3><h4 id="电平触发的SR触发器"><a href="#电平触发的SR触发器" class="headerlink" title="电平触发的SR触发器"></a>电平触发的SR触发器</h4><p>当触发信号CLK变成高电平后，SR锁存器才正常工作，否则SR锁存器将保持原有输出，无论S与R的输入情况如何。具有这种性质的触发器就是电平触发器。<br>这种触发器的操作效果可以这样表述：</p>
 <ol>
@@ -334,7 +396,27 @@
 <p>至于下降沿边沿触发其的特点则可以完全对称地总结下来，这里从略。<br>下面看一下边沿触发方式的判断方法：</p>
 <ol>
 <li>前非后不非-&gt;上升沿（符号不带圈）</li>
-<li>后非前不非-&gt;下降沿（符号带圈）<h3 id="脉冲触发"><a href="#脉冲触发" class="headerlink" title="脉冲触发"></a>脉冲触发</h3><h4 id="主从SR触发器（MSSR触发器）"><a href="#主从SR触发器（MSSR触发器）" class="headerlink" title="主从SR触发器（MSSR触发器）"></a>主从SR触发器（MSSR触发器）</h4></li>
+<li>后非前不非-&gt;下降沿（符号带圈）<h3 id="脉冲触发"><a href="#脉冲触发" class="headerlink" title="脉冲触发"></a>脉冲触发</h3><h4 id="主从SR触发器（MSSR触发器）"><a href="#主从SR触发器（MSSR触发器）" class="headerlink" title="主从SR触发器（MSSR触发器）"></a>主从SR触发器（MSSR触发器）</h4><img data-src="/images/DigitDesign/pic7.png" alt="MSSR触发器"><br>我们来尝试分析以下这个电路：</li>
+<li>CLK=0，CLK’=1,主触发器FF1，从触发器FF2均出于保持态。（虽然FF2的时钟信号是有效的，由于前一级的信号不会变，所以这一级的信号也不变，体现“主从”关系）</li>
+<li>CLK-&gt;1，上升沿到来时，Qm随着S和R的变化而变化，而从触发器保持原来的状态不变。</li>
+<li>CLK-&gt;0，下降沿到来时，从触发器的输出Q被置为此刻Qm的相同状态。</li>
+</ol>
+<p>简单来说就是：</p>
+<ol>
+<li>在一个时钟周期里只有CLK下降沿处（或上升沿，取决于电路结构）可能会发生输出端状态的改变。</li>
+<li>在脉冲触发中，不能仅仅根据CLK下降沿（或上升沿）到来的前一时刻的输入状态来确定输出端的状态，必须要考虑CLK=1（或0，表示边沿到来前）主触发器的变化。</li>
+</ol>
+<h4 id="JK触发器"><a href="#JK触发器" class="headerlink" title="JK触发器"></a>JK触发器</h4><p>先来看下这个令人遐想连篇（雾）的触发器的逻辑图，以及教材上对她的解读：<br><img data-src="/images/DigitDesign/pic8.png" alt="JK"><br>简单来说，JK触发器的逻辑功能就是：</p>
+<ol>
+<li>CLK下降沿（或上升沿）触发</li>
+<li>触发时，J=S，K=R</li>
+<li>唯一的区别：J=R=1时，确定次态变为当前态的反态</li>
+</ol>
+<h3 id="按逻辑功能分类的触发器"><a href="#按逻辑功能分类的触发器" class="headerlink" title="按逻辑功能分类的触发器"></a>按逻辑功能分类的触发器</h3><h4 id="触发器的逻辑表达式："><a href="#触发器的逻辑表达式：" class="headerlink" title="触发器的逻辑表达式："></a>触发器的逻辑表达式：</h4><ol>
+<li>SR触发器：<script type="math/tex; mode=display">Q^*=S'R'Q+SR'Q'+SR'Q=S+R'Q\\SR=0</script></li>
+<li>JK触发器：<script type="math/tex; mode=display">Q^*=JQ'+K'Q</script></li>
+<li>T触发器：<script type="math/tex; mode=display">Q^*=TQ'+T'Q=T异或Q</script></li>
+<li>D触发器：<script type="math/tex; mode=display">Q^*=D</script></li>
 </ol>
 
       
@@ -1447,12 +1529,12 @@ l（0→8）<l(0 \to 6)+l(6\to 8)(\text{if 6} \notin \text{the shortest way })</
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">23k</span>
+    <span title="站点总字数">24k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">42 分钟</span>
+    <span title="站点阅读时长">43 分钟</span>
 </div>
 <footer>
   <p>&copy; Invalid date Liu Yiwei. All rights reserved.</p>

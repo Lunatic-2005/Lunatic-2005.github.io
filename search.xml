@@ -59,6 +59,14 @@ AliasAddr= 0x22000000+ (A-0x20000000)\times8\times4 +4n</script><h3 id="宏定�
       </tags>
   </entry>
   <entry>
+    <title>欢迎来到Lunatic&#39;s Space</title>
+    <url>/2025/03/30/hello-world/</url>
+    <content><![CDATA[<p>欢迎来到我的博客。</p>
+<p>这是我用Hexo+Github搭建的第一个博客。我将在这里分享我的学习笔记，日常感慨和读书笔记等。</p>
+<p>本站关键词:<br>技术    理论    生活     </p>
+]]></content>
+  </entry>
+  <entry>
     <title>锁存器和触发器</title>
     <url>/2025/04/07/%E2%80%9C%E9%94%81%E5%AD%98%E5%99%A8%E5%92%8C%E8%A7%A6%E5%8F%91%E5%99%A8%E2%80%9D/</url>
     <content><![CDATA[<h2 id="锁存器"><a href="#锁存器" class="headerlink" title="锁存器"></a>锁存器</h2><h3 id="SR锁存器"><a href="#SR锁存器" class="headerlink" title="SR锁存器"></a>SR锁存器</h3><h4 id="SR锁存器的两种组成方式"><a href="#SR锁存器的两种组成方式" class="headerlink" title="SR锁存器的两种组成方式"></a>SR锁存器的两种组成方式</h4><p><img data-src="/images/DigitDesign/SR1.png" alt="或非门SR锁存器"></p>
@@ -134,7 +142,69 @@ AliasAddr= 0x22000000+ (A-0x20000000)\times8\times4 +4n</script><h3 id="宏定�
 </tbody>
 </table>
 </div>
-<p>下面是反逻辑SR锁存器的真值表<br>| S’ | R; | Q | <script type="math/tex">Q^*</script> |<br>| - | - | -   | - |<br>| 1 | 1 | 1   | 1 |<br>| 1 | 1 | 0   | 0 |<br>| 0 | 1 | 0   | 1 |<br>| 0 | 1 | 1   | 1 |<br>| 1 | 0 | 0   | 0 |<br>| 1 | 0 | 1   | 0 |<br>| 0 | 0 | 1   | 1 |<br>| 0 | 0 | 0   | 1 |</p>
+<p>下面是反逻辑SR锁存器的真值表</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>(S’)</th>
+<th>(R)</th>
+<th>(Q)</th>
+<th>(Q^*)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>注意这两种触发器真值表的最后两行不是一样的！另外这个电路要自己画一遍。</p>
 <h2 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h2><h3 id="电平触发"><a href="#电平触发" class="headerlink" title="电平触发"></a>电平触发</h3><h4 id="电平触发的SR触发器"><a href="#电平触发的SR触发器" class="headerlink" title="电平触发的SR触发器"></a>电平触发的SR触发器</h4><p>当触发信号CLK变成高电平后，SR锁存器才正常工作，否则SR锁存器将保持原有输出，无论S与R的输入情况如何。具有这种性质的触发器就是电平触发器。<br>这种触发器的操作效果可以这样表述：</p>
 <ol>
@@ -166,20 +236,32 @@ AliasAddr= 0x22000000+ (A-0x20000000)\times8\times4 +4n</script><h3 id="宏定�
 <p>至于下降沿边沿触发其的特点则可以完全对称地总结下来，这里从略。<br>下面看一下边沿触发方式的判断方法：</p>
 <ol>
 <li>前非后不非-&gt;上升沿（符号不带圈）</li>
-<li>后非前不非-&gt;下降沿（符号带圈）<h3 id="脉冲触发"><a href="#脉冲触发" class="headerlink" title="脉冲触发"></a>脉冲触发</h3><h4 id="主从SR触发器（MSSR触发器）"><a href="#主从SR触发器（MSSR触发器）" class="headerlink" title="主从SR触发器（MSSR触发器）"></a>主从SR触发器（MSSR触发器）</h4></li>
+<li>后非前不非-&gt;下降沿（符号带圈）<h3 id="脉冲触发"><a href="#脉冲触发" class="headerlink" title="脉冲触发"></a>脉冲触发</h3><h4 id="主从SR触发器（MSSR触发器）"><a href="#主从SR触发器（MSSR触发器）" class="headerlink" title="主从SR触发器（MSSR触发器）"></a>主从SR触发器（MSSR触发器）</h4><img data-src="/images/DigitDesign/pic7.png" alt="MSSR触发器"><br>我们来尝试分析以下这个电路：</li>
+<li>CLK=0，CLK’=1,主触发器FF1，从触发器FF2均出于保持态。（虽然FF2的时钟信号是有效的，由于前一级的信号不会变，所以这一级的信号也不变，体现“主从”关系）</li>
+<li>CLK-&gt;1，上升沿到来时，Qm随着S和R的变化而变化，而从触发器保持原来的状态不变。</li>
+<li>CLK-&gt;0，下降沿到来时，从触发器的输出Q被置为此刻Qm的相同状态。</li>
+</ol>
+<p>简单来说就是：</p>
+<ol>
+<li>在一个时钟周期里只有CLK下降沿处（或上升沿，取决于电路结构）可能会发生输出端状态的改变。</li>
+<li>在脉冲触发中，不能仅仅根据CLK下降沿（或上升沿）到来的前一时刻的输入状态来确定输出端的状态，必须要考虑CLK=1（或0，表示边沿到来前）主触发器的变化。</li>
+</ol>
+<h4 id="JK触发器"><a href="#JK触发器" class="headerlink" title="JK触发器"></a>JK触发器</h4><p>先来看下这个令人遐想连篇（雾）的触发器的逻辑图，以及教材上对她的解读：<br><img data-src="/images/DigitDesign/pic8.png" alt="JK"><br>简单来说，JK触发器的逻辑功能就是：</p>
+<ol>
+<li>CLK下降沿（或上升沿）触发</li>
+<li>触发时，J=S，K=R</li>
+<li>唯一的区别：J=R=1时，确定次态变为当前态的反态</li>
+</ol>
+<h3 id="按逻辑功能分类的触发器"><a href="#按逻辑功能分类的触发器" class="headerlink" title="按逻辑功能分类的触发器"></a>按逻辑功能分类的触发器</h3><h4 id="触发器的逻辑表达式："><a href="#触发器的逻辑表达式：" class="headerlink" title="触发器的逻辑表达式："></a>触发器的逻辑表达式：</h4><ol>
+<li>SR触发器：<script type="math/tex; mode=display">Q^*=S'R'Q+SR'Q'+SR'Q=S+R'Q\\SR=0</script></li>
+<li>JK触发器：<script type="math/tex; mode=display">Q^*=JQ'+K'Q</script></li>
+<li>T触发器：<script type="math/tex; mode=display">Q^*=TQ'+T'Q=T异或Q</script></li>
+<li>D触发器：<script type="math/tex; mode=display">Q^*=D</script></li>
 </ol>
 ]]></content>
       <tags>
         <tag>数字设计</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>欢迎来到Lunatic&#39;s Space</title>
-    <url>/2025/03/30/hello-world/</url>
-    <content><![CDATA[<p>欢迎来到我的博客。</p>
-<p>这是我用Hexo+Github搭建的第一个博客。我将在这里分享我的学习笔记，日常感慨和读书笔记等。</p>
-<p>本站关键词:<br>技术    理论    生活     </p>
-]]></content>
   </entry>
   <entry>
     <title>二叉搜索树</title>
@@ -271,50 +353,6 @@ l（0→8）<l(0 \to 6)+l(6\to 8)(\text{if 6} \notin \text{the shortest way })</
 <p>1）数组被分为已排序与未排序两组</p>
 <p>2）每次遍历未排序组找到最小的元素插入已排序组的最后</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> type&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">selectSort</span><span class="params">(type* items, <span class="type">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> imin = i - <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = i; j &lt; len; j++)<span class="comment">//j从i开始，在i后寻找最小的排到已经排序的前序列后一个</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (items[j] &lt; items[imin]) &#123;</span><br><span class="line">				imin = j;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (imin != i - <span class="number">1</span>)<span class="comment">//如果找到了，将最小值放置到i-1处</span></span><br><span class="line">		&#123;</span><br><span class="line">			type t = items[i - <span class="number">1</span>];</span><br><span class="line">			items[i - <span class="number">1</span>] = items[imin];</span><br><span class="line">			items[imin] = t;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
-    <title>数模模拟题的复盘</title>
-    <url>/2025/04/06/%E6%95%B0%E6%A8%A1%E6%A8%A1%E6%8B%9F%E9%A2%98%E7%9A%84%E5%A4%8D%E7%9B%98/</url>
-    <content><![CDATA[<p>我们做的问题是：第十六届华中杯<a href="assets/ProblemC.pdf">问题C</a>。这个问题在数学建模竞赛中属于十分简单的问题。我大体的思路就是：</p>
-<h3 id="问题一思路："><a href="#问题一思路：" class="headerlink" title="问题一思路："></a>问题一思路：</h3><ol>
-<li>归一化波长数据</li>
-<li>画出归一化波长-横坐标散点图</li>
-<li>得到散点图后，判断适合用何种曲线拟合</li>
-<li>采用数据点拟合并画图</li>
-<li>选择合适的插值方法，插入数据点后再次拟合</li>
-<li>比较两次拟合的结果</li>
-</ol>
-<h3 id="问题二思路："><a href="#问题二思路：" class="headerlink" title="问题二思路："></a>问题二思路：</h3><ol>
-<li>采用迭代方法求函数的离散表达式（可取x区间长0.01等）</li>
-<li>增加迭代次数，更改迭代模型（几何近似or微分）</li>
-<li>建立曲线函数表达式，分析不同情况下求得函数表达式的精确性</li>
-</ol>
-<h3 id="问题三思路："><a href="#问题三思路：" class="headerlink" title="问题三思路："></a>问题三思路：</h3><ol>
-<li>采用问题二的最佳方案，划分训练集和测试集</li>
-<li>利用训练集求出预测函数表达式，再对测试集进行预测</li>
-<li>对结果进行误差分析（残差，均方误差），分析误差产生的原因</li>
-</ol>
-<p>此后，我阅读了某优秀论文，发现其基本思想与我几乎一致。</p>
-<p>对于我们初学者想到的这种老套的既有模型，我的总结如下：</p>
-<ol>
-<li>本次第一题的结果几乎都维持在2.2附近，这说明曲线的曲率近似为定值，应想到原曲线为一个圆。这说明我们对结果的解释不够完善。在做完一件事之后，一定要回头给一个好的解释。</li>
-<li>不应该拘泥于题目文件本身，积极寻找相关领域论文，从机理方面做误差分析等实际情况的考虑。</li>
-<li>公式过程十分完善，推导很“数学”。虽然使用的都是可以用既有Matlab或Python函数求解的模型，但数模究竟是数模，必须要有完善的数学推理，这部分要把b装足了。</li>
-<li>学会变着法儿画图，但是要对每个图片的意义做好阐述。不要认为联系实际，给出合理解释的部分比较low！</li>
-<li>有时候，我们只能想到一个大致的思路，但是可以由此触发比较高级的算法，例如想到要插值，可以选用不太老套的插值方法。</li>
-<li>不要小看中学数学中学过的初等几何知识。</li>
-</ol>
-<p>定位为编程辅助建模，意味着二者我都要会！</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 原始数据</span></span><br><span class="line">test_1 = np.array([<span class="number">1529.808</span>, <span class="number">1529.807</span>, <span class="number">1529.813</span>, <span class="number">1529.812</span>, <span class="number">1529.814</span>, <span class="number">1529.809</span>])</span><br><span class="line">test_2 = np.array([<span class="number">1541.095</span>, <span class="number">1541.092</span>, <span class="number">1541.090</span>, <span class="number">1541.093</span>, <span class="number">1541.094</span>, <span class="number">1541.091</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 归一化 (标准化可选)</span></span><br><span class="line">test1 = test_1 / np.mean(test_1)</span><br><span class="line">test2 = test_2 / np.mean(test_2)</span><br><span class="line">dist = <span class="number">0.6</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成测试点位置</span></span><br><span class="line">test_points = np.array([<span class="number">1</span>*dist, <span class="number">2</span>*dist, <span class="number">3</span>*dist, <span class="number">4</span>*dist, <span class="number">5</span>*dist, <span class="number">6</span>*dist])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建 DataFrame</span></span><br><span class="line">df = pd.DataFrame(&#123;</span><br><span class="line">    <span class="string">&quot;testpoint&quot;</span>: test_points,</span><br><span class="line">    <span class="string">&quot;test1&quot;</span>: test1,</span><br><span class="line">    <span class="string">&quot;test2&quot;</span>: test2</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提取数据</span></span><br><span class="line">x = df[<span class="string">&quot;testpoint&quot;</span>].values</span><br><span class="line">y1 = df[<span class="string">&quot;test1&quot;</span>].values</span><br><span class="line">y2 = df[<span class="string">&quot;test2&quot;</span>].values</span><br><span class="line"></span><br><span class="line"><span class="comment"># 三次多项式拟合</span></span><br><span class="line">coef1_cubic = np.polyfit(x, y1, <span class="number">3</span>)</span><br><span class="line">coef2_cubic = np.polyfit(x, y2, <span class="number">3</span>)</span><br><span class="line">poly1_cubic = np.poly1d(coef1_cubic)</span><br><span class="line">poly2_cubic = np.poly1d(coef2_cubic)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成更平滑的拟合曲线</span></span><br><span class="line">x_dense = np.linspace(<span class="built_in">min</span>(x), <span class="built_in">max</span>(x), <span class="number">100</span>)</span><br><span class="line">y1_dense = poly1_cubic(x_dense)</span><br><span class="line">y2_dense = poly2_cubic(x_dense)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘图</span></span><br><span class="line">plt.figure(figsize=(<span class="number">8</span>, <span class="number">5</span>))</span><br><span class="line">plt.scatter(x, y1, color=<span class="string">&quot;blue&quot;</span>, label=<span class="string">&quot;Test1 Data&quot;</span>)</span><br><span class="line">plt.scatter(x, y2, color=<span class="string">&quot;red&quot;</span>, label=<span class="string">&quot;Test2 Data&quot;</span>)</span><br><span class="line">plt.plot(x_dense, y1_dense, linestyle=<span class="string">&quot;--&quot;</span>, color=<span class="string">&quot;blue&quot;</span>, alpha=<span class="number">0.7</span>, label=<span class="string">&quot;Cubic Fit 1 (smooth)&quot;</span>)</span><br><span class="line">plt.plot(x_dense, y2_dense, linestyle=<span class="string">&quot;--&quot;</span>, color=<span class="string">&quot;red&quot;</span>, alpha=<span class="number">0.7</span>, label=<span class="string">&quot;Cubic Fit 2 (smooth)&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.xlabel(<span class="string">&quot;Test Point Distance&quot;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&quot;Normalized Wavelength&quot;</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.title(<span class="string">&quot;Cubic Polynomial Fit (Smoothed)&quot;</span>)</span><br><span class="line">plt.grid()</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出拟合系数</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Test1 三次拟合系数:&quot;</span>, coef1_cubic)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Test2 三次拟合系数:&quot;</span>, coef2_cubic)</span><br><span class="line"></span><br><span class="line">test=[test1,test2]</span><br><span class="line"><span class="comment">#波长数据</span></span><br><span class="line">x_need=[<span class="number">0.3</span>,<span class="number">0.4</span>,<span class="number">0.5</span>,<span class="number">0.6</span>,<span class="number">0.7</span>]</span><br><span class="line">y1_predict=poly1_cubic(x_need)</span><br><span class="line">y2_predict=poly2_cubic(x_need)</span><br><span class="line">y1_predict=y1_predict*np.mean(test_1)</span><br><span class="line">y2_predict=y2_predict*np.mean(test_2)</span><br><span class="line"><span class="comment">#曲率数据</span></span><br><span class="line">lamda0=[<span class="number">1529</span>,<span class="number">1540</span>]</span><br><span class="line">c=<span class="number">4200</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">lamda2K</span>(<span class="params">y,i</span>):</span><br><span class="line">    <span class="keyword">return</span>(c*(y-lamda0[i]))/lamda0[i-<span class="number">1</span>]</span><br><span class="line">y1_predict=lamda2K(y1_predict,<span class="number">0</span>)</span><br><span class="line">y2_predict=lamda2K(y2_predict,<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_K</span>(<span class="params">x,i</span>):</span><br><span class="line">    y_predict=poly1_cubic(x)/np.mean(test[i-<span class="number">1</span>])</span><br><span class="line">    y_predict=lamda2K(y_predict,i-<span class="number">1</span>)</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(y1_predict)</span><br><span class="line"><span class="built_in">print</span>(y2_predict)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>以上为第一问代码。其输出结果也一并贴在下方。</p>
-<p><img data-src="images/mathmodel/Huazhong16C1.png" alt="第一问结果"></p>
-]]></content>
-      <categories>
-        <category>数学建模</category>
-      </categories>
-      <tags>
-        <tag>数学建模</tag>
-      </tags>
   </entry>
   <entry>
     <title>二叉树及其基本操作算法</title>
@@ -520,5 +558,49 @@ x'=\sqrt{A_1^2+A_2^2}\cos({\omega t+\phi})</script></li>
 m\frac{d^2x}{dt^2}=-kx-\gamma\frac{dx}{dt}\\\text{这是一个二阶常系数线齐次微分方程，我们讨论其解的结构：}\\\text{令}\omega^2_0=k/m,2\beta=\gamma/m,\\x''+2\beta x'+\omega_0^2x=0,\\
 \lambda^2+2\beta\lambda+\omega_0^2=0,
 \lambda_{1,2}=-\beta\pm\sqrt{\beta^2-\omega_0^2}\\1)\beta<\omega,x=A_0e^{-\beta t}cos(\sqrt{\omega_0^2-\beta^2 }\cdot t+\phi)\\2)\beta>\omega_0,x=Ae^{-(\beta+\sqrt{\beta^2-\omega_0^2})t}+Be^{-(\beta-\sqrt{\beta^2-\omega^2_0})t}\\3)\beta=\omega_0,x=e^{-\beta t}(A+Bt)</script>]]></content>
+  </entry>
+  <entry>
+    <title>数模模拟题的复盘</title>
+    <url>/2025/04/06/%E6%95%B0%E6%A8%A1%E6%A8%A1%E6%8B%9F%E9%A2%98%E7%9A%84%E5%A4%8D%E7%9B%98/</url>
+    <content><![CDATA[<p>我们做的问题是：第十六届华中杯<a href="assets/ProblemC.pdf">问题C</a>。这个问题在数学建模竞赛中属于十分简单的问题。我大体的思路就是：</p>
+<h3 id="问题一思路："><a href="#问题一思路：" class="headerlink" title="问题一思路："></a>问题一思路：</h3><ol>
+<li>归一化波长数据</li>
+<li>画出归一化波长-横坐标散点图</li>
+<li>得到散点图后，判断适合用何种曲线拟合</li>
+<li>采用数据点拟合并画图</li>
+<li>选择合适的插值方法，插入数据点后再次拟合</li>
+<li>比较两次拟合的结果</li>
+</ol>
+<h3 id="问题二思路："><a href="#问题二思路：" class="headerlink" title="问题二思路："></a>问题二思路：</h3><ol>
+<li>采用迭代方法求函数的离散表达式（可取x区间长0.01等）</li>
+<li>增加迭代次数，更改迭代模型（几何近似or微分）</li>
+<li>建立曲线函数表达式，分析不同情况下求得函数表达式的精确性</li>
+</ol>
+<h3 id="问题三思路："><a href="#问题三思路：" class="headerlink" title="问题三思路："></a>问题三思路：</h3><ol>
+<li>采用问题二的最佳方案，划分训练集和测试集</li>
+<li>利用训练集求出预测函数表达式，再对测试集进行预测</li>
+<li>对结果进行误差分析（残差，均方误差），分析误差产生的原因</li>
+</ol>
+<p>此后，我阅读了某优秀论文，发现其基本思想与我几乎一致。</p>
+<p>对于我们初学者想到的这种老套的既有模型，我的总结如下：</p>
+<ol>
+<li>本次第一题的结果几乎都维持在2.2附近，这说明曲线的曲率近似为定值，应想到原曲线为一个圆。这说明我们对结果的解释不够完善。在做完一件事之后，一定要回头给一个好的解释。</li>
+<li>不应该拘泥于题目文件本身，积极寻找相关领域论文，从机理方面做误差分析等实际情况的考虑。</li>
+<li>公式过程十分完善，推导很“数学”。虽然使用的都是可以用既有Matlab或Python函数求解的模型，但数模究竟是数模，必须要有完善的数学推理，这部分要把b装足了。</li>
+<li>学会变着法儿画图，但是要对每个图片的意义做好阐述。不要认为联系实际，给出合理解释的部分比较low！</li>
+<li>有时候，我们只能想到一个大致的思路，但是可以由此触发比较高级的算法，例如想到要插值，可以选用不太老套的插值方法。</li>
+<li>不要小看中学数学中学过的初等几何知识。</li>
+</ol>
+<p>定位为编程辅助建模，意味着二者我都要会！</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 原始数据</span></span><br><span class="line">test_1 = np.array([<span class="number">1529.808</span>, <span class="number">1529.807</span>, <span class="number">1529.813</span>, <span class="number">1529.812</span>, <span class="number">1529.814</span>, <span class="number">1529.809</span>])</span><br><span class="line">test_2 = np.array([<span class="number">1541.095</span>, <span class="number">1541.092</span>, <span class="number">1541.090</span>, <span class="number">1541.093</span>, <span class="number">1541.094</span>, <span class="number">1541.091</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 归一化 (标准化可选)</span></span><br><span class="line">test1 = test_1 / np.mean(test_1)</span><br><span class="line">test2 = test_2 / np.mean(test_2)</span><br><span class="line">dist = <span class="number">0.6</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成测试点位置</span></span><br><span class="line">test_points = np.array([<span class="number">1</span>*dist, <span class="number">2</span>*dist, <span class="number">3</span>*dist, <span class="number">4</span>*dist, <span class="number">5</span>*dist, <span class="number">6</span>*dist])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建 DataFrame</span></span><br><span class="line">df = pd.DataFrame(&#123;</span><br><span class="line">    <span class="string">&quot;testpoint&quot;</span>: test_points,</span><br><span class="line">    <span class="string">&quot;test1&quot;</span>: test1,</span><br><span class="line">    <span class="string">&quot;test2&quot;</span>: test2</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提取数据</span></span><br><span class="line">x = df[<span class="string">&quot;testpoint&quot;</span>].values</span><br><span class="line">y1 = df[<span class="string">&quot;test1&quot;</span>].values</span><br><span class="line">y2 = df[<span class="string">&quot;test2&quot;</span>].values</span><br><span class="line"></span><br><span class="line"><span class="comment"># 三次多项式拟合</span></span><br><span class="line">coef1_cubic = np.polyfit(x, y1, <span class="number">3</span>)</span><br><span class="line">coef2_cubic = np.polyfit(x, y2, <span class="number">3</span>)</span><br><span class="line">poly1_cubic = np.poly1d(coef1_cubic)</span><br><span class="line">poly2_cubic = np.poly1d(coef2_cubic)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成更平滑的拟合曲线</span></span><br><span class="line">x_dense = np.linspace(<span class="built_in">min</span>(x), <span class="built_in">max</span>(x), <span class="number">100</span>)</span><br><span class="line">y1_dense = poly1_cubic(x_dense)</span><br><span class="line">y2_dense = poly2_cubic(x_dense)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘图</span></span><br><span class="line">plt.figure(figsize=(<span class="number">8</span>, <span class="number">5</span>))</span><br><span class="line">plt.scatter(x, y1, color=<span class="string">&quot;blue&quot;</span>, label=<span class="string">&quot;Test1 Data&quot;</span>)</span><br><span class="line">plt.scatter(x, y2, color=<span class="string">&quot;red&quot;</span>, label=<span class="string">&quot;Test2 Data&quot;</span>)</span><br><span class="line">plt.plot(x_dense, y1_dense, linestyle=<span class="string">&quot;--&quot;</span>, color=<span class="string">&quot;blue&quot;</span>, alpha=<span class="number">0.7</span>, label=<span class="string">&quot;Cubic Fit 1 (smooth)&quot;</span>)</span><br><span class="line">plt.plot(x_dense, y2_dense, linestyle=<span class="string">&quot;--&quot;</span>, color=<span class="string">&quot;red&quot;</span>, alpha=<span class="number">0.7</span>, label=<span class="string">&quot;Cubic Fit 2 (smooth)&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.xlabel(<span class="string">&quot;Test Point Distance&quot;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&quot;Normalized Wavelength&quot;</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.title(<span class="string">&quot;Cubic Polynomial Fit (Smoothed)&quot;</span>)</span><br><span class="line">plt.grid()</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出拟合系数</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Test1 三次拟合系数:&quot;</span>, coef1_cubic)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Test2 三次拟合系数:&quot;</span>, coef2_cubic)</span><br><span class="line"></span><br><span class="line">test=[test1,test2]</span><br><span class="line"><span class="comment">#波长数据</span></span><br><span class="line">x_need=[<span class="number">0.3</span>,<span class="number">0.4</span>,<span class="number">0.5</span>,<span class="number">0.6</span>,<span class="number">0.7</span>]</span><br><span class="line">y1_predict=poly1_cubic(x_need)</span><br><span class="line">y2_predict=poly2_cubic(x_need)</span><br><span class="line">y1_predict=y1_predict*np.mean(test_1)</span><br><span class="line">y2_predict=y2_predict*np.mean(test_2)</span><br><span class="line"><span class="comment">#曲率数据</span></span><br><span class="line">lamda0=[<span class="number">1529</span>,<span class="number">1540</span>]</span><br><span class="line">c=<span class="number">4200</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">lamda2K</span>(<span class="params">y,i</span>):</span><br><span class="line">    <span class="keyword">return</span>(c*(y-lamda0[i]))/lamda0[i-<span class="number">1</span>]</span><br><span class="line">y1_predict=lamda2K(y1_predict,<span class="number">0</span>)</span><br><span class="line">y2_predict=lamda2K(y2_predict,<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_K</span>(<span class="params">x,i</span>):</span><br><span class="line">    y_predict=poly1_cubic(x)/np.mean(test[i-<span class="number">1</span>])</span><br><span class="line">    y_predict=lamda2K(y_predict,i-<span class="number">1</span>)</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(y1_predict)</span><br><span class="line"><span class="built_in">print</span>(y2_predict)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>以上为第一问代码。其输出结果也一并贴在下方。</p>
+<p><img data-src="images/mathmodel/Huazhong16C1.png" alt="第一问结果"></p>
+]]></content>
+      <categories>
+        <category>数学建模</category>
+      </categories>
+      <tags>
+        <tag>数学建模</tag>
+      </tags>
   </entry>
 </search>

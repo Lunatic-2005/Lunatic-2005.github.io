@@ -35,8 +35,10 @@
 <meta property="og:image" content="http://lunatic-2005.github.io/images/DigitDesign/pic4.png">
 <meta property="og:image" content="http://lunatic-2005.github.io/images/DigitDesign/pic5.png">
 <meta property="og:image" content="http://lunatic-2005.github.io/images/DigitDesign/pic6.png">
+<meta property="og:image" content="http://lunatic-2005.github.io/images/DigitDesign/pic7.png">
+<meta property="og:image" content="http://lunatic-2005.github.io/images/DigitDesign/pic8.png">
 <meta property="article:published_time" content="2025-04-07T10:04:43.000Z">
-<meta property="article:modified_time" content="2025-04-07T11:28:41.288Z">
+<meta property="article:modified_time" content="2025-04-07T11:58:26.030Z">
 <meta property="article:author" content="Liu Yiwei">
 <meta property="article:tag" content="数字设计">
 <meta name="twitter:card" content="summary">
@@ -213,7 +215,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2025-04-07 18:04:43 / 修改时间：19:28:41" itemprop="dateCreated datePublished" datetime="2025-04-07T18:04:43+08:00">2025-04-07</time>
+              <time title="创建时间：2025-04-07 18:04:43 / 修改时间：19:58:26" itemprop="dateCreated datePublished" datetime="2025-04-07T18:04:43+08:00">2025-04-07</time>
             </span>
 
           
@@ -229,14 +231,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.6k</span>
+              <span>2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -321,7 +323,69 @@
 </tbody>
 </table>
 </div>
-<p>下面是反逻辑SR锁存器的真值表<br>| S’ | R; | Q | <script type="math/tex">Q^*</script> |<br>| - | - | -   | - |<br>| 1 | 1 | 1   | 1 |<br>| 1 | 1 | 0   | 0 |<br>| 0 | 1 | 0   | 1 |<br>| 0 | 1 | 1   | 1 |<br>| 1 | 0 | 0   | 0 |<br>| 1 | 0 | 1   | 0 |<br>| 0 | 0 | 1   | 1 |<br>| 0 | 0 | 0   | 1 |</p>
+<p>下面是反逻辑SR锁存器的真值表</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>(S’)</th>
+<th>(R)</th>
+<th>(Q)</th>
+<th>(Q^*)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>注意这两种触发器真值表的最后两行不是一样的！另外这个电路要自己画一遍。</p>
 <h2 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h2><h3 id="电平触发"><a href="#电平触发" class="headerlink" title="电平触发"></a>电平触发</h3><h4 id="电平触发的SR触发器"><a href="#电平触发的SR触发器" class="headerlink" title="电平触发的SR触发器"></a>电平触发的SR触发器</h4><p>当触发信号CLK变成高电平后，SR锁存器才正常工作，否则SR锁存器将保持原有输出，无论S与R的输入情况如何。具有这种性质的触发器就是电平触发器。<br>这种触发器的操作效果可以这样表述：</p>
 <ol>
@@ -353,7 +417,27 @@
 <p>至于下降沿边沿触发其的特点则可以完全对称地总结下来，这里从略。<br>下面看一下边沿触发方式的判断方法：</p>
 <ol>
 <li>前非后不非-&gt;上升沿（符号不带圈）</li>
-<li>后非前不非-&gt;下降沿（符号带圈）<h3 id="脉冲触发"><a href="#脉冲触发" class="headerlink" title="脉冲触发"></a>脉冲触发</h3><h4 id="主从SR触发器（MSSR触发器）"><a href="#主从SR触发器（MSSR触发器）" class="headerlink" title="主从SR触发器（MSSR触发器）"></a>主从SR触发器（MSSR触发器）</h4></li>
+<li>后非前不非-&gt;下降沿（符号带圈）<h3 id="脉冲触发"><a href="#脉冲触发" class="headerlink" title="脉冲触发"></a>脉冲触发</h3><h4 id="主从SR触发器（MSSR触发器）"><a href="#主从SR触发器（MSSR触发器）" class="headerlink" title="主从SR触发器（MSSR触发器）"></a>主从SR触发器（MSSR触发器）</h4><img data-src="/images/DigitDesign/pic7.png" alt="MSSR触发器"><br>我们来尝试分析以下这个电路：</li>
+<li>CLK=0，CLK’=1,主触发器FF1，从触发器FF2均出于保持态。（虽然FF2的时钟信号是有效的，由于前一级的信号不会变，所以这一级的信号也不变，体现“主从”关系）</li>
+<li>CLK-&gt;1，上升沿到来时，Qm随着S和R的变化而变化，而从触发器保持原来的状态不变。</li>
+<li>CLK-&gt;0，下降沿到来时，从触发器的输出Q被置为此刻Qm的相同状态。</li>
+</ol>
+<p>简单来说就是：</p>
+<ol>
+<li>在一个时钟周期里只有CLK下降沿处（或上升沿，取决于电路结构）可能会发生输出端状态的改变。</li>
+<li>在脉冲触发中，不能仅仅根据CLK下降沿（或上升沿）到来的前一时刻的输入状态来确定输出端的状态，必须要考虑CLK=1（或0，表示边沿到来前）主触发器的变化。</li>
+</ol>
+<h4 id="JK触发器"><a href="#JK触发器" class="headerlink" title="JK触发器"></a>JK触发器</h4><p>先来看下这个令人遐想连篇（雾）的触发器的逻辑图，以及教材上对她的解读：<br><img data-src="/images/DigitDesign/pic8.png" alt="JK"><br>简单来说，JK触发器的逻辑功能就是：</p>
+<ol>
+<li>CLK下降沿（或上升沿）触发</li>
+<li>触发时，J=S，K=R</li>
+<li>唯一的区别：J=R=1时，确定次态变为当前态的反态</li>
+</ol>
+<h3 id="按逻辑功能分类的触发器"><a href="#按逻辑功能分类的触发器" class="headerlink" title="按逻辑功能分类的触发器"></a>按逻辑功能分类的触发器</h3><h4 id="触发器的逻辑表达式："><a href="#触发器的逻辑表达式：" class="headerlink" title="触发器的逻辑表达式："></a>触发器的逻辑表达式：</h4><ol>
+<li>SR触发器：<script type="math/tex; mode=display">Q^*=S'R'Q+SR'Q'+SR'Q=S+R'Q\\SR=0</script></li>
+<li>JK触发器：<script type="math/tex; mode=display">Q^*=JQ'+K'Q</script></li>
+<li>T触发器：<script type="math/tex; mode=display">Q^*=TQ'+T'Q=T异或Q</script></li>
+<li>D触发器：<script type="math/tex; mode=display">Q^*=D</script></li>
 </ol>
 
     </div>
@@ -436,7 +520,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%81%E5%AD%98%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">锁存器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SR%E9%94%81%E5%AD%98%E5%99%A8"><span class="nav-number">1.1.</span> <span class="nav-text">SR锁存器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SR%E9%94%81%E5%AD%98%E5%99%A8%E7%9A%84%E4%B8%A4%E7%A7%8D%E7%BB%84%E6%88%90%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.1.</span> <span class="nav-text">SR锁存器的两种组成方式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">触发器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E5%B9%B3%E8%A7%A6%E5%8F%91"><span class="nav-number">2.1.</span> <span class="nav-text">电平触发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E5%B9%B3%E8%A7%A6%E5%8F%91%E7%9A%84SR%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-number">2.1.1.</span> <span class="nav-text">电平触发的SR触发器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E5%B9%B3%E8%A7%A6%E5%8F%91%E7%9A%84D%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-number">2.1.2.</span> <span class="nav-text">电平触发的D触发器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%B9%E6%B2%BF%E8%A7%A6%E5%8F%91"><span class="nav-number">2.2.</span> <span class="nav-text">边沿触发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%84%89%E5%86%B2%E8%A7%A6%E5%8F%91"><span class="nav-number">2.3.</span> <span class="nav-text">脉冲触发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BB%E4%BB%8ESR%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%88MSSR%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89"><span class="nav-number">2.3.1.</span> <span class="nav-text">主从SR触发器（MSSR触发器）</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%81%E5%AD%98%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">锁存器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SR%E9%94%81%E5%AD%98%E5%99%A8"><span class="nav-number">1.1.</span> <span class="nav-text">SR锁存器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SR%E9%94%81%E5%AD%98%E5%99%A8%E7%9A%84%E4%B8%A4%E7%A7%8D%E7%BB%84%E6%88%90%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.1.</span> <span class="nav-text">SR锁存器的两种组成方式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">触发器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E5%B9%B3%E8%A7%A6%E5%8F%91"><span class="nav-number">2.1.</span> <span class="nav-text">电平触发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E5%B9%B3%E8%A7%A6%E5%8F%91%E7%9A%84SR%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-number">2.1.1.</span> <span class="nav-text">电平触发的SR触发器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E5%B9%B3%E8%A7%A6%E5%8F%91%E7%9A%84D%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-number">2.1.2.</span> <span class="nav-text">电平触发的D触发器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%B9%E6%B2%BF%E8%A7%A6%E5%8F%91"><span class="nav-number">2.2.</span> <span class="nav-text">边沿触发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%84%89%E5%86%B2%E8%A7%A6%E5%8F%91"><span class="nav-number">2.3.</span> <span class="nav-text">脉冲触发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BB%E4%BB%8ESR%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%88MSSR%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89"><span class="nav-number">2.3.1.</span> <span class="nav-text">主从SR触发器（MSSR触发器）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JK%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-number">2.3.2.</span> <span class="nav-text">JK触发器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E9%80%BB%E8%BE%91%E5%8A%9F%E8%83%BD%E5%88%86%E7%B1%BB%E7%9A%84%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-number">2.4.</span> <span class="nav-text">按逻辑功能分类的触发器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A6%E5%8F%91%E5%99%A8%E7%9A%84%E9%80%BB%E8%BE%91%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%9A"><span class="nav-number">2.4.1.</span> <span class="nav-text">触发器的逻辑表达式：</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -521,12 +605,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">23k</span>
+    <span title="站点总字数">24k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">42 分钟</span>
+    <span title="站点阅读时长">43 分钟</span>
 </div>
 <footer>
   <p>&copy; Invalid date Liu Yiwei. All rights reserved.</p>
