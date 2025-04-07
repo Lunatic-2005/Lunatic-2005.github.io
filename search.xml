@@ -59,14 +59,6 @@ AliasAddr= 0x22000000+ (A-0x20000000)\times8\times4 +4n</script><h3 id="宏定�
       </tags>
   </entry>
   <entry>
-    <title>欢迎来到Lunatic&#39;s Space</title>
-    <url>/2025/03/30/hello-world/</url>
-    <content><![CDATA[<p>欢迎来到我的博客。</p>
-<p>这是我用Hexo+Github搭建的第一个博客。我将在这里分享我的学习笔记，日常感慨和读书笔记等。</p>
-<p>本站关键词:<br>技术    理论    生活     </p>
-]]></content>
-  </entry>
-  <entry>
     <title>锁存器和触发器</title>
     <url>/2025/04/07/%E2%80%9C%E9%94%81%E5%AD%98%E5%99%A8%E5%92%8C%E8%A7%A6%E5%8F%91%E5%99%A8%E2%80%9D/</url>
     <content><![CDATA[<h2 id="锁存器"><a href="#锁存器" class="headerlink" title="锁存器"></a>锁存器</h2><h3 id="SR锁存器"><a href="#SR锁存器" class="headerlink" title="SR锁存器"></a>SR锁存器</h3><h4 id="SR锁存器的两种组成方式"><a href="#SR锁存器的两种组成方式" class="headerlink" title="SR锁存器的两种组成方式"></a>SR锁存器的两种组成方式</h4><p><img data-src="/images/DigitDesign/SR(1" alt="或非门SR锁存器">.png)</p>
@@ -180,6 +172,14 @@ AliasAddr= 0x22000000+ (A-0x20000000)\times8\times4 +4n</script><h3 id="宏定�
       <tags>
         <tag>数字设计</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>欢迎来到Lunatic&#39;s Space</title>
+    <url>/2025/03/30/hello-world/</url>
+    <content><![CDATA[<p>欢迎来到我的博客。</p>
+<p>这是我用Hexo+Github搭建的第一个博客。我将在这里分享我的学习笔记，日常感慨和读书笔记等。</p>
+<p>本站关键词:<br>技术    理论    生活     </p>
+]]></content>
   </entry>
   <entry>
     <title>二叉搜索树</title>
