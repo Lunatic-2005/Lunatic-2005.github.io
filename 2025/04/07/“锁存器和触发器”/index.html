@@ -22,19 +22,27 @@
     var CONFIG = {"hostname":"lunatic-2005.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="算法（2）排序算法1、插入排序 1.1 直接插入排序： 直接插入排序的基本思想： 1）将整个数组分为“已排序”和“未排序”的两部分，设已排序m，总长度n 2）从未排序部分选取第一个元素 3）遍历已排序的数组，查找需要插入的位置下标i 4）保护待排序数据，将下标大于i，小于m的所有元素右移一位 5）插入，进入下一轮循环 1234567891011121314void InsertSort(type*">
+  <meta name="description" content="锁存器SR锁存器SR锁存器的两种组成方式.png) .png) 无论是哪一种SR锁存器，其底层逻辑都是一致的，可以用以下几句话概括：  或非门SR锁存器是正逻辑，与非门SR锁存器是反逻辑。 当S&#x3D;R&#x3D;0时，锁存器输出保持上一个时刻的输出。（对于反逻辑而言。即S’&#x3D;R’&#x3D;1） 当S&#x3D;1，R&#x3D;0时，进入Set模式，输出端置1。 当S&#x3D;0，R&#x3D;1时，进入Reset模式，输出端置0。 当S&#x3D;R&#x3D;1时，分以">
 <meta property="og:type" content="article">
-<meta property="og:title" content="排序算法">
-<meta property="og:url" content="http://lunatic-2005.github.io/2025/03/31/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:title" content="锁存器和触发器">
+<meta property="og:url" content="http://lunatic-2005.github.io/2025/04/07/%E2%80%9C%E9%94%81%E5%AD%98%E5%99%A8%E5%92%8C%E8%A7%A6%E5%8F%91%E5%99%A8%E2%80%9D/index.html">
 <meta property="og:site_name" content="Lunatic&#39;s Space">
-<meta property="og:description" content="算法（2）排序算法1、插入排序 1.1 直接插入排序： 直接插入排序的基本思想： 1）将整个数组分为“已排序”和“未排序”的两部分，设已排序m，总长度n 2）从未排序部分选取第一个元素 3）遍历已排序的数组，查找需要插入的位置下标i 4）保护待排序数据，将下标大于i，小于m的所有元素右移一位 5）插入，进入下一轮循环 1234567891011121314void InsertSort(type*">
+<meta property="og:description" content="锁存器SR锁存器SR锁存器的两种组成方式.png) .png) 无论是哪一种SR锁存器，其底层逻辑都是一致的，可以用以下几句话概括：  或非门SR锁存器是正逻辑，与非门SR锁存器是反逻辑。 当S&#x3D;R&#x3D;0时，锁存器输出保持上一个时刻的输出。（对于反逻辑而言。即S’&#x3D;R’&#x3D;1） 当S&#x3D;1，R&#x3D;0时，进入Set模式，输出端置1。 当S&#x3D;0，R&#x3D;1时，进入Reset模式，输出端置0。 当S&#x3D;R&#x3D;1时，分以">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-03-31T12:49:40.000Z">
-<meta property="article:modified_time" content="2025-03-31T14:23:24.378Z">
+<meta property="og:image" content="http://lunatic-2005.github.io/images/DigitDesign/SR(1">
+<meta property="og:image" content="http://lunatic-2005.github.io/images/DigitDesign/SR(2">
+<meta property="og:image" content="http://lunatic-2005.github.io/images/DigitDesign/pic(3">
+<meta property="og:image" content="http://lunatic-2005.github.io/images/DigitDesign/pic(4">
+<meta property="og:image" content="http://lunatic-2005.github.io/images/DigitDesign/pic(5">
+<meta property="og:image" content="http://lunatic-2005.github.io/images/DigitDesign/pic(6">
+<meta property="article:published_time" content="2025-04-07T10:04:43.000Z">
+<meta property="article:modified_time" content="2025-04-07T11:14:11.529Z">
 <meta property="article:author" content="Liu Yiwei">
+<meta property="article:tag" content="数字设计">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://lunatic-2005.github.io/images/DigitDesign/SR(1">
 
-<link rel="canonical" href="http://lunatic-2005.github.io/2025/03/31/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">
+<link rel="canonical" href="http://lunatic-2005.github.io/2025/04/07/%E2%80%9C%E9%94%81%E5%AD%98%E5%99%A8%E5%92%8C%E8%A7%A6%E5%8F%91%E5%99%A8%E2%80%9D/">
 
 
 <script id="page-configurations">
@@ -47,7 +55,7 @@
   };
 </script>
 
-  <title>排序算法 | Lunatic's Space</title>
+  <title>锁存器和触发器 | Lunatic's Space</title>
   
 
 
@@ -181,7 +189,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://lunatic-2005.github.io/2025/03/31/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="http://lunatic-2005.github.io/2025/04/07/%E2%80%9C%E9%94%81%E5%AD%98%E5%99%A8%E5%92%8C%E8%A7%A6%E5%8F%91%E5%99%A8%E2%80%9D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.png">
@@ -194,7 +202,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          排序算法
+          锁存器和触发器
         </h1>
 
         <div class="post-meta">
@@ -205,7 +213,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2025-03-31 20:49:40 / 修改时间：22:23:24" itemprop="dateCreated datePublished" datetime="2025-03-31T20:49:40+08:00">2025-03-31</time>
+              <time title="创建时间：2025-04-07 18:04:43 / 修改时间：19:14:11" itemprop="dateCreated datePublished" datetime="2025-04-07T18:04:43+08:00">2025-04-07</time>
             </span>
 
           
@@ -221,14 +229,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.9k</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -240,35 +248,114 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="算法（2）排序算法"><a href="#算法（2）排序算法" class="headerlink" title="算法（2）排序算法"></a>算法（2）排序算法</h1><p>1、插入排序</p>
-<p>1.1 直接插入排序：</p>
-<p>直接插入排序的基本思想：</p>
-<p>1）将整个数组分为“已排序”和“未排序”的两部分，设已排序m，总长度n</p>
-<p>2）从未排序部分选取第一个元素</p>
-<p>3）遍历已排序的数组，查找需要插入的位置下标i</p>
-<p>4）保护待排序数据，将下标大于i，小于m的所有元素右移一位</p>
-<p>5）插入，进入下一轮循环</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">InsertSort</span><span class="params">(type* arr, <span class="type">int</span> num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> m = <span class="number">1</span>; m &lt; num; m++)<span class="comment">//外层for循环，用于记录已经排序好的长度m</span></span><br><span class="line">	&#123;</span><br><span class="line">		type tmp = arr[m];</span><br><span class="line">		<span class="type">int</span> i = m - <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span> ( i = m - <span class="number">1</span>; i &gt;= <span class="number">0</span>&amp;&amp;arr[i]&gt;tmp; i--)<span class="comment">//内层for循环，用于遍历已排序的数组</span></span><br><span class="line">		&#123;</span><br><span class="line">			arr[i + <span class="number">1</span>] = arr[i];</span><br><span class="line">		&#125;</span><br><span class="line">		arr[i<span class="number">+1</span>] = tmp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>算法的性能分析：</p>
-<p>时间复杂度：O（n^2）</p>
-<p>（平均情况下向长度为m的序列中插入一个数据的平均移动速度是m/2，m从1累加到n-1）</p>
-<p>空间复杂度：O（1）</p>
-<p>稳定性：稳定</p>
-<p>2、交换排序</p>
-<p>2.1 快速排序</p>
-<p>1）递归调用自身</p>
-<p>2）每次将数组以“主元”为界分为较大组和较小组，再对两组分别进行快速排序</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span> <span class="comment">// 用于 std::swap</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">Partition</span><span class="params">(<span class="type">int</span>* arr, <span class="type">int</span> num, <span class="type">int</span> nLower, <span class="type">int</span> nUpper)</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> pivot = arr[nLower]; <span class="comment">// 选取第一个元素作为主元进行切割</span></span><br><span class="line">	<span class="type">int</span> nLeft = nLower + <span class="number">1</span>;</span><br><span class="line">	<span class="type">int</span> nRight = nUpper; <span class="comment">// 确定本次分割的范围</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">		<span class="keyword">while</span> (nLeft &lt;= nRight &amp;&amp; arr[nLeft] &lt;= pivot) nLeft++; <span class="comment">// 查找左侧第一个大于 pivot 的元素对应的下标</span></span><br><span class="line">		<span class="keyword">while</span> (nRight &gt;= nLeft &amp;&amp; arr[nRight] &gt;= pivot) nRight--; <span class="comment">// 查找右侧第一个小于 pivot 的元素对应的下标</span></span><br><span class="line">		<span class="keyword">if</span> (nLeft &gt; nRight) <span class="keyword">break</span>; <span class="comment">// 循环退出条件</span></span><br><span class="line">		<span class="keyword">if</span> (nLeft &lt; nRight) &#123; <span class="comment">// 如果左标小于右标，交换找到的两个下标对应的数的位置</span></span><br><span class="line">			std::<span class="built_in">swap</span>(arr[nLeft], arr[nRight]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	std::<span class="built_in">swap</span>(arr[nLower], arr[nRight]); <span class="comment">// 将主元放到正确的位置</span></span><br><span class="line">	<span class="keyword">return</span> nRight; <span class="comment">// 返回主元的最终位置</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">QuickSort</span><span class="params">(<span class="type">int</span>* arr, <span class="type">int</span> num, <span class="type">int</span> nLower = <span class="number">0</span>, <span class="type">int</span> nUpper = <span class="number">-1</span>)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (nUpper == <span class="number">-1</span>) nUpper = num - <span class="number">1</span>; <span class="comment">// 缺省参数的情况，nUpper 应该是 num - 1</span></span><br><span class="line">	<span class="keyword">if</span> (nLower &lt; nUpper) &#123;</span><br><span class="line">		<span class="type">int</span> nSplit = <span class="built_in">Partition</span>(arr, num, nLower, nUpper); <span class="comment">// 划分数组</span></span><br><span class="line">		<span class="built_in">QuickSort</span>(arr, num, nLower, nSplit - <span class="number">1</span>); <span class="comment">// 递归排序左侧子数组</span></span><br><span class="line">		<span class="built_in">QuickSort</span>(arr, num, nSplit + <span class="number">1</span>, nUpper); <span class="comment">// 递归排序右侧子数组</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>算法性能分析：</p>
-<p>快速排序在n较大时时间复杂度O（nlogn）</p>
-<p>在n较小时或主元选择不合理时，时间复杂度为O（n^2）</p>
-<p>空间复杂度O（logn）</p>
-<p>快速排序是不稳定的</p>
-<p>3、选择排序</p>
-<p>3.1直接选择排序</p>
-<p>1）数组被分为已排序与未排序两组</p>
-<p>2）每次遍历未排序组找到最小的元素插入已排序组的最后</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> type&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">selectSort</span><span class="params">(type* items, <span class="type">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> imin = i - <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = i; j &lt; len; j++)<span class="comment">//j从i开始，在i后寻找最小的排到已经排序的前序列后一个</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (items[j] &lt; items[imin]) &#123;</span><br><span class="line">				imin = j;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (imin != i - <span class="number">1</span>)<span class="comment">//如果找到了，将最小值放置到i-1处</span></span><br><span class="line">		&#123;</span><br><span class="line">			type t = items[i - <span class="number">1</span>];</span><br><span class="line">			items[i - <span class="number">1</span>] = items[imin];</span><br><span class="line">			items[imin] = t;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="锁存器"><a href="#锁存器" class="headerlink" title="锁存器"></a>锁存器</h2><h3 id="SR锁存器"><a href="#SR锁存器" class="headerlink" title="SR锁存器"></a>SR锁存器</h3><h4 id="SR锁存器的两种组成方式"><a href="#SR锁存器的两种组成方式" class="headerlink" title="SR锁存器的两种组成方式"></a>SR锁存器的两种组成方式</h4><p><img data-src="/images/DigitDesign/SR(1" alt="或非门SR锁存器">.png)</p>
+<p><img data-src="/images/DigitDesign/SR(2" alt="与非门SR锁存器">.png)</p>
+<p>无论是哪一种SR锁存器，其底层逻辑都是一致的，可以用以下几句话概括：</p>
+<ol>
+<li>或非门SR锁存器是正逻辑，与非门SR锁存器是反逻辑。</li>
+<li>当S=R=0时，锁存器输出保持上一个时刻的输出。（对于反逻辑而言。即S’=R’=1）</li>
+<li>当S=1，R=0时，进入Set模式，输出端置1。</li>
+<li>当S=0，R=1时，进入Reset模式，输出端置0。</li>
+<li>当S=R=1时，分以下两种情况：<br>a. 对于正逻辑锁存器，均输出0<br>b. 对于反逻辑锁存器，均输出1<br>这种情况下，当S，D的信号同时变为0后状态不定。</li>
+</ol>
+<p>由此可知，对于正常的情况，我们应当保证S·R=0的约束条件。但是要注意理解，当情况5中下一时刻S与R错开变化，我们其实是可以预测下一时刻电路的输出状态的。<br>下面是正逻辑SR锁存器的真值表</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>S</th>
+<th>R</th>
+<th>Q</th>
+<th><script type="math/tex">Q^*</script></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>下面是反逻辑SR锁存器的真值表<br>| S’ | R; | Q | <script type="math/tex">Q^*</script> |<br>| - | - | -   | - |<br>| 1 | 1 | 1   | 1 |<br>| 1 | 1 | 0   | 0 |<br>| 0 | 1 | 0   | 1 |<br>| 0 | 1 | 1   | 1 |<br>| 1 | 0 | 0   | 0 |<br>| 1 | 0 | 1   | 0 |<br>| 0 | 0 | 1   | 1 |<br>| 0 | 0 | 0   | 1 |</p>
+<p>注意这两种触发器真值表的最后两行不是一样的！另外这个电路要自己画一遍。</p>
+<h2 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h2><h3 id="电平触发"><a href="#电平触发" class="headerlink" title="电平触发"></a>电平触发</h3><h4 id="电平触发的SR触发器"><a href="#电平触发的SR触发器" class="headerlink" title="电平触发的SR触发器"></a>电平触发的SR触发器</h4><p>当触发信号CLK变成高电平后，SR锁存器才正常工作，否则SR锁存器将保持原有输出，无论S与R的输入情况如何。具有这种性质的触发器就是电平触发器。<br>这种触发器的操作效果可以这样表述：</p>
+<ol>
+<li>CLK=0，电路保持原状态输出</li>
+<li>CLK=1，电路变成SR锁存器电路。<br>电平触发的触发器有这样的作用特点：</li>
+<li>只有当CLK有效的时候才需要看输入情况.</li>
+<li>在CLK=1的全部时间里，SR的状态都会引起输出变化；CLK回到0后，触发器保存着前一瞬间的状态。<br>下面介绍带异步置位复位端口的电平触发SR触发器。<br>他的思路也很简单：在原有的电平触发SR触发器的基础上，添加两个优先级更高的信号S’,R’，若这两个信号有效，只要相应地将其置为1或0即可；当这两个信号无效，则进入一般的电平触发SR触发器<br>下面给出SR触发器的逻辑图：<br><img data-src="/images/DigitDesign/pic(3" alt="同步SR触发器">.png)<br><img data-src="/images/DigitDesign/pic(4" alt="异步SR触发器">.png)<br>在CLK=1时，同步SR触发器的真值表与一般SR触发器完全相同；在CLK=0时，电路出于保持状态。<br>相关真值表此处从略</li>
+</ol>
+<h4 id="电平触发的D触发器"><a href="#电平触发的D触发器" class="headerlink" title="电平触发的D触发器"></a>电平触发的D触发器</h4><p>D触发器的发明是为了先天地去除可能使得SR触发器中S=R=1的情况的一种设计，它其实就是把<br>将SR触发器中的输入端利用同一个信号D及其反信号作为输入信号D’作为S和R端输出，得到的就是电平触发的D触发器。<br>其逻辑图如下：<br><img data-src="/images/DigitDesign/pic(5" alt="电平触发的D触发器">.png)<br>由此可见，这样的方式先天避免了S=R=1的可能性，但是也使得S=R=0变得不可能。为了使电路保持功能完整，我们规定：<br>CLK定好为低电平时，为D型锁存器的保持态。</p>
+<h3 id="边沿触发"><a href="#边沿触发" class="headerlink" title="边沿触发"></a>边沿触发</h3><p>我们直接来看一个例子：<br><img data-src="/images/DigitDesign/pic(6" alt="上升沿边沿触发器">.png)<br>分析以下CLK从0-&gt;1(上升沿)的电路变化：<br>CLK=0时：</p>
+<ol>
+<li>CLK=0，CLK1=1，CLK2=0</li>
+<li>FF1有效，FF2无效</li>
+<li><strong>Q1随着输入信号D同步变化，即Q1=D</strong></li>
+<li>Q=Q2<strong>不变</strong>（注意，此前我一直以为这是会变化的！）</li>
+</ol>
+<p>CLK=1时：</p>
+<ol>
+<li>CLK=1，CLK1=0，CLK2=1</li>
+<li>FF2有效，FF1无效</li>
+<li><strong>Q1=D不再变化</strong></li>
+<li><strong>Q2=Q1=D</strong></li>
+</ol>
+<p>由此我们可以知道，这种上升沿边沿触发器有以下特点：</p>
+<ol>
+<li>触发器的次态输出仅仅取决于上升沿到达前瞬间输入的逻辑状态，在<strong>一个时钟周期内上升沿到来前后，输入信号的变化对触发器的次态没有影响</strong></li>
+<li>从结果上看，以上升沿边沿触发器为例，输出信号只有在CLK信号上升沿到来处才<strong>有可能</strong>发生变化（分析波形图的时候可以直接判断这些关键节点）</li>
+</ol>
+<p>至于下降沿边沿触发其的特点则可以完全对称地总结下来，这里从略。<br>下面看一下边沿触发方式的判断方法：</p>
+<ol>
+<li>前非后不非-&gt;上升沿（符号不带圈）</li>
+<li>后非前不非-&gt;下降沿（符号带圈）<h3 id="脉冲触发"><a href="#脉冲触发" class="headerlink" title="脉冲触发"></a>脉冲触发</h3><h4 id="主从SR触发器（MSSR触发器）"><a href="#主从SR触发器（MSSR触发器）" class="headerlink" title="主从SR触发器（MSSR触发器）"></a>主从SR触发器（MSSR触发器）</h4></li>
+</ol>
+
     </div>
 
     
@@ -276,6 +363,9 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E5%AD%97%E8%AE%BE%E8%AE%A1/" rel="tag"># 数字设计</a>
+          </div>
 
         
 
@@ -283,13 +373,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/03/30/hello-world/" rel="prev" title="欢迎来到Lunatic's Space">
-      <i class="fa fa-chevron-left"></i> 欢迎来到Lunatic's Space
+    <a href="/2025/04/06/%E6%95%B0%E6%A8%A1%E6%A8%A1%E6%8B%9F%E9%A2%98%E7%9A%84%E5%A4%8D%E7%9B%98/" rel="prev" title="数模模拟题的复盘">
+      <i class="fa fa-chevron-left"></i> 数模模拟题的复盘
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2025/04/02/%E5%9B%BE%E8%AE%BA%E6%A8%A1%E5%9E%8B%EF%BC%9A%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E7%AE%97%E6%B3%95/" rel="next" title="图论模型：最小路径算法">
-      图论模型：最小路径算法 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -349,7 +436,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%EF%BC%882%EF%BC%89%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">算法（2）排序算法</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%81%E5%AD%98%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">锁存器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SR%E9%94%81%E5%AD%98%E5%99%A8"><span class="nav-number">1.1.</span> <span class="nav-text">SR锁存器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SR%E9%94%81%E5%AD%98%E5%99%A8%E7%9A%84%E4%B8%A4%E7%A7%8D%E7%BB%84%E6%88%90%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.1.</span> <span class="nav-text">SR锁存器的两种组成方式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">触发器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E5%B9%B3%E8%A7%A6%E5%8F%91"><span class="nav-number">2.1.</span> <span class="nav-text">电平触发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E5%B9%B3%E8%A7%A6%E5%8F%91%E7%9A%84SR%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-number">2.1.1.</span> <span class="nav-text">电平触发的SR触发器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E5%B9%B3%E8%A7%A6%E5%8F%91%E7%9A%84D%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-number">2.1.2.</span> <span class="nav-text">电平触发的D触发器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%B9%E6%B2%BF%E8%A7%A6%E5%8F%91"><span class="nav-number">2.2.</span> <span class="nav-text">边沿触发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%84%89%E5%86%B2%E8%A7%A6%E5%8F%91"><span class="nav-number">2.3.</span> <span class="nav-text">脉冲触发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BB%E4%BB%8ESR%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%88MSSR%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89"><span class="nav-number">2.3.1.</span> <span class="nav-text">主从SR触发器（MSSR触发器）</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

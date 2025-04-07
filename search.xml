@@ -67,6 +67,126 @@ AliasAddr= 0x22000000+ (A-0x20000000)\times8\times4 +4n</script><h3 id="宏定�
 ]]></content>
   </entry>
   <entry>
+    <title>锁存器和触发器</title>
+    <url>/2025/04/07/%E2%80%9C%E9%94%81%E5%AD%98%E5%99%A8%E5%92%8C%E8%A7%A6%E5%8F%91%E5%99%A8%E2%80%9D/</url>
+    <content><![CDATA[<h2 id="锁存器"><a href="#锁存器" class="headerlink" title="锁存器"></a>锁存器</h2><h3 id="SR锁存器"><a href="#SR锁存器" class="headerlink" title="SR锁存器"></a>SR锁存器</h3><h4 id="SR锁存器的两种组成方式"><a href="#SR锁存器的两种组成方式" class="headerlink" title="SR锁存器的两种组成方式"></a>SR锁存器的两种组成方式</h4><p><img data-src="/images/DigitDesign/SR(1" alt="或非门SR锁存器">.png)</p>
+<p><img data-src="/images/DigitDesign/SR(2" alt="与非门SR锁存器">.png)</p>
+<p>无论是哪一种SR锁存器，其底层逻辑都是一致的，可以用以下几句话概括：</p>
+<ol>
+<li>或非门SR锁存器是正逻辑，与非门SR锁存器是反逻辑。</li>
+<li>当S=R=0时，锁存器输出保持上一个时刻的输出。（对于反逻辑而言。即S’=R’=1）</li>
+<li>当S=1，R=0时，进入Set模式，输出端置1。</li>
+<li>当S=0，R=1时，进入Reset模式，输出端置0。</li>
+<li>当S=R=1时，分以下两种情况：<br>a. 对于正逻辑锁存器，均输出0<br>b. 对于反逻辑锁存器，均输出1<br>这种情况下，当S，D的信号同时变为0后状态不定。</li>
+</ol>
+<p>由此可知，对于正常的情况，我们应当保证S·R=0的约束条件。但是要注意理解，当情况5中下一时刻S与R错开变化，我们其实是可以预测下一时刻电路的输出状态的。<br>下面是正逻辑SR锁存器的真值表</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>S</th>
+<th>R</th>
+<th>Q</th>
+<th><script type="math/tex">Q^*</script></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>下面是反逻辑SR锁存器的真值表<br>| S’ | R; | Q | <script type="math/tex">Q^*</script> |<br>| - | - | -   | - |<br>| 1 | 1 | 1   | 1 |<br>| 1 | 1 | 0   | 0 |<br>| 0 | 1 | 0   | 1 |<br>| 0 | 1 | 1   | 1 |<br>| 1 | 0 | 0   | 0 |<br>| 1 | 0 | 1   | 0 |<br>| 0 | 0 | 1   | 1 |<br>| 0 | 0 | 0   | 1 |</p>
+<p>注意这两种触发器真值表的最后两行不是一样的！另外这个电路要自己画一遍。</p>
+<h2 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h2><h3 id="电平触发"><a href="#电平触发" class="headerlink" title="电平触发"></a>电平触发</h3><h4 id="电平触发的SR触发器"><a href="#电平触发的SR触发器" class="headerlink" title="电平触发的SR触发器"></a>电平触发的SR触发器</h4><p>当触发信号CLK变成高电平后，SR锁存器才正常工作，否则SR锁存器将保持原有输出，无论S与R的输入情况如何。具有这种性质的触发器就是电平触发器。<br>这种触发器的操作效果可以这样表述：</p>
+<ol>
+<li>CLK=0，电路保持原状态输出</li>
+<li>CLK=1，电路变成SR锁存器电路。<br>电平触发的触发器有这样的作用特点：</li>
+<li>只有当CLK有效的时候才需要看输入情况.</li>
+<li>在CLK=1的全部时间里，SR的状态都会引起输出变化；CLK回到0后，触发器保存着前一瞬间的状态。<br>下面介绍带异步置位复位端口的电平触发SR触发器。<br>他的思路也很简单：在原有的电平触发SR触发器的基础上，添加两个优先级更高的信号S’,R’，若这两个信号有效，只要相应地将其置为1或0即可；当这两个信号无效，则进入一般的电平触发SR触发器<br>下面给出SR触发器的逻辑图：<br><img data-src="/images/DigitDesign/pic(3" alt="同步SR触发器">.png)<br><img data-src="/images/DigitDesign/pic(4" alt="异步SR触发器">.png)<br>在CLK=1时，同步SR触发器的真值表与一般SR触发器完全相同；在CLK=0时，电路出于保持状态。<br>相关真值表此处从略</li>
+</ol>
+<h4 id="电平触发的D触发器"><a href="#电平触发的D触发器" class="headerlink" title="电平触发的D触发器"></a>电平触发的D触发器</h4><p>D触发器的发明是为了先天地去除可能使得SR触发器中S=R=1的情况的一种设计，它其实就是把<br>将SR触发器中的输入端利用同一个信号D及其反信号作为输入信号D’作为S和R端输出，得到的就是电平触发的D触发器。<br>其逻辑图如下：<br><img data-src="/images/DigitDesign/pic(5" alt="电平触发的D触发器">.png)<br>由此可见，这样的方式先天避免了S=R=1的可能性，但是也使得S=R=0变得不可能。为了使电路保持功能完整，我们规定：<br>CLK定好为低电平时，为D型锁存器的保持态。</p>
+<h3 id="边沿触发"><a href="#边沿触发" class="headerlink" title="边沿触发"></a>边沿触发</h3><p>我们直接来看一个例子：<br><img data-src="/images/DigitDesign/pic(6" alt="上升沿边沿触发器">.png)<br>分析以下CLK从0-&gt;1(上升沿)的电路变化：<br>CLK=0时：</p>
+<ol>
+<li>CLK=0，CLK1=1，CLK2=0</li>
+<li>FF1有效，FF2无效</li>
+<li><strong>Q1随着输入信号D同步变化，即Q1=D</strong></li>
+<li>Q=Q2<strong>不变</strong>（注意，此前我一直以为这是会变化的！）</li>
+</ol>
+<p>CLK=1时：</p>
+<ol>
+<li>CLK=1，CLK1=0，CLK2=1</li>
+<li>FF2有效，FF1无效</li>
+<li><strong>Q1=D不再变化</strong></li>
+<li><strong>Q2=Q1=D</strong></li>
+</ol>
+<p>由此我们可以知道，这种上升沿边沿触发器有以下特点：</p>
+<ol>
+<li>触发器的次态输出仅仅取决于上升沿到达前瞬间输入的逻辑状态，在<strong>一个时钟周期内上升沿到来前后，输入信号的变化对触发器的次态没有影响</strong></li>
+<li>从结果上看，以上升沿边沿触发器为例，输出信号只有在CLK信号上升沿到来处才<strong>有可能</strong>发生变化（分析波形图的时候可以直接判断这些关键节点）</li>
+</ol>
+<p>至于下降沿边沿触发其的特点则可以完全对称地总结下来，这里从略。<br>下面看一下边沿触发方式的判断方法：</p>
+<ol>
+<li>前非后不非-&gt;上升沿（符号不带圈）</li>
+<li>后非前不非-&gt;下降沿（符号带圈）<h3 id="脉冲触发"><a href="#脉冲触发" class="headerlink" title="脉冲触发"></a>脉冲触发</h3><h4 id="主从SR触发器（MSSR触发器）"><a href="#主从SR触发器（MSSR触发器）" class="headerlink" title="主从SR触发器（MSSR触发器）"></a>主从SR触发器（MSSR触发器）</h4></li>
+</ol>
+]]></content>
+      <tags>
+        <tag>数字设计</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>二叉搜索树</title>
+    <url>/2025/04/04/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>图论模型：最小路径算法</title>
     <url>/2025/04/02/%E5%9B%BE%E8%AE%BA%E6%A8%A1%E5%9E%8B%EF%BC%9A%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E7%AE%97%E6%B3%95/</url>
     <content><![CDATA[<h2 id="基础理论"><a href="#基础理论" class="headerlink" title="基础理论"></a>基础理论</h2><p>图，有向图，无向图的定义这里从略。</p>
@@ -308,128 +428,6 @@ i_{previous} \geq \frac{n_{max}}{2}>\frac{n}{2}</script><p>故得证。同理可
       </tags>
   </entry>
   <entry>
-    <title>编码器与译码器</title>
-    <url>/2025/04/04/%EF%BC%88%E4%B8%89%EF%BC%89%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF%EF%BC%9A%E7%BC%96%E7%A0%81%E5%99%A8%E4%B8%8E%E8%AF%91%E7%A0%81%E5%99%A8/</url>
-    <content><![CDATA[<h1 id="3-1-编码器：普通编码器与优先编码器"><a href="#3-1-编码器：普通编码器与优先编码器" class="headerlink" title="3.1 编码器：普通编码器与优先编码器"></a>3.1 编码器：普通编码器与优先编码器</h1><p>3.1.1 编码器的分类</p>
-<p>普通编码器：任何时刻只允许输入一个有效信号，不允许同时出现两个或两个以上的有效信号，因而其输入是一组有约束的变量</p>
-<p>优先编码器：用于优先中断系统和键盘编码</p>
-<p>3.1.2优先编码器举例： 8线-3线优先编码器（74LS148）</p>
-<p><img data-src="images/digitalcircuit/74ls148.png" alt="74LS148"></p>
-<p><img data-src="images/digitalcircuit/74ls148table.png" alt="74148真值表"></p>
-<p>输入输出均为低电平有效，优先级7~0。从功能表可以看出：</p>
-<ol>
-<li>E1是使能端，E1处于低电平时系统才工作。</li>
-<li>CS （chip select）和E0输出情况：</li>
-</ol>
-<p>CS：片选信号，当片选信号为0时，说明有输入信号，该芯片片选有效；</p>
-<p>E1：Enable信号</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>CS</th>
-<th>E0</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>1</td>
-<td>使能端高电平，系统不工作</td>
-</tr>
-<tr>
-<td>1</td>
-<td>0</td>
-<td>系统工作但无输入信号</td>
-</tr>
-<tr>
-<td>0</td>
-<td>1</td>
-<td>系统工作且有输入信号</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>下面是74LS148优先编码器的Verilog实现：</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> _74hc148(</span><br><span class="line">    <span class="keyword">input</span>           S,</span><br><span class="line">    <span class="keyword">input</span>   [<span class="number">7</span>:<span class="number">0</span>]   A,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>]   Y,</span><br><span class="line">    <span class="keyword">output</span>          Yex,</span><br><span class="line">    <span class="keyword">output</span>          Ys</span><br><span class="line">);</span><br><span class="line"><span class="keyword">always</span>@(*)<span class="keyword">begin</span><span class="comment">//always块内部只能访问reg变量</span></span><br><span class="line">   <span class="keyword">if</span>(!S)<span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">casex</span>(A)</span><br><span class="line">            <span class="number">8&#x27;b0xxxxxxx</span> : Y = <span class="number">0</span>;</span><br><span class="line">            <span class="number">8&#x27;b10xxxxxx</span> : Y = <span class="number">1</span>;</span><br><span class="line">            <span class="number">8&#x27;b110xxxxx</span> : Y = <span class="number">2</span>;</span><br><span class="line">            <span class="number">8&#x27;b1110xxxx</span> : Y = <span class="number">3</span>;</span><br><span class="line">            <span class="number">8&#x27;b11110xxx</span> : Y = <span class="number">4</span>;</span><br><span class="line">            <span class="number">8&#x27;b111110xx</span> : Y = <span class="number">5</span>;</span><br><span class="line">            <span class="number">8&#x27;b1111110x</span> : Y = <span class="number">6</span>;</span><br><span class="line">            <span class="number">8&#x27;b11111110</span> : Y = <span class="number">7</span>;</span><br><span class="line">            <span class="keyword">default</span>:      Y = <span class="number">7</span>;</span><br><span class="line">        <span class="keyword">endcase</span></span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">      Y=<span class="number">7</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">assign</span> &#123;Ys,Yex&#125;=S ? <span class="number">2&#x27;b11</span> : (&amp;A ? <span class="number">2&#x27;b01</span> : <span class="number">2&#x27;b10</span>);<span class="comment">//&amp;A 对A进行按位与，即诘问A是否各位都为1</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p>这个实现具有以下特点：</p>
-<ul>
-<li>完全支持优先级编码，I7具有最高优先级，I0具有最低优先级</li>
-<li>使用active-low逻辑，符合74LS148的规格</li>
-<li>包含使能控制（E1）和状态输出（E0, CS）</li>
-<li>测试文件包含了多种测试场景，包括使能控制、单输入和多输入情况</li>
-</ul>
-<p>级联问题：（注意到后三位的循环）</p>
-<p><img data-src="images/digitalcircuit/28_3=16_4.png" alt="2*8_3=16_4"></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">//级联:</span></span><br><span class="line"><span class="keyword">module</span> _16_4encoder(</span><br><span class="line">    <span class="keyword">input</span> S,</span><br><span class="line">    <span class="keyword">input</span> [<span class="number">15</span>:<span class="number">0</span>] IN,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> [<span class="number">3</span>:<span class="number">0</span>] Y,</span><br><span class="line">    <span class="keyword">output</span> Ys,</span><br><span class="line">    <span class="keyword">output</span> Yex</span><br><span class="line">);</span><br><span class="line">    <span class="comment">// 中间信号</span></span><br><span class="line">    <span class="keyword">wire</span> Ys1, Yex1, Ys2, Yex2;</span><br><span class="line">    <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] Y1, Y2;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 实例化两个74HC148</span></span><br><span class="line">    _74hc148 U1(</span><br><span class="line">        <span class="variable">.A</span>(IN[<span class="number">15</span>:<span class="number">8</span>]),  <span class="comment">// 高8位输入</span></span><br><span class="line">        <span class="variable">.S</span>(S),</span><br><span class="line">        <span class="variable">.Y</span>(Y1),</span><br><span class="line">        <span class="variable">.Ys</span>(Ys1),</span><br><span class="line">        <span class="variable">.Yex</span>(Yex1)</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    _74hc148 U2(</span><br><span class="line">        <span class="variable">.A</span>(IN[<span class="number">7</span>:<span class="number">0</span>]),   <span class="comment">// 低8位输入</span></span><br><span class="line">        <span class="variable">.S</span>(Ys1),       <span class="comment">// 如果高8位无效，则处理低8位</span></span><br><span class="line">        <span class="variable">.Y</span>(Y2),</span><br><span class="line">        <span class="variable">.Ys</span>(Ys2),</span><br><span class="line">        <span class="variable">.Yex</span>(Yex2)</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 合并输出</span></span><br><span class="line">    <span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span> (!Ys1) <span class="keyword">begin</span>  <span class="comment">// 高8位有效</span></span><br><span class="line">            Y[<span class="number">2</span>:<span class="number">0</span>] = Y1;</span><br><span class="line">            Y[<span class="number">3</span>] = <span class="number">1&#x27;b1</span>;  <span class="comment">// 高8位优先</span></span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">            Y[<span class="number">2</span>:<span class="number">0</span>] = Y2;</span><br><span class="line">            Y[<span class="number">3</span>] = <span class="number">1&#x27;b0</span>;  <span class="comment">// 低8位</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 有效输出和扩展输出</span></span><br><span class="line">    <span class="keyword">assign</span> Ys = ~(Ys1 | Ys2);  <span class="comment">// 如果高8位或低8位有效，则Ys为低电平</span></span><br><span class="line">    <span class="keyword">assign</span> Yex = Ys1 &amp; Ys2;    <span class="comment">// 如果高8位和低8位都无效，则Yex为低电平</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<h1 id="3-2译码器"><a href="#3-2译码器" class="headerlink" title="3.2译码器"></a>3.2译码器</h1><p>3.2.1 中规模集成电路译码器的基本结构：</p>
-<p><img data-src="images/digitalcircuit/decoder.png" alt="decoder"></p>
-<p> 例如，3-8译码器74LS38：</p>
-<ol>
-<li>基本介绍</li>
-</ol>
-<p>74LS138是一种常用的3-8线译码器，其主要功能是将3位二进制输入编码转换为8个互斥的输出。具体功能如下：</p>
-<ol>
-<li>输入编码：接收3位二进制输入信号（A0、A1、A2），可以表示8种不同的状态（000~111）</li>
-<li>译码输出：根据输入的二进制组合，在8个输出端（Y0~Y7）中选择一个输出有效信号</li>
-<li>使能控制：通过3个使能端（S1、S2、S3）控制芯片的工作状态，S1&amp;（S2’+S3’)时工作</li>
-</ol>
-<p>工作原理：</p>
-<ul>
-<li>当使能端满足工作条件时，芯片根据输入端A0、A1、A2的二进制组合，在相应的输出端产生低电平有效信号</li>
-<li>在任意时刻，8个输出端中只有一个输出端为低电平（有效），其余输出端均为高电平（无效）</li>
-</ul>
-<p>主要应用：</p>
-<ul>
-<li>地址译码：在计算机系统中用于<strong>存储器地址译码</strong></li>
-<li>数据选择：用于<strong>多路数据选择电路</strong></li>
-<li>信号分配：将一路信号分配到多个设备</li>
-</ul>
-<ol>
-<li>引脚排布：74LS138有6个输入端，7个输出端。</li>
-</ol>
-<p><img data-src="https://i-blog.csdnimg.cn/blog_migrate/8736ec3fad8152625e694533580a733f.png" alt=""></p>
-<p><strong>特点：</strong></p>
-<ol>
-<li>输入端高电平有效，输出端低电平有效；</li>
-<li>S1，S2，S3为三个使能控制端，且当S1=S2=S3=0时，该译码器才有效状态信号输出。</li>
-</ol>
-<p><strong>真值表如图所示：</strong></p>
-<p><img data-src="https://i-blog.csdnimg.cn/blog_migrate/897c624084caa17c468c1ac72769cda8.png" alt=""></p>
-<p>各输出状态由Ai输入决定。</p>
-<p><img data-src="https://i-blog.csdnimg.cn/blog_migrate/3f5c7b8a30829fe046a43d4543533a89.png" alt=""></p>
-<p>Yi=mi（正好对应最小项）</p>
-<p>Verilog实现</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> _74hc138(</span><br><span class="line">    <span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] A,       <span class="comment">// 3位输入地址</span></span><br><span class="line">    <span class="keyword">input</span> S1, S2, S3,    <span class="comment">// 使能信号</span></span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> [<span class="number">7</span>:<span class="number">0</span>] Y   <span class="comment">// 8位输出</span></span><br><span class="line">);</span><br><span class="line">    <span class="comment">// 使能条件判断</span></span><br><span class="line">    <span class="keyword">wire</span> enable;</span><br><span class="line">    <span class="keyword">assign</span> enable = S3 &amp; ~S2 &amp; ~S1;  <span class="comment">// 使能条件：S3=1, S2=0, S1=0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span> (enable) <span class="keyword">begin</span></span><br><span class="line">            <span class="keyword">case</span> (A)</span><br><span class="line">                <span class="number">3&#x27;b000</span>: Y = <span class="number">8&#x27;b00000001</span>;</span><br><span class="line">                <span class="number">3&#x27;b001</span>: Y = <span class="number">8&#x27;b00000010</span>;</span><br><span class="line">                <span class="number">3&#x27;b010</span>: Y = <span class="number">8&#x27;b00000100</span>;</span><br><span class="line">                <span class="number">3&#x27;b011</span>: Y = <span class="number">8&#x27;b00001000</span>;</span><br><span class="line">                <span class="number">3&#x27;b100</span>: Y = <span class="number">8&#x27;b00010000</span>;</span><br><span class="line">                <span class="number">3&#x27;b101</span>: Y = <span class="number">8&#x27;b00100000</span>;</span><br><span class="line">                <span class="number">3&#x27;b110</span>: Y = <span class="number">8&#x27;b01000000</span>;</span><br><span class="line">                <span class="number">3&#x27;b111</span>: Y = <span class="number">8&#x27;b10000000</span>;</span><br><span class="line">                <span class="keyword">default</span>: Y = <span class="number">8&#x27;b11111111</span>;  <span class="comment">// 默认输出全高电平</span></span><br><span class="line">            <span class="keyword">endcase</span></span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">            Y = <span class="number">8&#x27;b11111111</span>;  <span class="comment">// 未使能时，所有输出为高电平</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p>级联问题：</p>
-<p><img data-src="images/digitalcircuit/23_8=4_16.png" alt="2*3_8=4_16"></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> _16to4_decoder(</span><br><span class="line">    <span class="keyword">input</span> [<span class="number">3</span>:<span class="number">0</span>] A,       <span class="comment">// 4位输入地址</span></span><br><span class="line">    <span class="keyword">input</span> S1, S2, S3,    <span class="comment">// 使能信号</span></span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> [<span class="number">15</span>:<span class="number">0</span>] Y  <span class="comment">// 16位输出</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 中间信号</span></span><br><span class="line">    <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] A1;       <span class="comment">// 第一个74HC138的地址输入</span></span><br><span class="line">    <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] A2;       <span class="comment">// 第二个74HC138的地址输入</span></span><br><span class="line">    <span class="keyword">wire</span> [<span class="number">1</span>:<span class="number">0</span>] enable;   <span class="comment">// 两个74HC138的使能信号</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 分配地址和使能信号</span></span><br><span class="line">    <span class="keyword">assign</span> A1 = A[<span class="number">3</span>:<span class="number">1</span>];   <span class="comment">// 高3位地址给第一个74HC138</span></span><br><span class="line">    <span class="keyword">assign</span> A2 = A[<span class="number">2</span>:<span class="number">0</span>];   <span class="comment">// 低3位地址给第二个74HC138</span></span><br><span class="line">    <span class="keyword">assign</span> enable = &#123;S3, S2, S1&#125;; <span class="comment">// 使能信号</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第一个74HC138，用于选择第二个74HC138的使能信号</span></span><br><span class="line">    <span class="keyword">wire</span> [<span class="number">7</span>:<span class="number">0</span>] Y1;       <span class="comment">// 第一个74HC138的输出</span></span><br><span class="line">    _74hc138 decoder1(</span><br><span class="line">        <span class="variable">.A</span>(A1),</span><br><span class="line">        <span class="variable">.S1</span>(enable[<span class="number">0</span>]),</span><br><span class="line">        <span class="variable">.S2</span>(enable[<span class="number">1</span>]),</span><br><span class="line">        <span class="variable">.S3</span>(enable[<span class="number">2</span>]),</span><br><span class="line">        <span class="variable">.Y</span>(Y1)</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第二个74HC138，用于生成最终的4位输出</span></span><br><span class="line">    <span class="keyword">wire</span> [<span class="number">7</span>:<span class="number">0</span>] Y2;       <span class="comment">// 第二个74HC138的输出</span></span><br><span class="line">    _74hc138 decoder2(</span><br><span class="line">        <span class="variable">.A</span>(A2),</span><br><span class="line">        <span class="variable">.S1</span>(Y1[<span class="number">0</span>]),</span><br><span class="line">        <span class="variable">.S2</span>(Y1[<span class="number">1</span>]),</span><br><span class="line">        <span class="variable">.S3</span>(Y1[<span class="number">2</span>]),</span><br><span class="line">        <span class="variable">.Y</span>(Y2)</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将两个74HC138的输出组合成16位输出</span></span><br><span class="line">    <span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">        Y = &#123;Y2, Y2&#125;;    <span class="comment">// 将第二个74HC138的输出复制到16位输出中</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p>74hc42：BCD码转10进制编码器</p>
-<p><img data-src="images/digitalcircuit/74hc42.png" alt="74hc42"></p>
-<p><img data-src="images/digitalcircuit/74hc42table.png" alt="74hc42真值表"></p>
-<p>74ls47：七段字形译码器<br>下图所示的是一个七段字形数码管:</p>
-<p><img data-src="images/digitalcircuit/digit.png" alt="digit"></p>
-<p>7个条形的发光二极管排列成这种样式，每一段通过一个引脚控制。7段数码管有两种，共阳极数码管和共阴极数码管，其中，共阳极数码管的7个发光二极管的阳极连在一起，7个阴极是独立的；而共阴极数码管的7个发光二极管的阴极连在一起，7个阳极是独立的。<br>当共阳极数码管的某一阴极接低电平时，相应的二极管发光，故共阳极数码管需要输出低电平有效的译码器驱动，而共阴极数码管需要输出高电平有效的译码器驱动。</p>
-<p>如下图所示是一个输出低电平有效的七段字形译码器74LS47的集成芯片引脚图和它的真值表：</p>
-<p><img data-src="images/digitalcircuit/74ls47.png" alt="74LS47"></p>
-<p>在译码的同时，还有一些引脚有如下的功能：</p>
-<p>（1）试灯输入 L T </p>
-<p>试灯输入顾名思义是为了检测每一段数码管是否正常工作而设置的，当输入为0时，无论其余的输入是什么值，译码器都是输出低电平，可以保证每一个发光二极管变亮。</p>
-<p>（2）灭灯输入 B I </p>
-<p>灭灯输入也是顾名思义，是为了让每一段数码管灭灯而设置的。当输入为0时，不论其他的输入是什么状态，译码器均输入高电平，使得所有的数码管熄灭</p>
-<p>（3）灭零输入 B R I </p>
-<p>灭零输入功能是为了让不需要显示的0熄灭而设置的，例如：当我们在显示0088.8800时，实际上只需显示88.88即可，把其他位置上的0熄灭即可。</p>
-<p>（4）灭零输出 R B O<br>RBO输出是否熄灭0的信号</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> _74ls47(</span><br><span class="line">		<span class="keyword">input</span> [<span class="number">3</span>:<span class="number">0</span>] A,       <span class="comment">// 4位输入地址</span></span><br><span class="line">    <span class="keyword">input</span> LT,            <span class="comment">// 试灯输入</span></span><br><span class="line">    <span class="keyword">input</span> BI,            <span class="comment">// 灭灯输入</span></span><br><span class="line">    <span class="keyword">input</span> BRI,           <span class="comment">// 灭零输入</span></span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> [<span class="number">6</span>:<span class="number">0</span>] Y,  <span class="comment">// 7段数码管输出</span></span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> RBO       <span class="comment">// 灭零输出</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 定义7段数码管的段码</span></span><br><span class="line">    <span class="keyword">function</span> [<span class="number">6</span>:<span class="number">0</span>] get_segment(<span class="keyword">input</span> [<span class="number">3</span>:<span class="number">0</span>] value);</span><br><span class="line">        <span class="keyword">case</span> (value)</span><br><span class="line">            <span class="number">4&#x27;d0</span>: get_segment = <span class="number">7&#x27;b1000000</span>;  <span class="comment">// 0</span></span><br><span class="line">            <span class="number">4&#x27;d1</span>: get_segment = <span class="number">7&#x27;b1111001</span>;  <span class="comment">// 1</span></span><br><span class="line">            <span class="number">4&#x27;d2</span>: get_segment = <span class="number">7&#x27;b0100100</span>;  <span class="comment">// 2</span></span><br><span class="line">            <span class="number">4&#x27;d3</span>: get_segment = <span class="number">7&#x27;b0110000</span>;  <span class="comment">// 3</span></span><br><span class="line">            <span class="number">4&#x27;d4</span>: get_segment = <span class="number">7&#x27;b0011001</span>;  <span class="comment">// 4</span></span><br><span class="line">            <span class="number">4&#x27;d5</span>: get_segment = <span class="number">7&#x27;b0010010</span>;  <span class="comment">// 5</span></span><br><span class="line">            <span class="number">4&#x27;d6</span>: get_segment = <span class="number">7&#x27;b0000010</span>;  <span class="comment">// 6</span></span><br><span class="line">            <span class="number">4&#x27;d7</span>: get_segment = <span class="number">7&#x27;b1111000</span>;  <span class="comment">// 7</span></span><br><span class="line">            <span class="number">4&#x27;d8</span>: get_segment = <span class="number">7&#x27;b0000000</span>;  <span class="comment">// 8</span></span><br><span class="line">            <span class="number">4&#x27;d9</span>: get_segment = <span class="number">7&#x27;b0010000</span>;  <span class="comment">// 9</span></span><br><span class="line">            <span class="keyword">default</span>: get_segment = <span class="number">7&#x27;b1111111</span>;  <span class="comment">// 默认全灭</span></span><br><span class="line">        <span class="keyword">endcase</span></span><br><span class="line">    <span class="keyword">endfunction</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span> (!BI) <span class="keyword">begin</span></span><br><span class="line">            <span class="comment">// 灭灯输入为0，所有输出为高电平</span></span><br><span class="line">            Y = <span class="number">7&#x27;b1111111</span>;</span><br><span class="line">            RBO = <span class="number">1&#x27;b1</span>;  <span class="comment">// 灭零输出为高电平</span></span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">if</span> (!LT) <span class="keyword">begin</span></span><br><span class="line">            <span class="comment">// 试灯输入为0，所有输出为低电平</span></span><br><span class="line">            Y = <span class="number">7&#x27;b0000000</span>;</span><br><span class="line">            RBO = <span class="number">1&#x27;b0</span>;  <span class="comment">// 灭零输出为低电平</span></span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">            <span class="comment">// 正常译码</span></span><br><span class="line">            Y = get_segment(A);</span><br><span class="line">            <span class="keyword">if</span> (!BRI &amp;&amp; A == <span class="number">4&#x27;d0</span>) <span class="keyword">begin</span></span><br><span class="line">                <span class="comment">// 灭零输入为0且输入值为0，熄灭0</span></span><br><span class="line">                Y = <span class="number">7&#x27;b1111111</span>;</span><br><span class="line">                RBO = <span class="number">1&#x27;b1</span>;  <span class="comment">// 灭零输出为高电平</span></span><br><span class="line">            <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">                RBO = <span class="number">1&#x27;b0</span>;  <span class="comment">// 灭零输出为低电平</span></span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>数字逻辑设计</category>
-      </categories>
-      <tags>
-        <tag>组合逻辑</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>简谐振动（更新中）</title>
     <url>/2025/04/05/%E7%AE%80%E8%B0%90%E6%8C%AF%E5%8A%A8%E7%9A%84%E5%90%88%E6%88%90/</url>
     <content><![CDATA[<h2 id="简谐振动的合成"><a href="#简谐振动的合成" class="headerlink" title="简谐振动的合成"></a>简谐振动的合成</h2><h3 id="两个同方向，同频率的简谐振动的合成"><a href="#两个同方向，同频率的简谐振动的合成" class="headerlink" title="两个同方向，同频率的简谐振动的合成"></a>两个<strong>同方向，同频率</strong>的简谐振动的合成</h3><p>由于运动是同方向的，可以将位移的合成表达为代数加法，即</p>
@@ -522,10 +520,5 @@ x'=\sqrt{A_1^2+A_2^2}\cos({\omega t+\phi})</script></li>
 m\frac{d^2x}{dt^2}=-kx-\gamma\frac{dx}{dt}\\\text{这是一个二阶常系数线齐次微分方程，我们讨论其解的结构：}\\\text{令}\omega^2_0=k/m,2\beta=\gamma/m,\\x''+2\beta x'+\omega_0^2x=0,\\
 \lambda^2+2\beta\lambda+\omega_0^2=0,
 \lambda_{1,2}=-\beta\pm\sqrt{\beta^2-\omega_0^2}\\1)\beta<\omega,x=A_0e^{-\beta t}cos(\sqrt{\omega_0^2-\beta^2 }\cdot t+\phi)\\2)\beta>\omega_0,x=Ae^{-(\beta+\sqrt{\beta^2-\omega_0^2})t}+Be^{-(\beta-\sqrt{\beta^2-\omega^2_0})t}\\3)\beta=\omega_0,x=e^{-\beta t}(A+Bt)</script>]]></content>
-  </entry>
-  <entry>
-    <title>二叉搜索树</title>
-    <url>/2025/04/04/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</url>
-    <content><![CDATA[]]></content>
   </entry>
 </search>
